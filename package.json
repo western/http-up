@@ -1,8 +1,21 @@
 {
   "name": "http-up",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple index folder via http with upload",
   "main": "./lib/http-up",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/western/http-up.git"
+  },
+  "keywords": [
+    "cli",
+    "command",
+    "static",
+    "http",
+    "http-server",
+    "server",
+    "upload"
+  ],
   "directories": {
     "lib": "lib",
     "bin": "bin",
