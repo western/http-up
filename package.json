@@ -31,8 +31,11 @@
     "bin",
     "test"
   ],
+  "bugs": {
+    "url": "https://github.com/western/http-up/issues"
+  },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
     "minimist": "^1.2.8",
