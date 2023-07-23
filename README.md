@@ -1,5 +1,5 @@
 # http-up
-http server with upload
+Simple index folder via http with upload
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
 
