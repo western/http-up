@@ -1,6 +1,10 @@
 # http-up
 Simple index folder via http with upload
 
+`npm i http-up`
+
+`http-up --port 4000 .`
+
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
 
 ## join to dev
