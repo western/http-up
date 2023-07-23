@@ -5,7 +5,7 @@
 
 let HTTPUP = require('../lib/http-up');
 let argv = require('minimist')(process.argv.slice(2));
-//console.log('argv1', argv);
+
 
 
 
@@ -16,7 +16,7 @@ if( argv._[0] ){
 }
 
 
-//console.log('argv2', argv);
+
 
 
 process.title = 'http-up';
