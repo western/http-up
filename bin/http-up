@@ -1,0 +1,59 @@
+#!/usr/bin/env node
+
+'use strict';
+
+
+let HTTPUP = require('../lib/http-up');
+let argv = require('minimist')(process.argv.slice(2));
+//console.log('argv1', argv);
+
+
+
+argv.port = argv.port || argv.p || 4000;
+argv.fold = 'public';
+if( argv._[0] ){
+    argv.fold = argv._[0];
+}
+
+
+//console.log('argv2', argv);
+
+
+process.title = 'http-up';
+
+if (argv.h || argv.help) {
+    console.log([
+        'usage: http-up [path] [options]',
+        '',
+        'options:',
+        '  -p --port    Port to use. If 0, look for open port. [4000]',
+    ].join('\n'));
+    process.exit();
+}
+
+
+HTTPUP.makeServer(argv);
+
+
+
+
+if (process.platform === 'win32') {
+    require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+    }).on('SIGINT', function () {
+        process.emit('SIGINT');
+    });
+}
+
+process.on('SIGINT', function () {
+    logger.info(chalk.red('http-up stopped.'));
+    process.exit();
+});
+
+process.on('SIGTERM', function () {
+    logger.info(chalk.red('http-up stopped.'));
+    process.exit();
+});
+
+

@@ -1,15 +1,15 @@
 {
-  "name": "http-server-up",
+  "name": "http-up",
   "version": "1.0.0",
   "description": "",
-  "main": "./lib/http-server-up",
+  "main": "./lib/http-up",
   "directories": {
     "lib": "lib",
     "bin": "bin",
     "test": "test"
   },
   "scripts": {
-    "start": "node ./bin/http-server-up",
+    "start": "node ./bin/http-up",
     "test": "tap --reporter=spec test/*.test.js",
     "test-watch": "tap --reporter=spec --watch test/*.test.js"
   },
@@ -22,10 +22,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "minimist": "^1.2.8",
     "multer": "^1.4.5-lts.1",
     "urlencode": "^1.1.0"
   },
   "bin": {
-    "http-server-up": "./bin/http-server-up"
+    "http-up": "./bin/http-up"
   }
 }
