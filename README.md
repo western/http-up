@@ -1,9 +1,12 @@
 # http-up
 Simple index folder via http with upload
 
+Multiple files upload to current showed folder
+
 `npm i http-up`
 
-`http-up --port 4000 .`
+`http-up --port 4000 .` or `./node_modules/.bin/http-up .`
+<br><br><br>
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
 
