@@ -1,7 +1,13 @@
 
 # compare
-last check 25.07.2023
+last check 26.07.2023
 
+
+
+
+### http-server
+`rm -rf * && npm init -y && npm i http-server`
+* folder walking only
 
 ### @shrimpster00/upload-server
 `rm -rf * && npm init -y && npm i @shrimpster00/upload-server`
@@ -18,6 +24,10 @@ last check 25.07.2023
 * only one file
 * upload working
 * walk by folder, but upload to only root folder
+
+
+
+
 
 ## problems
 
