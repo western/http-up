@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple index folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
@@ -38,7 +38,7 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "minimist": "^1.2.8",
     "multer": "^1.4.5-lts.1",
     "urlencode": "^1.1.0"
