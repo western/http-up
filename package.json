@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Simple index folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
@@ -22,7 +22,6 @@
   },
   "scripts": {
     "start": "node ./bin/http-up",
-
     "prettier": "npx prettier bin lib --check",
     "prettier:fix": "npm run prettier -- --write"
   },
