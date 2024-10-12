@@ -27,7 +27,8 @@
   },
   "files": [
     "lib",
-    "bin"
+    "bin",
+    "README.md"
   ],
   "bugs": {
     "url": "https://github.com/western/http-up/issues"
