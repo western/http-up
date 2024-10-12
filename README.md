@@ -3,6 +3,8 @@ Simple index folder via http with upload
 
 Multiple files upload to current showed folder
 
+Also you can download any files inside current folder, just click on them
+
 `npm i http-up`
 
 `http-up --port 4000 .` or `./node_modules/.bin/http-up .`
