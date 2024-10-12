@@ -24,6 +24,9 @@ or `node ./bin/http-up folder3`
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
 
+### http-up features 1.0.11
+- [x] - refresh npm modules with clear recreate lock file
+
 ### http-up features 1.0.10
 - [x] - refresh bootstrap
 - [ ] - refresh npm modules with clear recreate lock file
