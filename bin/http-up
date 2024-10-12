@@ -2,23 +2,25 @@
 
 'use strict';
 
-const colors = require('colors')
-
+const colors = require('colors');
+const fs = require('fs');
 
 let HTTPUP = require('../lib/http-up');
 let argv = require('minimist')(process.argv.slice(2));
 
-
-
-
 argv.port = argv.port || argv.p || 4000;
 argv.fold = 'public';
-if( argv._[0] ){
+if (argv._[0]) {
     argv.fold = argv._[0];
 }
 
 
 
+if (!fs.existsSync(argv.fold)) {
+    console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
+    console.log('Create folder and send name of folder as first argument, as these '+ colors.yellow('npm start foldername1'));
+    process.exit();
+}
 
 
 process.title = 'http-up';
@@ -28,24 +30,22 @@ if (argv.h || argv.help) {
         'usage: http-up [path] [options]',
         '',
         'options:',
-        '  -p --port    Port to use. [4000]',
+        '  -p --port    Port to use. [4000]'
     ].join('\n'));
     process.exit();
 }
 
-
 HTTPUP.makeServer(argv);
 
-
-
-
 if (process.platform === 'win32') {
-    require('readline').createInterface({
-        input: process.stdin,
-        output: process.stdout
-    }).on('SIGINT', function () {
-        process.emit('SIGINT');
-    });
+    require('readline')
+        .createInterface({
+            input: process.stdin,
+            output: process.stdout,
+        })
+        .on('SIGINT', function () {
+            process.emit('SIGINT');
+        });
 }
 
 process.on('SIGINT', function () {
@@ -57,5 +57,3 @@ process.on('SIGTERM', function () {
     console.log('http-up stopped.');
     process.exit();
 });
-
-

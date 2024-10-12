@@ -18,18 +18,17 @@
   ],
   "directories": {
     "lib": "lib",
-    "bin": "bin",
-    "test": "test"
+    "bin": "bin"
   },
   "scripts": {
     "start": "node ./bin/http-up",
-    "test": "tap --reporter=spec test/*.test.js",
-    "test-watch": "tap --reporter=spec --watch test/*.test.js"
+
+    "prettier": "npx prettier bin lib --check",
+    "prettier:fix": "npm run prettier -- --write"
   },
   "files": [
     "lib",
-    "bin",
-    "test"
+    "bin"
   ],
   "bugs": {
     "url": "https://github.com/western/http-up/issues"
