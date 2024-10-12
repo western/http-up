@@ -24,6 +24,9 @@ or `node ./bin/http-up folder3`
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
+### http-up features 1.0.13
+- [x] - decomposition for lib/http-up.js
+
 ### http-up features 1.0.12
 - [x] - make new folder via web interface
 
