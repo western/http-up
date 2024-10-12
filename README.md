@@ -1,4 +1,5 @@
 # http-up
+
 Simple index folder via http with upload
 
 Multiple files upload to current showed folder
@@ -9,7 +10,7 @@ Also you can download any files inside current folder, just click on them
 
 `http-up --port 4000 .` or `./node_modules/.bin/http-up .`
 
-## upload folder
+### upload folder
 
 Inside run folder should be exist `public` folder. This is folder for uploading and show.
 
@@ -23,7 +24,16 @@ or `node ./bin/http-up folder3`
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
 
-## join to dev
+### http-up features 1.0.10
+- [x] - refresh bootstrap
+- [ ] - refresh npm modules with clear recreate lock file
+- [x] - public folder argument (if need)
+- [ ] - public folder automake (if not exist)
+- [x] - file size warning show
+- [ ] - file size show in page
+
+
+### join to dev
 
 clone repo:
 `git clone https://github.com/western/http-up`
