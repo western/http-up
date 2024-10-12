@@ -22,7 +22,7 @@ or `node ./bin/http-up folder3`
 
 <br><br><br>
 
-![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true)
+![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
 ### http-up features 1.0.12
 - [x] - make new folder via web interface
