@@ -31,6 +31,7 @@ or `node ./bin/http-up folder3`
 - [ ] - public folder automake (if not exist)
 - [x] - file size warning show
 - [ ] - file size show in page
+- [x] - add prettier for code
 
 
 ### join to dev
