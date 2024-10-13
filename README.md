@@ -57,7 +57,7 @@ Also you can download any files inside current folder, just click on them
 ## Join to dev
 
 clone repo:
-`git clone https://github.com/western/http-up`
+`https://github.com/western/http-up`
 
 download necessary packs:
 `npm i`
