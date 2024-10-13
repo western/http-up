@@ -44,16 +44,7 @@ if (argv.h || argv.help) {
 
 HTTPUP.makeServer(argv);
 
-if (process.platform === 'win32') {
-    require('readline')
-        .createInterface({
-            input: process.stdin,
-            output: process.stdout,
-        })
-        .on('SIGINT', function () {
-            process.emit('SIGINT');
-        });
-}
+
 
 process.on('SIGINT', function () {
     console.log('http-up stopped.');
