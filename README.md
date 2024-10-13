@@ -6,9 +6,13 @@ Multiple files upload to current showed folder
 
 Also you can download any files inside current folder, just click on them
 
-`npm i http-up`
+## Fast running without local install
 
-`http-up --port 4000 .` or `./node_modules/.bin/http-up .`
+`npx http-up .`
+
+or
+
+`npx http-up --port 3999 .`
 
 ## Desktop window
 <p align="center">
