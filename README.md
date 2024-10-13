@@ -14,6 +14,10 @@ or
 
 `npx http-up --port 3999 .`
 
+basic auth
+
+`npx http-up --user login1 --password password .`
+
 ## Desktop window
 <p align="center">
   <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&18" />
