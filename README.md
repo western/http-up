@@ -12,7 +12,7 @@ Also you can download any files inside current folder, just click on them
 
 
 
-![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
+![alt text](https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&17)
 
 ## Notes
 
