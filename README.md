@@ -30,6 +30,8 @@ Also you can download any files inside current folder, just click on them
 ### 1.0.19 features
 - [x] - remove H1
 - [x] - autoclean temp folder
+- [x] - change breadcrumbs font
+- [x] - change list font
 
 ### 1.0.17 features
 - [x] - change temp folder to /tmp/httpup
