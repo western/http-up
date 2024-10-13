@@ -24,6 +24,9 @@ or `node ./bin/http-up folder3`
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
+### 1.0.15 features
+- [x] - make folder by enter
+
 ### 1.0.14 features
 - [x] - swap bg color between folder and file
 
