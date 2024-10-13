@@ -31,6 +31,9 @@ or
 
 ## History
 
+### 1.0.21 features
+- [x] - add basic auth
+
 ### 1.0.19 features
 - [x] - remove H1
 - [x] - autoclean temp folder

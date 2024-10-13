@@ -8,6 +8,7 @@ const fs = require('fs');
 let HTTPUP = require('../lib/http-up');
 let argv = require('minimist')(process.argv.slice(2));
 
+
 let config = require('../lib/config');
 
 
@@ -52,7 +53,9 @@ if (argv.h || argv.help) {
         'usage: http-up [path] [options]',
         '',
         'options:',
-        `  -p --port    Port to use. [${config.defaultPort}]`
+        `  -p --port        Port to use. [${config.defaultPort}]`,
+        `     --user        User for basic authorization.`,
+        `     --password    Password for basic authorization.`
     ].join('\n'));
     process.exit();
 }
