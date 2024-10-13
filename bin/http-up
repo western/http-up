@@ -26,7 +26,22 @@ if (!fs.existsSync(argv.fold)) {
 }
 
 if (!fs.existsSync( config.destination )) {
+    console.log('Temporary folder "' + colors.yellow(config.destination) + '" is absent.');
+    console.log('Make new');
+
     fs.mkdirSync( config.destination );
+
+    console.log('Done');
+    console.log('');
+}else{
+    console.log('Temporary folder "' + colors.yellow(config.destination) + '" is exist.');
+    console.log('Run clearing...');
+
+    fs.rmSync(config.destination, {recursive: true, force: true});
+    fs.mkdirSync( config.destination );
+
+    console.log('Done');
+    console.log('');
 }
 
 
