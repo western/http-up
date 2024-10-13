@@ -12,8 +12,6 @@ Also you can download any files inside current folder, just click on them
 
 
 
-<br><br><br>
-
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
 ## Notes
