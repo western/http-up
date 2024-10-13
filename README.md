@@ -24,16 +24,19 @@ or `node ./bin/http-up folder3`
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
-### http-up features 1.0.13
+### 1.0.14 features
+- [x] - swap bg color between folder and file
+
+### 1.0.13 features
 - [x] - decomposition for lib/http-up.js
 
-### http-up features 1.0.12
+### 1.0.12 features
 - [x] - make new folder via web interface
 
-### http-up features 1.0.11
+### 1.0.11 features
 - [x] - refresh npm modules with clear recreate lock file
 
-### http-up features 1.0.10
+### 1.0.10 features
 - [x] - refresh bootstrap
 - [ ] - refresh npm modules with clear recreate lock file
 - [x] - public folder argument (if need)
