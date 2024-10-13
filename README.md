@@ -16,6 +16,13 @@ Also you can download any files inside current folder, just click on them
 
 ![alt text](https://github.com/western/http-up/blob/dev/doc/screen.jpg?raw=true&12)
 
+## Notes
+
+- If you run application under some User, this user should be have privileges to write current folder
+- App using temporary folder for upload form, usually it /tmp, do not forget to clean it
+
+## History
+
 ### 1.0.15 features
 - [x] - make folder by enter
 
@@ -41,7 +48,7 @@ Also you can download any files inside current folder, just click on them
 - [x] - add prettier for code
 
 
-### join to dev
+## Join to dev
 
 clone repo:
 `git clone https://github.com/western/http-up`
