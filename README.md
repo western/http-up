@@ -10,11 +10,15 @@ Also you can download any files inside current folder, just click on them
 
 `http-up --port 4000 .` or `./node_modules/.bin/http-up .`
 
+## Desktop window
+<p align="center">
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&18" />
+</p>
 
-
-![alt text](https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&18)
-
-![alt text](https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&18)
+## Mobile window
+<p align="center">
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&18" />
+</p>
 
 ## Notes
 
