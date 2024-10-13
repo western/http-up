@@ -27,6 +27,10 @@ Also you can download any files inside current folder, just click on them
 
 ## History
 
+### 1.0.19 features
+- [x] - remove H1
+- [x] - autoclean temp folder
+
 ### 1.0.17 features
 - [x] - change temp folder to /tmp/httpup
 - [x] - change copy function to rename
