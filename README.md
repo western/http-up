@@ -17,9 +17,13 @@ Also you can download any files inside current folder, just click on them
 ## Notes
 
 - If you run application under some User, this user should be have privileges to write current folder
-- App using temporary folder for upload form, usually it /tmp, do not forget to clean it
+- App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
 ## History
+
+### 1.0.17 features
+- [x] - change temp folder to /tmp/httpup
+- [x] - change copy function to rename
 
 ### 1.0.16 features
 - [x] - add config file

@@ -25,6 +25,10 @@ if (!fs.existsSync(argv.fold)) {
     process.exit();
 }
 
+if (!fs.existsSync( config.destination )) {
+    fs.mkdirSync( config.destination );
+}
+
 
 process.title = 'http-up';
 
