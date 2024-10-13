@@ -24,6 +24,7 @@ Also you can download any files inside current folder, just click on them
 ### 1.0.17 features
 - [x] - change temp folder to /tmp/httpup
 - [x] - change copy function to rename
+- [x] - fix multiple upload
 
 ### 1.0.16 features
 - [x] - add config file
