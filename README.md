@@ -21,6 +21,9 @@ Also you can download any files inside current folder, just click on them
 
 ## History
 
+### 1.0.16 features
+- [x] - add config file
+
 ### 1.0.15 features
 - [x] - make folder by enter
 
