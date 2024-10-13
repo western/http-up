@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Simple index folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
