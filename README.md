@@ -30,6 +30,7 @@ basic auth
 
 ## Notes
 
+- Be careful, if you start this App on public network interface, anybody can work with it
 - If you run application under some User, this user should be have privileges to write current folder
 - App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
