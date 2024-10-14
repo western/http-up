@@ -27,7 +27,7 @@ if ( argv._[0] && argv._[0] == '.' ) {
 if (!fs.existsSync(argv.fold)) {
     console.log('');
     console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
-    console.log('Create folder and send name of folder as first argument, as '+ colors.yellow('npm start foldername1'));
+    console.log('You can run http-up with folder as first argument, as '+ colors.yellow('http-up foldername1'));
     process.exit();
 }
 
