@@ -13,20 +13,26 @@ let config = require('../lib/config');
 
 
 argv.port = argv.port || argv.p || config.defaultPort;
-argv.fold = 'public';
-if (argv._[0]) {
-    argv.fold = argv._[0];
+argv.fold = process.cwd() + '/' + 'public';
+if ( argv._[0] && argv._[0] != '.' ) {
+    argv.fold = process.cwd() + '/' + argv._[0];
 }
+if ( argv._[0] && argv._[0] == '.' ) {
+    argv.fold = process.cwd();
+}
+
 
 
 
 if (!fs.existsSync(argv.fold)) {
+    console.log('');
     console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
-    console.log('Create folder and send name of folder as first argument, as these '+ colors.yellow('npm start foldername1'));
+    console.log('Create folder and send name of folder as first argument, as '+ colors.yellow('npm start foldername1'));
     process.exit();
 }
 
 if (!fs.existsSync( config.destination )) {
+    console.log('');
     console.log('Temporary folder "' + colors.yellow(config.destination) + '" is absent.');
     console.log('Make new');
 
@@ -35,6 +41,7 @@ if (!fs.existsSync( config.destination )) {
     console.log('Done');
     console.log('');
 }else{
+    console.log('');
     console.log('Temporary folder "' + colors.yellow(config.destination) + '" is exist.');
     console.log('Run clearing...');
 
