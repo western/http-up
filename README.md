@@ -70,12 +70,11 @@ basic auth
 
 ### 1.0.10 features
 - [x] - refresh bootstrap
-- [ ] - refresh npm modules with clear recreate lock file
-- [x] - public folder argument (if need)
-- [ ] - public folder automake (if not exist)
 - [x] - file size warning show
-- [ ] - file size show in page
 - [x] - add prettier for code
+- [ ] - refresh npm modules with clear recreate lock file
+- [ ] - public folder automake (if not exist)
+- [ ] - file size show in page
 
 
 ## Join to dev
