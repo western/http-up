@@ -36,6 +36,9 @@ basic auth
 
 ## History
 
+### 1.0.25 features
+- [x] - show files_count_max warning
+
 ### 1.0.21 features
 - [x] - add basic auth
 
