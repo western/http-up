@@ -6,7 +6,7 @@ Multiple files upload to current showed folder
 
 Also you can download any files inside current folder, just click on them
 
-## Fast running without local install
+## Fast running without install
 
 `npx http-up .`
 
