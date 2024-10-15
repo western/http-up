@@ -13,14 +13,23 @@ let config = require('../lib/config');
 
 
 argv.port = argv.port || argv.p || config.defaultPort;
+
+
 argv.fold = process.cwd() + '/' + 'public';
-if ( argv._[0] && argv._[0] != '.' ) {
-    argv.fold = process.cwd() + '/' + argv._[0];
-}
+
+
+
 if ( argv._[0] && argv._[0] == '.' ) {
     argv.fold = process.cwd();
-}
+} else if ( argv._[0] ) {
+    let user_set_full_path_match = argv._[0].match(/^\//)
+    if( user_set_full_path_match ){
 
+        argv.fold = argv._[0];
+    }else{
+        argv.fold = process.cwd() + '/' + argv._[0];
+    }
+}
 
 
 
