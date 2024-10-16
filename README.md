@@ -25,7 +25,7 @@ basic auth
 
 ## Mobile window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&18" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&26" />
 </p>
 
 ## Notes
@@ -35,6 +35,12 @@ basic auth
 - App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
 ## History
+
+### http-up 1.0.26
+- [x] - change stdout log info
+- [x] - change file listing view to full row
+- [x] - move uploader and folder create interfaces up
+- [ ] - arg --log to file
 
 ### 1.0.25 features
 - [x] - show files_count_max warning
