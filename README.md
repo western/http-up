@@ -36,48 +36,48 @@ basic auth
 
 ## History
 
-### http-up 1.0.26
+### 1.0.26
 - [x] - change stdout log info
 - [x] - change file listing view to full row
 - [x] - move uploader and folder create interfaces up
 - [ ] - arg --log to file
 
-### 1.0.25 features
+### 1.0.25
 - [x] - show files_count_max warning
 
-### 1.0.21 features
+### 1.0.21
 - [x] - add basic auth
 
-### 1.0.19 features
+### 1.0.19
 - [x] - remove H1
 - [x] - autoclean temp folder
 - [x] - change breadcrumbs font
 - [x] - change list font
 
-### 1.0.17 features
+### 1.0.17
 - [x] - change temp folder to /tmp/httpup
 - [x] - change copy function to rename
 - [x] - fix multiple upload
 
-### 1.0.16 features
+### 1.0.16
 - [x] - add config file
 
-### 1.0.15 features
+### 1.0.15
 - [x] - make folder by enter
 
-### 1.0.14 features
+### 1.0.14
 - [x] - swap bg color between folder and file
 
-### 1.0.13 features
+### 1.0.13
 - [x] - decomposition for lib/http-up.js
 
-### 1.0.12 features
+### 1.0.12
 - [x] - make new folder via web interface
 
-### 1.0.11 features
+### 1.0.11
 - [x] - refresh npm modules with clear recreate lock file
 
-### 1.0.10 features
+### 1.0.10
 - [x] - refresh bootstrap
 - [x] - file size warning show
 - [x] - add prettier for code
