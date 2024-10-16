@@ -70,8 +70,12 @@ if (argv.h || argv.help) {
         '',
         'options:',
         `  -p --port        Port to use. [${config.defaultPort}]`,
+        ``,
         `     --user        User for basic authorization.`,
-        `     --password    Password for basic authorization.`
+        `     --password    Password for basic authorization.`,
+        ``,
+        `     --upload-disable`,
+        `     --folder-make-disable`
     ].join('\n'));
     process.exit();
 }

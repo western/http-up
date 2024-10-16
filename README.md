@@ -36,6 +36,9 @@ basic auth
 
 ## History
 
+### 1.0.29
+- [x] - --upload-disable and --folder-make-disable keys
+
 ### 1.0.27
 - [x] - set right mime type
 
