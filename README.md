@@ -20,12 +20,12 @@ basic auth
 
 ## Desktop window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&18" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&27" />
 </p>
 
 ## Mobile window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&26" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&27" />
 </p>
 
 ## Notes
@@ -35,6 +35,9 @@ basic auth
 - App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
 ## History
+
+### 1.0.27
+- [x] - set right mime type
 
 ### 1.0.26
 - [x] - change stdout log info
