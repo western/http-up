@@ -36,6 +36,11 @@ basic auth
 
 ## History
 
+### backlog
+- [ ] - add table of files with extended information and sort instead simple list
+- [ ] - grouping folders on top of list
+- [ ] - need some aside panel with folders tree?
+
 ### 1.0.29
 - [x] - --upload-disable and --folder-make-disable keys
 
