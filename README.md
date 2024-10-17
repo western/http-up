@@ -41,6 +41,9 @@ basic auth
 - [ ] - need some aside panel with folders tree?
 - [ ] - arg --log to file
 
+### 1.0.31
+- [x] - catch read errors and new error page
+
 ### 1.0.30
 - [x] - grouping folders on top of list
 - [x] - change stdout log info
