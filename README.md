@@ -39,6 +39,7 @@ basic auth
 ### backlog
 - [ ] - add table of files with extended information and sort instead simple list
 - [ ] - need some aside panel with folders tree?
+- [ ] - arg --log to file
 
 ### 1.0.30
 - [x] - grouping folders on top of list
