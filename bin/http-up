@@ -8,81 +8,72 @@ const fs = require('fs');
 let HTTPUP = require('../lib/http-up');
 let argv = require('minimist')(process.argv.slice(2));
 
-
 let config = require('../lib/config');
-
 
 argv.port = argv.port || argv.p || config.defaultPort;
 
-
 argv.fold = process.cwd() + '/' + 'public';
 
-
-
-if ( argv._[0] && argv._[0] == '.' ) {
+if (argv._[0] && argv._[0] == '.') {
     argv.fold = process.cwd();
-} else if ( argv._[0] ) {
-    let user_set_full_path_match = argv._[0].match(/^\//)
-    if( user_set_full_path_match ){
-
+} else if (argv._[0]) {
+    let user_set_full_path_match = argv._[0].match(/^\//);
+    if (user_set_full_path_match) {
         argv.fold = argv._[0];
-    }else{
+    } else {
         argv.fold = process.cwd() + '/' + argv._[0];
     }
 }
 
-
-
 if (!fs.existsSync(argv.fold)) {
     console.log('');
     console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
-    console.log('You can run http-up with folder as first argument, as '+ colors.yellow('http-up foldername1'));
+    console.log('You can run http-up with folder as first argument, as ' + colors.yellow('http-up foldername1'));
     process.exit();
 }
 
-if (!fs.existsSync( config.destination )) {
+if (!fs.existsSync(config.destination)) {
     console.log('');
     console.log('Temporary folder "' + colors.yellow(config.destination) + '" is absent.');
     console.log('Make new');
 
-    fs.mkdirSync( config.destination );
+    fs.mkdirSync(config.destination);
 
     console.log('Done');
     console.log('');
-}else{
+} else {
     console.log('');
     console.log('Temporary folder "' + colors.yellow(config.destination) + '" is exist.');
     console.log('Run clearing...');
 
-    fs.rmSync(config.destination, {recursive: true, force: true});
-    fs.mkdirSync( config.destination );
+    fs.rmSync(config.destination, { recursive: true, force: true });
+    fs.mkdirSync(config.destination);
 
     console.log('Done');
     console.log('');
 }
 
-
 process.title = 'http-up';
 
 if (argv.h || argv.help) {
-    console.log([
-        'usage: http-up [path] [options]',
-        '',
-        'options:',
-        `  -p --port        Port to use. [${config.defaultPort}]`,
-        ``,
-        `     --user        User for basic authorization.`,
-        `     --password    Password for basic authorization.`,
-        ``,
-        `     --upload-disable`,
-        `     --folder-make-disable`
-    ].join('\n'));
+    console.log(
+        [
+            'usage: http-up [path] [options]',
+            '',
+            'options:',
+            `  -p --port        Port to use. [${config.defaultPort}]`,
+            ``,
+            `     --user        User for basic authorization.`,
+            `     --password    Password for basic authorization.`,
+            ``,
+            `     --upload-disable`,
+            `     --folder-make-disable`,
+        ].join('\n'),
+    );
     process.exit();
 }
 
 HTTPUP.makeServer(argv);
-
-
 
 process.on('SIGINT', function () {
     console.log('http-up stopped.');
