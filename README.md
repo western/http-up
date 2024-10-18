@@ -41,8 +41,14 @@ basic auth
 - [ ] - need some aside panel with folders tree?
 - [ ] - arg --log to file
 
+### 1.0.35
+- [x] - security fix - double slashes
+
 ### 1.0.34
 - [x] - filename and foldername letters extended
+
+### 1.0.32 and 1.0.33
+- [x] - security fix - double dot
 
 ### 1.0.31
 - [x] - catch read errors and new error page
