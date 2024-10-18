@@ -20,12 +20,12 @@ basic auth
 
 ## Desktop window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&27" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&34" />
 </p>
 
 ## Mobile window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&27" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&34" />
 </p>
 
 ## Notes
@@ -40,6 +40,9 @@ basic auth
 - [ ] - add table of files with extended information and sort instead simple list?
 - [ ] - need some aside panel with folders tree?
 - [ ] - arg --log to file
+
+### 1.0.34
+- [x] - filename and foldername letters extended
 
 ### 1.0.31
 - [x] - catch read errors and new error page
