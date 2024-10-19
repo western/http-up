@@ -43,6 +43,7 @@
     "minimist": "^1.2.8",
     "multer": "^1.4.5-lts.1",
     "node-datetime": "^2.1.2",
+    "shelljs": "^0.8.5",
     "urlencode": "^2.0.0"
   },
   "bin": {

@@ -41,6 +41,7 @@ basic auth
 - [ ] - need some aside panel with folders tree?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
+- [ ] - tls
 
 ### 1.0.35
 - [x] - security fix - double slashes
