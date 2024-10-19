@@ -28,6 +28,7 @@ if (argv._[0] && argv._[0] == '.') {
     argv.fold = argv.fold.replace(/([^:]\/)\/+/g, "$1");
 }
 
+console.info('');
 console.info('Node ', colors.yellow(process.versions.node));
 
 if( !fs.lstatSync(argv.fold).isDirectory() ){
