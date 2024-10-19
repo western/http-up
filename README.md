@@ -34,6 +34,11 @@ basic auth
 - If you run application under some User, this user should be have privileges to write current folder
 - App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
+## Automatic TLS
+
+- For start HTTPS server you need `easyrsa` linux package
+- When you start server with `--tls` option, all keys generate automatically
+
 ## History
 
 ### backlog
