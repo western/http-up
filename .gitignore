@@ -1,3 +1,4 @@
 node_modules/
 public/*.png
 public/*.jpg
+lib/easyrsa/
