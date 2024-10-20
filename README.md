@@ -16,7 +16,7 @@ or
 
 basic auth
 
-`npx http-up --user login1 --password password .`
+`npx http-up --user login1 --password EAJteG5 .`
 
 ## Desktop window
 <p align="center">
