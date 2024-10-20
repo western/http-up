@@ -9,23 +9,23 @@ Also you can download any files inside current folder, just click on them
 ## Fast running without install
 
 ```console
-foo@bar:~$ npx http-up .
+npx http-up .
 ```
 
 or
 
 ```console
-foo@bar:~$ npx http-up --port 3999 /path/to/fold
+npx http-up --port 3999 /path/to/fold
 ```
 
 basic auth
 
 ```console
-foo@bar:~$ npx http-up --basic .
+npx http-up --basic .
 ```
 
 ```console
-foo@bar:~$ npx http-up --user login1 --password EAJteG5 .
+npx http-up --user login1 --password EAJteG5 .
 ```
 
 
@@ -57,7 +57,7 @@ foo@bar:~$ npx http-up --user login1 --password EAJteG5 .
 - When you start server with `--tls` option, all keys generate automatically
 
 ```console
-foo@bar:~$ npx http-up . --tls
+npx http-up . --tls
 ```
 
 - Server use self signed certs, generated at first time. Thus you need approve this connection on your clients.
