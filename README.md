@@ -77,6 +77,15 @@ npx http-up . --tls
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
 
+### 1.0.43
+- [x] - 401 error page show
+- [x] - new util.http_path_clear function
+
+### 1.0.42
+- [x] - show basic login in log
+
+### 1.0.41
+- [x] - basic auth with --basic make list of credentials
 
 ### 1.0.37
 - [x] - add tls
