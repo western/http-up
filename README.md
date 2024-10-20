@@ -8,15 +8,29 @@ Also you can download any files inside current folder, just click on them
 
 ## Fast running without install
 
-`npx http-up .`
+```console
+npx http-up .
+```
 
 or
 
-`npx http-up --port 3999 .`
+```console
+npx http-up --port 3999 /path/to/fold
+```
 
 basic auth
 
-`npx http-up --user login1 --password EAJteG5 .` or `npx http-up --basic .`
+```console
+npx http-up --basic .
+```
+
+or only one basic auth specific user
+
+```console
+npx http-up --user login1 --password EAJteG5 .
+```
+
+
 
 ## Desktop window
 <p align="center">
@@ -30,7 +44,12 @@ basic auth
 
 ## Notes
 
-- Be careful, if you start this App on public network interface, anybody can work with it
+> [!CAUTION]
+> Be careful, if you start this App on public network interface, anybody can work with it
+
+> [!IMPORTANT]  
+> Always run this app only under unprivileged common user
+
 - If you run application under some User, this user should be have privileges to write current folder
 - App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
 
@@ -38,6 +57,11 @@ basic auth
 
 - For start HTTPS server you need `easyrsa` linux package
 - When you start server with `--tls` option, all keys generate automatically
+
+```console
+npx http-up . --tls
+```
+
 - Server use self signed certs, generated at first time. Thus you need approve this connection on your clients.
 
 <p float="left">
