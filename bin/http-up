@@ -72,6 +72,8 @@ if (argv.h || argv.help) {
             `     --user        User for basic authorization.`,
             `     --password    Password for basic authorization.`,
             ``,
+            `     --basic       Set basic auth and generate several accounts every time.`,
+            ``,
             `     --upload-disable`,
             `     --folder-make-disable`,
             ``,
