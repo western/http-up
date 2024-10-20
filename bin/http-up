@@ -8,7 +8,8 @@ const fs = require('fs');
 let HTTPUP = require('../lib/http-up');
 let argv = require('minimist')(process.argv.slice(2));
 
-let config = require('../lib/config');
+const config = require('../lib/config');
+const util = require('../lib/util');
 
 argv.port = argv.port || argv.p || config.defaultPort;
 
@@ -24,8 +25,7 @@ if (argv._[0] && argv._[0] == '.') {
         argv.fold = process.cwd() + '/' + argv._[0];
     }
 
-    argv.fold = argv.fold.replace(/\.\./g, '');
-    argv.fold = argv.fold.replace(/([^:]\/)\/+/g, '$1');
+    argv.fold = util.http_path_clear(argv.fold);
 }
 
 console.info('');
