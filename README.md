@@ -24,6 +24,8 @@ basic auth
 npx http-up --basic .
 ```
 
+or only one basic auth specific user
+
 ```console
 npx http-up --user login1 --password EAJteG5 .
 ```
