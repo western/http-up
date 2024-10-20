@@ -25,16 +25,21 @@ if (argv._[0] && argv._[0] == '.') {
     }
 
     argv.fold = argv.fold.replace(/\.\./g, '');
-    argv.fold = argv.fold.replace(/([^:]\/)\/+/g, "$1");
+    argv.fold = argv.fold.replace(/([^:]\/)\/+/g, '$1');
 }
 
 console.info('');
 console.info('Node ', colors.yellow(process.versions.node));
 
-if( !fs.lstatSync(argv.fold).isDirectory() ){
+if (!fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
     console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
-    console.log('You can run http-up with folder as first argument, as ' + colors.yellow('http-up foldername1') + ' or ' + colors.yellow('http-up /path/to/foldername1'));
+    console.log(
+        'You can run http-up with folder as first argument, as ' +
+            colors.yellow('http-up foldername1') +
+            ' or ' +
+            colors.yellow('http-up /path/to/foldername1'),
+    );
     process.exit();
 }
 
