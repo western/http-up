@@ -37,6 +37,7 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-basic-auth": "^1.2.1",
     "mime": "^3.0.0",
