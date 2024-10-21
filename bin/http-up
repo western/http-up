@@ -28,8 +28,8 @@ if (argv._[0] && argv._[0] == '.') {
     argv.fold = util.http_path_clear(argv.fold);
 }
 
-console.info('');
-console.info('Node ', colors.yellow(process.versions.node));
+//console.info('');
+//console.info('Node ', colors.yellow(process.versions.node));
 
 if (!fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
