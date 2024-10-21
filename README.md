@@ -18,7 +18,9 @@ or
 npx http-up --port 3999 /path/to/fold
 ```
 
-basic auth
+## Basic auth
+
+every time when you start, you get a list of accounts
 
 ```console
 npx http-up --basic .
