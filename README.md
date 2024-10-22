@@ -81,6 +81,7 @@ npx http-up . --tls
 - [ ] - need some aside panel with folders tree?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
+- [ ] - show upload progress as simple as possible
 
 ### 1.0.43
 - [x] - 401 error page show
