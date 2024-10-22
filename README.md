@@ -87,6 +87,7 @@ npx http-up . --tls
 ### 1.0.44
 - [x] - cors for api
 - [x] - cmd args configure
+- [x] - add folder with tests
 
 ### 1.0.43
 - [x] - 401 error page show
