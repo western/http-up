@@ -79,6 +79,7 @@ npx http-up . --tls
 ### backlog
 - [ ] - add table of files with extended information and sort instead simple list?
 - [ ] - need some aside panel with folders tree?
+- [ ] - save whitespaces for filenames?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
 - [ ] - show upload progress as simple as possible
