@@ -116,6 +116,16 @@ describe("should 500", () => {
 
 
     }, 3_000);
+
+
+
+    afterAll(() => {
+        if (fs.existsSync('/tmp/foldername1')) {
+            fs.rmdirSync('/tmp/foldername1');
+        }
+    });
+
+
 })
 
 

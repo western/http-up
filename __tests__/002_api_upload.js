@@ -83,6 +83,15 @@ describe("should 200", () => {
 
 
     }, 3_000);
+
+
+    afterAll(() => {
+        if (fs.existsSync('/tmp/file1.jpg')) {
+            fs.unlinkSync('/tmp/file1.jpg');
+        }
+    });
+
+
 })
 
 
