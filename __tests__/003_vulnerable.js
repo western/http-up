@@ -30,7 +30,7 @@ describe("should 200", () => {
             fs.mkdirSync('/tmp/foldXX/foldername2', { recursive: true });
         }
 
-        //child = shell.exec('./bin/http-up /tmp ', {async:true});
+        child = shell.exec('./bin/http-up /tmp ', {async:true});
     });
 
 
@@ -61,7 +61,7 @@ describe("should 200", () => {
         let json = await response.json();
         console.log('json=', json);
 
-        //child.kill();
+        child.kill();
         expect(response.status).toBe(200);
         expect(json.result).toBe('/foldXX/foldernameT');
 
