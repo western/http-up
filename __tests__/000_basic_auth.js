@@ -3,12 +3,12 @@
 const shell = require('shelljs');
 
 if (shell.exec('./bin/http-up --help', { silent: true }).code !== 0) {
-    console.log('Error: ./bin/http-up');
+    console.log('Error: ./bin/http-up not found');
     shell.exit(1);
     process.exit();
 }
 
-
+//shell.exec("ps auxf | grep 'http-up' | grep -v grep | awk '{print $2}' | xargs kill", {async:false});
 
 let url = 'http://127.0.0.1:4000/';
 
@@ -42,6 +42,8 @@ describe("should auth success", () => {
             expect(res.status).toBe(200);
         })
 
+        //await new Promise((r) => setTimeout(r, 2000));
+
 
     }, 3_000);
 })
@@ -71,6 +73,8 @@ describe("should auth fail", () => {
             child.kill();
             expect(res.status).toBe(401);
         })
+
+        //await new Promise((r) => setTimeout(r, 2000));
 
 
     }, 3_000);

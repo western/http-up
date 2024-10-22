@@ -24,7 +24,7 @@
     "start": "node ./bin/http-up",
     "prettier": "npx prettier bin lib --check",
     "prettier:fix": "npm run prettier -- --write",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --runInBand"
   },
   "files": [
     "lib",
