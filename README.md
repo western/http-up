@@ -84,6 +84,10 @@ npx http-up . --tls
 - [ ] - need tests and vulnerability tests too
 - [ ] - show upload progress as simple as possible
 
+### 1.0.44
+- [x] - cors for api
+- [x] - cmd args configure
+
 ### 1.0.43
 - [x] - 401 error page show
 - [x] - new util.http_path_clear function
