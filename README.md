@@ -20,7 +20,10 @@ npx http-up --port 3999 /path/to/fold
 
 ## Basic auth
 
-every time when you start, you get a list of accounts
+> [!IMPORTANT]  
+> It is recommend for work on public network interfaces
+
+every time when you start, you get a list of random accounts
 
 ```console
 npx http-up --basic .
@@ -49,7 +52,7 @@ npx http-up --user login1 --password EAJteG5 .
 > [!CAUTION]
 > Be careful, if you start this App on public network interface, anybody can work with it
 
-> [!IMPORTANT]  
+> [!CAUTION]  
 > Always run this app only under unprivileged common user
 
 - If you run application under some User, this user should be have privileges to write current folder
@@ -76,8 +79,10 @@ npx http-up . --tls
 ### backlog
 - [ ] - add table of files with extended information and sort instead simple list?
 - [ ] - need some aside panel with folders tree?
+- [ ] - save whitespaces for filenames?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
+- [ ] - show upload progress as simple as possible
 
 ### 1.0.43
 - [x] - 401 error page show
