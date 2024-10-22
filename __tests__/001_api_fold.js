@@ -26,7 +26,10 @@ describe("should 200", () => {
     let child;
     beforeAll(async() => {
 
-        fs.rmdirSync('/tmp/foldername1');
+
+        if (fs.existsSync('/tmp/foldername1')) {
+            fs.rmdirSync('/tmp/foldername1');
+        }
 
         child = shell.exec('./bin/http-up /tmp ', {async:true});
     });
