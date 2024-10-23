@@ -8,18 +8,15 @@ const fs = require('fs');
 let HTTPUP = require('../lib/http-up');
 //let argv = require('minimist')(process.argv.slice(2));
 
-
 let argv = require('minimist')(process.argv.slice(2), {
-  string: [ 'port', 'user', 'password' ],
-  boolean: [ 'basic', 'tls', 'upload-disable', 'folder-make-disable' ],
-  alias: { h: 'help' },
-  default: { port: '4000' },
-  '--': true,
-  stopEarly: false, /* populate _ with first non-option */
-  //unknown: function () { ... } /* invoked on unknown param */
+    string: ['port', 'user', 'password'],
+    boolean: ['basic', 'tls', 'upload-disable', 'folder-make-disable'],
+    alias: { h: 'help' },
+    default: { port: '4000' },
+    '--': true,
+    stopEarly: false /* populate _ with first non-option */,
+    //unknown: function () { ... } /* invoked on unknown param */
 });
-
-
 
 const config = require('../lib/config');
 const util = require('../lib/util');
@@ -27,8 +24,6 @@ const util = require('../lib/util');
 argv.port = argv.port || argv.p || config.defaultPort;
 
 argv.fold = process.cwd() + '/' + 'public';
-
-
 
 if (argv._[0] && argv._[0] == '.') {
     argv.fold = process.cwd();
@@ -42,7 +37,6 @@ if (argv._[0] && argv._[0] == '.') {
 
     argv.fold = util.http_path_clear(argv.fold);
 }
-
 
 if (argv.h || argv.help) {
     console.log(
@@ -66,9 +60,7 @@ if (argv.h || argv.help) {
     process.exit();
 }
 
-
-
-if ( !fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
+if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
     console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
     console.log(
@@ -102,7 +94,6 @@ if (!fs.existsSync(config.destination)) {
 }
 
 process.title = 'http-up';
-
 
 HTTPUP.makeServer(argv);
 
