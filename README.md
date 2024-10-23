@@ -84,6 +84,11 @@ npx http-up . --tls
 - [ ] - need tests and vulnerability tests too
 - [ ] - show upload progress as simple as possible
 
+### 1.0.47
+- [x] - decomposition
+- [x] - change default content type
+- [x] - set utf charset for js files
+
 ### 1.0.44
 - [x] - cors for api
 - [x] - cmd args configure
