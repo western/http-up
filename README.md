@@ -1,6 +1,6 @@
 # http-up
 
-Simple index folder via http with upload
+Simple share folder via http with upload
 
 Multiple files upload to current showed folder
 
