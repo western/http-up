@@ -44,6 +44,27 @@ if (argv._[0] && argv._[0] == '.') {
 }
 
 
+if (argv.h || argv.help) {
+    console.log(
+        [
+            'usage: http-up [path] [options]',
+            '',
+            'options:',
+            `  -p --port        Port to use. [${config.defaultPort}]`,
+            ``,
+            `     --user        User for basic authorization.`,
+            `     --password    Password for basic authorization.`,
+            ``,
+            `     --basic       Set basic auth and generate several accounts every time.`,
+            ``,
+            `     --upload-disable`,
+            `     --folder-make-disable`,
+            ``,
+            `     --tls`,
+        ].join('\n'),
+    );
+    process.exit();
+}
 
 if (!fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
@@ -80,27 +101,6 @@ if (!fs.existsSync(config.destination)) {
 
 process.title = 'http-up';
 
-if (argv.h || argv.help) {
-    console.log(
-        [
-            'usage: http-up [path] [options]',
-            '',
-            'options:',
-            `  -p --port        Port to use. [${config.defaultPort}]`,
-            ``,
-            `     --user        User for basic authorization.`,
-            `     --password    Password for basic authorization.`,
-            ``,
-            `     --basic       Set basic auth and generate several accounts every time.`,
-            ``,
-            `     --upload-disable`,
-            `     --folder-make-disable`,
-            ``,
-            `     --tls`,
-        ].join('\n'),
-    );
-    process.exit();
-}
 
 HTTPUP.makeServer(argv);
 
