@@ -86,7 +86,8 @@ div.list-group a i{
 
 .file-man-box .file-img-box {
     line-height: 120px;
-    text-align: center
+    text-align: center;
+    overflow: hidden;
 }
 
 .file-man-box .file-img-box img {
