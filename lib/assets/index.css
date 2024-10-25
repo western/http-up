@@ -30,6 +30,7 @@ div.list-group {
 
 div.list-group a {
     font-size: 16px;
+    overflow: hidden;
 }
 
 div.list-group a.file {
