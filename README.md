@@ -82,7 +82,16 @@ npx http-up . --tls
 - [ ] - save whitespaces for filenames?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
-- [ ] - show upload progress as simple as possible
+
+
+### 1.0.57
+- [x] - add folder tree
+
+### 1.0.51
+- [x] - add two experimental view modes
+
+### 1.0.48
+- [x] - show upload progress as simple as possible
 
 ### 1.0.47
 - [x] - decomposition
