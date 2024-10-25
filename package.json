@@ -1,7 +1,7 @@
 {
   "name": "http-up",
   "version": "1.0.60",
-  "description": "Simple index folder via http with upload",
+  "description": "Simple share folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
     "type": "git",
