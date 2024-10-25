@@ -61,7 +61,7 @@ div.list-group a i{
 
 
 .card-box {
-    padding: 20px;
+    _padding: 20px;
     border-radius: 3px;
     margin-bottom: 30px;
     background-color: #fff;
