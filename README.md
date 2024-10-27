@@ -82,6 +82,8 @@ npx http-up . --tls
 - [ ] - save whitespaces for filenames?
 - [ ] - arg --log to file
 - [ ] - need tests and vulnerability tests too
+- [ ] - what is the lib can resize images enough fast
+- [ ] - and how store thumbs (home dot cache folder?)
 
 
 ### 1.0.57
