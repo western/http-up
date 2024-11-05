@@ -23,7 +23,7 @@ const util = require('../lib/util');
 
 argv.port = argv.port || argv.p || config.defaultPort;
 
-argv.fold = process.cwd() + '/' + 'public';
+argv.fold = process.cwd();
 
 if (argv._[0] && argv._[0] == '.') {
     argv.fold = process.cwd();
@@ -62,7 +62,7 @@ if (argv.h || argv.help) {
 
 if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
-    console.log('Public folder "' + colors.yellow(argv.fold) + '" is absent.');
+    console.log('Folder "' + colors.yellow(argv.fold) + '" is absent.');
     console.log(
         'You can run http-up with folder as first argument, as ' +
             colors.yellow('http-up foldername1') +
