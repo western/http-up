@@ -65,10 +65,15 @@ div.list-group a i{
 
 
 
+.file-table {
+    margin-bottom: 50px;
+}
 
 
 
 
+
+/*
 .card-box {
     _padding: 20px;
     border-radius: 3px;
@@ -134,4 +139,38 @@ div.list-group a i{
     width: 100%;
     overflow: hidden;
 }
+*/
+
+
+
+
+
+
+
+
+
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+
+.input-group-text.font-reset{
+
+    font-size: unset !important;
+
+}
+
+
 

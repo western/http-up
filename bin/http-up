@@ -10,7 +10,7 @@ let HTTPUP = require('../lib/http-up');
 
 let argv = require('minimist')(process.argv.slice(2), {
     string: ['port', 'user', 'password'],
-    boolean: ['basic', 'tls', 'upload-disable', 'folder-make-disable'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode'],
     alias: { h: 'help' },
     default: { port: '4000' },
     '--': true,
@@ -41,20 +41,25 @@ if (argv._[0] && argv._[0] == '.') {
 if (argv.h || argv.help) {
     console.log(
         [
-            'usage: http-up [path] [options]',
-            '',
-            'options:',
-            `  -p --port        Port to use. [${config.defaultPort}]`,
             ``,
-            `     --user        User for basic authorization.`,
-            `     --password    Password for basic authorization.`,
+            `v1.2.0`,
             ``,
-            `     --basic       Set basic auth and generate several accounts every time.`,
+            `usage: http-up [path] [options]`,
+            ``,
+            `options:`,
+            `     --port                    Port to use. [${config.defaultPort}]`,
+            ``,
+            `     --user                    User for basic authorization.`,
+            `     --password                Password for basic authorization.`,
+            ``,
+            `     --basic                   Set basic auth and generate several accounts every time.`,
             ``,
             `     --upload-disable`,
             `     --folder-make-disable`,
             ``,
             `     --tls`,
+            ``,
+            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`
         ].join('\n'),
     );
     process.exit();
