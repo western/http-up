@@ -15,7 +15,7 @@ In extended mode you can delete group of files
   <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&35" />
 </p>
 
-## If you switch extended mode on --extend-mode
+## If you switch --extend-mode
 
 App will change main list view to table.
 
