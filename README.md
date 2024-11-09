@@ -15,6 +15,17 @@ In extended mode you can delete group of files
   <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&35" />
 </p>
 
+## If you switch extended mode on --extend-mode
+
+App will change main list view to table.
+
+Below you see display width more than 992 pix (1), less than (2) and mobile window (3):
+
+<p align="center">
+    <img src="https://github.com/western/http-here/blob/dev/doc/width_screen_compare3.png?raw=true"  >
+    <img src="https://github.com/western/http-here/blob/dev/doc/width_screen_compare4.png?raw=true"  >
+</p>
+
 ## Fast running without install
 
 ```console
@@ -85,6 +96,10 @@ npx http-up . --tls
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.2.0
+twin brother rewrite to v1.2.0
+- [x] - add --extend-mode (table view, thumbnails and delete)
+- [x] - decomposition of code
 
 ### 1.0.57
 - [x] - add folder tree
