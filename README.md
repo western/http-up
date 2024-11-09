@@ -4,7 +4,16 @@ Simple share folder via http with upload
 
 Multiple files upload to current showed folder
 
-Also you can download any files inside current folder, just click on them
+In extended mode you can delete group of files
+
+<p align="center">
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&35" />
+</p>
+
+## Mobile window
+<p align="center">
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&35" />
+</p>
 
 ## Fast running without install
 
@@ -37,15 +46,6 @@ npx http-up --user login1 --password EAJteG5 .
 
 
 
-## Desktop window
-<p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&34" />
-</p>
-
-## Mobile window
-<p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&34" />
-</p>
 
 ## Notes
 
