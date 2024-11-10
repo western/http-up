@@ -96,6 +96,10 @@ npx http-up . --tls
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.2.2
+- [x] - change out and path.join everywhere
+- [x] - set sendfile
+
 ### 1.2.0
 twin brother rewrite to v1.2.0
 - [x] - add --extend-mode (table view, thumbnails and delete)
