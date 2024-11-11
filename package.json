@@ -18,7 +18,8 @@
   ],
   "directories": {
     "lib": "lib",
-    "bin": "bin"
+    "bin": "bin",
+    "views": "views"
   },
   "scripts": {
     "start": "node ./bin/http-up",
@@ -29,6 +30,7 @@
   "files": [
     "lib",
     "bin",
+    "views",
     "README.md"
   ],
   "bugs": {
