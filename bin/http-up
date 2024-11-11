@@ -59,7 +59,7 @@ if (argv.h || argv.help) {
             ``,
             `     --tls`,
             ``,
-            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`
+            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
         ].join('\n'),
     );
     process.exit();
