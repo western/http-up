@@ -42,7 +42,7 @@ if (argv.h || argv.help) {
     console.log(
         [
             ``,
-            `v1.2.7`,
+            `v1.3.0`,
             ``,
             `usage: http-up [path] [options]`,
             ``,
