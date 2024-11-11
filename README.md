@@ -91,7 +91,7 @@ npx http-up . --tls
 - [ ] - add table of files with extended information and sort instead simple list?
 - [ ] - need some aside panel with folders tree?
 - [ ] - save whitespaces for filenames?
-- [ ] - arg --log to file
+- [ ] - add arg --tee and --log to file
 - [ ] - need tests and vulnerability tests too
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
