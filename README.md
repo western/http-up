@@ -97,12 +97,12 @@ npx http-up . --tls
 - [ ] - and how store thumbs (home dot cache folder?)
 
 ### 1.2.7
-- success publish with right /view folder path
+- [x] - success publish with right /view folder path
 
 ### 1.2.4
-- core: rewrite for template express-handlebars (big rewrite)
-- remove unused assets
-- change http_path_clear util function
+- [x] - core: rewrite for template express-handlebars (big rewrite)
+- [x] - remove unused assets
+- [x] - change http_path_clear util function
 
 ### 1.2.2
 - [x] - change out and path.join everywhere
