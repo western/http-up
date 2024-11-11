@@ -87,7 +87,7 @@ npx http-up . --tls
 
 ## Magic file index.html inside any folder
 
-If you put inside folder file index.html, it will be return as context
+If you put inside folder index.html, it will be return as context
 
 ## History
 
@@ -101,7 +101,7 @@ If you put inside folder file index.html, it will be return as context
 - [ ] - and how store thumbs (home dot cache folder?)
 
 ### 1.3.0
-- [x] - check index file index.html inside folder and show it
+- [x] - check file index.html inside folder and show it
 
 ### 1.2.7
 - [x] - success publish with right /view folder path
