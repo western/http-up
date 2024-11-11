@@ -85,6 +85,10 @@ npx http-up . --tls
   <img src="https://github.com/western/http-up/blob/dev/doc/firefox_self_signed_cert.png?raw=true" width="45%" >
 </p>
 
+## Magic file index.html inside any folder
+
+If you put inside folder file index.html, it will be return as context
+
 ## History
 
 ### backlog
@@ -95,6 +99,9 @@ npx http-up . --tls
 - [ ] - need tests and vulnerability tests too
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
+
+### 1.3.0
+- [x] - check index file index.html inside folder and show it
 
 ### 1.2.7
 - [x] - success publish with right /view folder path
