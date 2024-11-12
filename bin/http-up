@@ -2,11 +2,11 @@
 
 'use strict';
 
-const colors = require('colors');
+const chalk = require('chalk');
 const fs = require('fs');
 
 let HTTPUP = require('../lib/http-up');
-//let argv = require('minimist')(process.argv.slice(2));
+
 
 let argv = require('minimist')(process.argv.slice(2), {
     string: ['port', 'user', 'password'],
@@ -67,19 +67,19 @@ if (argv.h || argv.help) {
 
 if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
-    console.log('Folder "' + colors.yellow(argv.fold) + '" is absent.');
+    console.log('Folder "' + chalk.yellow(argv.fold) + '" is absent.');
     console.log(
         'You can run http-up with folder as first argument, as ' +
-            colors.yellow('http-up foldername1') +
+            chalk.yellow('http-up foldername1') +
             ' or ' +
-            colors.yellow('http-up /path/to/foldername1'),
+            chalk.yellow('http-up /path/to/foldername1'),
     );
     process.exit();
 }
 
 if (!fs.existsSync(config.destination)) {
     console.log('');
-    console.log('Temporary folder "' + colors.yellow(config.destination) + '" is absent.');
+    console.log('Temporary folder "' + chalk.yellow(config.destination) + '" is absent.');
     console.log('Make new');
 
     fs.mkdirSync(config.destination);
@@ -88,7 +88,7 @@ if (!fs.existsSync(config.destination)) {
     console.log('');
 } else {
     console.log('');
-    console.log('Temporary folder "' + colors.yellow(config.destination) + '" is exist.');
+    console.log('Temporary folder "' + chalk.yellow(config.destination) + '" is exist.');
     console.log('Run clearing...');
 
     fs.rmSync(config.destination, { recursive: true, force: true });
