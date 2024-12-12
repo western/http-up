@@ -55,6 +55,54 @@ or only one basic auth specific user
 npx http-up --user login1 --password EAJteG5 .
 ```
 
+## File encrypt
+
+> [!IMPORTANT]  
+> Be careful. If you download `.crypt` file with WRONG password, it file will be contain MESS of bytes
+
+<br>
+
+<p align="center">
+    <img src="https://github.com/western/http-here/blob/dev/doc/code_to_encrypt3.png?raw=true"  >
+    
+</p>
+
+Your server need package `openssl`. It will be use `openssl aes-256-cbc`
+
+```console
+npx http-up --extend-mode --crypt /tmp
+```
+
+Then, set your passcode to the form. The passcode store on the form between requests and you not need input it every time (if you clear it server will not use openssl).
+
+During the process of uploading, your files will be encrypt and their EXT change to `.crypt`
+
+When files lying on your server, their data is crypted.
+
+If you need decrypt any `.crypt` flles, set your passcode, and click on file. During download this file, it will be decrypt on the fly.
+
+### Server will be encrypt upload file:
+```console
+npx http-up --extend-mode --crypt /tmp
+```
+- if you set `--crypt` arg on cmd
+- if you set passcode (pass code set by form)
+
+### Server will be decrypt download file:
+```console
+npx http-up --extend-mode --crypt /tmp
+```
+- if you set `--crypt` arg on cmd
+- if filename contain `.crypt` extension
+- if you set right passcode (pass code set by form)
+
+### Server will be decrypt download file (case 2):
+```console
+npx http-up /tmp
+```
+- if filename contain `.crypt` extension
+- if you get file with `code` param: `/fold3/file.jpg.crypt?code=YOUR_PASS_HERE`
+
 
 
 
