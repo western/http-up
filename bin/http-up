@@ -2,8 +2,11 @@
 
 'use strict';
 
-const chalk = require('chalk');
+
+const os = require('os');
 const fs = require('fs');
+const path = require('path');
+const chalk = require('chalk');
 
 let HTTPUP = require('../lib/http-up');
 
@@ -42,7 +45,7 @@ if (argv.h || argv.help) {
     console.log(
         [
             ``,
-            `v1.3.2`,
+            `v1.4.0`,
             ``,
             `usage: http-up [path] [options]`,
             ``,
@@ -77,6 +80,41 @@ if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     process.exit();
 }
 
+
+
+
+
+const homedir = os.homedir();
+const httpup_home = path.join(homedir, '.httpup');
+const httpup_thumb = path.join(homedir, '.httpup', 'thumb');
+const httpup_temp = path.join(homedir, '.httpup', 'temp');
+
+if ( !fs.existsSync(httpup_home) ) {
+    fs.mkdirSync( httpup_home );
+}
+
+if ( !fs.existsSync(httpup_thumb) ) {
+    fs.mkdirSync( httpup_thumb );
+}
+
+if ( !fs.existsSync(httpup_temp) ) {
+    fs.mkdirSync( httpup_temp );
+}else{
+    
+    console.log('');
+    console.log('Temporary folder "' + chalk.yellow(httpup_temp) + '" is exist.');
+    console.log('Run clearing...');
+
+    fs.rmSync(httpup_temp, { recursive: true, force: true });
+    fs.mkdirSync(httpup_temp);
+
+    console.log('Done');
+    console.log('');
+}
+
+
+
+/*
 if (!fs.existsSync(config.destination)) {
     console.log('');
     console.log('Temporary folder "' + chalk.yellow(config.destination) + '" is absent.');
@@ -97,6 +135,7 @@ if (!fs.existsSync(config.destination)) {
     console.log('Done');
     console.log('');
 }
+*/
 
 process.title = 'http-up';
 
