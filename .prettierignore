@@ -2,3 +2,5 @@ node_modules/
 dist/
 public/
 doc/
+lib/assets/bstreeview/*
+lib/assets/lightbox/*
