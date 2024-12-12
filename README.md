@@ -100,6 +100,13 @@ If you put inside folder index.html, it will be return as context
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.5.0
+- [x] move group operation buttons to top panel
+- [x] add sort operation
+- [x] add move group API (with side panel folder)
+- [x] add copy group API (with side panel folder)
+- [x] add zip and download group API
+
 ### 1.4.0
 - [x] make root config folder as /home/USERNAME/.httpup/
 - [x] temp and easyrsa folder moved to root config folder
