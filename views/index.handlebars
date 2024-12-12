@@ -76,12 +76,43 @@
                 	        <div class="row " style="padding:10px 0;">
 
                                 <div class="col-4" >
-
+                                    
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="">
+                                        <a  class="btn btn-outline-secondary " id="group_del" href="javascript:void(0)" title="Delete group"><i class="bi bi-trash3"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_move" href="javascript:void(0)" title="Move group"><i class="bi bi-folder-symlink"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_copy" href="javascript:void(0)" title="Copy group"><i class="bi bi-copy"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_zip" href="javascript:void(0)" title="Zip group and download"><i class="bi bi-file-zip"></i></a>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="col-8 text-end">
                                     
                                     <div class="btn-group btn-group-sm" role="group" aria-label="">
+                                        
+                                        <div class="btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                
+                                                
+                                                {{#if sort_name}}
+                                                By name
+                                                {{/if}}
+                                                
+                                                {{#if sort_modified}}
+                                                By modified
+                                                {{/if}}
+                                                
+                                                {{#if sort_size}}
+                                                By size
+                                                {{/if}}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="?sort=name">By name</a></li>
+                                                <li><a class="dropdown-item" href="?sort=modified">By modified</a></li>
+                                                <li><a class="dropdown-item" href="?sort=size">By size</a></li>
+                                            </ul>
+                                        </div>
+                                        
                                         <a  class="btn btn-outline-secondary " href="?mode=thumb" title="Folder and thumb"><i class="bi bi-image"></i> Thumbnails</a>
                                         <a  class="btn btn-outline-secondary active" href="?mode=list" title="List layout"><i class="bi bi-list"></i> List layout</a>
                                     </div>
@@ -142,10 +173,10 @@
                               </tbody>
                             </table>
                             
-                            <div class="d-grid gap-2 d-md-block">
+                            <!--div class="d-grid gap-2 d-md-block">
                                 <button type="button" class="btn btn-outline-danger btn-sm" id="group_del">Delete group</button>
-                                <!--button type="button" class="btn btn-outline-secondary btn-sm" id="group_zip">Zip and download group</button-->
-                            </div>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="group_zip">Zip and download group</button>
+                            </div-->
                             
                         </div>
                     
@@ -323,10 +354,10 @@
                             </div>
                         </div>
                         
-                        <div class="d-grid gap-2 d-md-block" style="padding: 50px 0;">
+                        <!--div class="d-grid gap-2 d-md-block" style="padding: 50px 0;">
                             <button type="button" class="btn btn-outline-danger btn-sm" id="group_del">Delete group</button>
-                            <!--button type="button" class="btn btn-outline-secondary btn-sm" id="group_zip">Zip and download group</button-->
-                        </div>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="group_zip">Zip and download group</button>
+                        </div-->
                     
                     
                     {{/if}}
@@ -377,4 +408,46 @@
 
 
     </div>
-    
+
+
+
+
+
+<div class="offcanvas  offcanvas-start _w-40" tabindex="-1" id="offcanvasMove" _style="width:40%" >
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" >Move to</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="/" id="move_folder_input" disabled value="/" >
+            <button class="btn btn-outline-secondary" type="button" id="move_folder_button">Do</button>
+        </div>
+        
+        <div id="folderTreeMove">
+            
+        </div>
+    </div>
+</div>
+
+
+
+<div class="offcanvas  offcanvas-start _w-40" tabindex="-1" id="offcanvasCopy" _style="width:40%" >
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" >Move to</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="/" id="copy_folder_input" disabled value="/" >
+            <button class="btn btn-outline-secondary" type="button" id="copy_folder_button">Do</button>
+        </div>
+        
+        <div id="folderTreeCopy">
+            
+        </div>
+    </div>
+</div>
+
