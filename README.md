@@ -100,6 +100,11 @@ If you put inside folder index.html, it will be return as context
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.4.0
+- [x] make root config folder as /home/USERNAME/.httpup/
+- [x] temp and easyrsa folder moved to root config folder
+- [x] add /__thumb/ preview generator for img and documents
+
 ### 1.3.0
 - [x] - check file index.html inside folder and show it
 
