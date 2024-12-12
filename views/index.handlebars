@@ -58,7 +58,7 @@
         
 
 
-        <div class="row" style="padding:10px 0 100px 0;">
+        <div class="row" style="padding:10px 0 50px 0;">
             
 
                 
@@ -155,7 +155,7 @@
                                         
                                             <tr>
                                               <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="file" value="{{Name}}" ></th>
-                                              <td ><a class="nodecor" href="{{FullPath}}">{{Name}}</a></td>
+                                              <td ><a class="nodecor" href="{{FullPath}}?{{Rnds}}">{{Name}}</a></td>
                                               
                                               <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{SizeHuman}}</td>
                                               <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{ModTimeHuman}}</td>
@@ -308,7 +308,7 @@
                                     
                                         <div class="col">
                                             <div class="card shadow-sm">
-                                                <a href="{{FullPath}}">
+                                                <a href="{{FullPath}}?{{Rnds}}">
                                                         
                                                         
                                                         {{#if IsPreviewImg}}
@@ -442,6 +442,33 @@
 
             
         </div>
+        
+        
+        
+        {{#if arg_crypt}}
+        <div class="row" style="padding:10px 0 50px 0;">
+
+            <div class="col">
+                
+                
+
+            </div>
+
+            <div class="col">
+                
+                
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Code to encrypt/decrypt" aria-label="Code to encrypt/decrypt" id="set_code_input" >
+                    <button class="btn btn-outline-secondary" type="button" id="set_code_button">Set</button>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        {{/if}}
+        
+        
 
 
     </div>

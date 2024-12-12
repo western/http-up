@@ -13,7 +13,7 @@ let HTTPUP = require('../lib/http-up');
 
 let argv = require('minimist')(process.argv.slice(2), {
     string: ['port', 'user', 'password'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode', 'crypt'],
     alias: { h: 'help' },
     default: { port: '4000' },
     '--': true,
@@ -45,7 +45,7 @@ if (argv.h || argv.help) {
     console.log(
         [
             ``,
-            `v1.5.3`,
+            `v1.6.0`,
             ``,
             `usage: http-up [path] [options]`,
             ``,
@@ -63,6 +63,8 @@ if (argv.h || argv.help) {
             `     --tls`,
             ``,
             `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
+            ``,
+            `     --crypt                   Enable file encrypt support.`,
         ].join('\n'),
     );
     process.exit();
