@@ -63,7 +63,7 @@ npx http-up --user login1 --password EAJteG5 .
 <br>
 
 <p align="center">
-    <img src="https://github.com/western/http-here/blob/dev/doc/code_to_encrypt3.png?raw=true"  >
+    <img src="https://github.com/western/http-up/blob/dev/doc/code_to_encrypt4.png?raw=true"  >
     
 </p>
 
