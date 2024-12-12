@@ -99,7 +99,7 @@
                                                 {{/if}}
                                                 
                                                 {{#if sort_modified}}
-                                                By modified
+                                                By mod
                                                 {{/if}}
                                                 
                                                 {{#if sort_size}}
@@ -113,7 +113,7 @@
                                             </ul>
                                         </div>
                                         
-                                        <a  class="btn btn-outline-secondary " href="?mode=thumb" title="Folder and thumb"><i class="bi bi-image"></i> Thumbnails</a>
+                                        <a  class="btn btn-outline-secondary " href="?mode=thumb" title="Thumbnails"><i class="bi bi-image"></i></a>
                                         <a  class="btn btn-outline-secondary active" href="?mode=list" title="List layout"><i class="bi bi-list"></i> List layout</a>
                                     </div>
                                     
@@ -206,13 +206,45 @@
                                     </div>
                                     
                                     
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="">
+                                        <a  class="btn btn-outline-secondary " id="group_del" href="javascript:void(0)" title="Delete group"><i class="bi bi-trash3"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_move" href="javascript:void(0)" title="Move group"><i class="bi bi-folder-symlink"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_copy" href="javascript:void(0)" title="Copy group"><i class="bi bi-copy"></i></a>
+                                        <a  class="btn btn-outline-secondary " id="group_zip" href="javascript:void(0)" title="Zip group and download"><i class="bi bi-file-zip"></i></a>
+                                    </div>
+                                    
+                                    
                                     
                                 </div>
 
                                 <div class="col-8 text-end">
                                     
                                     <div class="btn-group btn-group-sm" role="group" aria-label="">
-                                        <a  class="btn btn-outline-secondary active" href="?mode=thumb" title="Folder and thumb"><i class="bi bi-image"></i> Thumbnails</a>
+                                        
+                                        <div class="btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                
+                                                
+                                                {{#if sort_name}}
+                                                By name
+                                                {{/if}}
+                                                
+                                                {{#if sort_modified}}
+                                                By mod
+                                                {{/if}}
+                                                
+                                                {{#if sort_size}}
+                                                By size
+                                                {{/if}}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="?sort=name">By name</a></li>
+                                                <li><a class="dropdown-item" href="?sort=modified">By modified</a></li>
+                                                <li><a class="dropdown-item" href="?sort=size">By size</a></li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <a  class="btn btn-outline-secondary active" href="?mode=thumb" title="Thumbnails"><i class="bi bi-image"></i></a>
                                         <a  class="btn btn-outline-secondary " href="?mode=list" title="List layout"><i class="bi bi-list"></i> List layout</a>
                                     </div>
                                     

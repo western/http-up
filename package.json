@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Simple share folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
