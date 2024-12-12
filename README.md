@@ -148,6 +148,9 @@ If you put inside folder index.html, it will be return as context
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.6.0
+- [x] file encrypt
+
 ### 1.5.0
 - [x] move group operation buttons to top panel
 - [x] add sort operation
