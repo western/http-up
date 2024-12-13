@@ -114,7 +114,7 @@ npx http-up /tmp
 > [!CAUTION]  
 > Always run this app only under unprivileged common user
 
-- If you run application under some User, this user should be have privileges to write current folder
+- If you run application under some User, this user should be have privileges to write target folder
 
 
 ## Automatic TLS keys generate
