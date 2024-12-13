@@ -115,7 +115,7 @@ npx http-up /tmp
 > Always run this app only under unprivileged common user
 
 - If you run application under some User, this user should be have privileges to write current folder
-- App using temporary folder for upload form, usually it /tmp/httpup, do not forget to clean it
+
 
 ## Automatic TLS keys generate
 
