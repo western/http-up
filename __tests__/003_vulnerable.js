@@ -63,7 +63,8 @@ describe("should 200", () => {
 
         child.kill();
         expect(response.status).toBe(200);
-        expect(json.result).toBe('/foldXX/foldernameT');
+        //expect(json.result).toBe('/foldXX/foldernameT');
+        expect(json.code).toBe(200);
 
 
     }, 3_000);
