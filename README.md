@@ -119,15 +119,6 @@ npx http-up /tmp
 
 
 
-## Notes
-
-> [!CAUTION]
-> Be careful, if you start this App on public network interface, anybody can work with it
-
-> [!CAUTION]  
-> Always run this app only under unprivileged common user
-
-- If you run application under some User, this user should be have privileges to write target folder
 
 
 ## Automatic TLS keys generate
@@ -158,6 +149,19 @@ If you put inside folder `index.html`, it will be return as context
 - `easyrsa` - package for certs build
 - `openssl` - encrypt support
 - `zip`
+
+
+## Notes
+
+> [!CAUTION]
+> Be careful, if you start this App on public network interface, anybody can work with it
+
+> [!CAUTION]  
+> Always run this app only under unprivileged common user
+
+- If you run application under some User, this user should be have privileges to write target folder
+
+
 
 ## History
 
