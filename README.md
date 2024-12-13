@@ -156,6 +156,7 @@ If you put inside folder `index.html`, it will be return as context
 - `convert` (ImageMagick package) - for thumbnails
 - `libreoffice` (free office) - for thumbnails
 - `easyrsa` - package for certs build
+- `openssl` - encrypt support
 
 ## History
 
