@@ -55,6 +55,19 @@ or only one basic auth specific user
 npx http-up --user login1 --password EAJteG5 .
 ```
 
+## The safest run
+
+```console
+npx http-up --tls --basic /path/to/you
+```
+read for TLS support below
+
+## Only share
+
+```console
+npx http-up --upload-disable --folder-make-disable /tmp/fold
+```
+
 ## File encrypt
 
 > [!IMPORTANT]  
