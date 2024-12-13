@@ -150,6 +150,13 @@ npx http-up . --tls
 
 If you put inside folder `index.html`, it will be return as context
 
+## Linux packages needs for full functional
+
+- `md5sum` (coreutils package) - make md5 sum of file
+- `convert` (ImageMagick package) - for thumbnails
+- `libreoffice` (free office) - for thumbnails
+- `easyrsa` - package for certs build
+
 ## History
 
 ### backlog
