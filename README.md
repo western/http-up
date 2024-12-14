@@ -139,7 +139,7 @@ npx http-up . --tls
 
 ## Magic file index.html inside any folder
 
-If you put inside folder `index.html`, it will be return as context
+If you put inside folder `index.html`, it will be return as content
 
 ## Linux packages needs for full functional
 
