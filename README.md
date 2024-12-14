@@ -198,25 +198,7 @@ If you put inside folder `index.html`, it will be return as content
 - [x] temp and easyrsa folder moved to root config folder
 - [x] add /__thumb/ preview generator for img and documents
 
-### 1.3.0
-- [x] - check file index.html inside folder and show it
 
-### 1.2.7
-- [x] - success publish with right /view folder path
-
-### 1.2.4
-- [x] - core: rewrite for template express-handlebars (big rewrite)
-- [x] - remove unused assets
-- [x] - change http_path_clear util function
-
-### 1.2.2
-- [x] - change out and path.join everywhere
-- [x] - set sendfile
-
-### 1.2.0
-twin brother rewrite to v1.2.0
-- [x] - add --extend-mode (table view, thumbnails and delete)
-- [x] - decomposition of code
 
 ### [other history here](HISTORY.md)
 
