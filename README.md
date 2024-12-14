@@ -4,7 +4,7 @@ Simple share folder via http with upload
 
 Multiple files upload to current showed folder
 
-In extended mode you can delete group of files
+In extended mode you can make more
 
 <p align="center">
   <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&35" />
