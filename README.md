@@ -148,7 +148,7 @@ If you put inside folder `index.html`, it will be return as context
 - `libreoffice` (free office) - for thumbnails
 - `easyrsa` - package for certs build
 - `openssl` - encrypt support
-- `zip`
+- `zip` - cmd util
 
 
 ## Notes
