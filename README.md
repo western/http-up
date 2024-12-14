@@ -174,6 +174,12 @@ If you put inside folder `index.html`, it will be return as context
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 1.6.5
+- [x] add compression
+
+### 1.6.4
+- [x] fix upload with code undefined
+
 ### 1.6.1
 - [x] API: remove target file or folder while COPY or MOVE
 
