@@ -37,6 +37,7 @@ if (argv._[0] && argv._[0] == '.') {
     }
 
     argv.fold = util.http_path_clear(argv.fold);
+    argv.fold = path.normalize(argv.fold);
 }
 
 if (argv.h || argv.help) {

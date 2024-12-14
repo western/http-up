@@ -61,7 +61,7 @@ describe("should 200", () => {
         let json = await response.json();
         console.log('json=', json);
 
-        child.kill();
+        
         expect(response.status).toBe(200);
         //expect(json.result).toBe('/foldXX/foldernameT');
         expect(json.code).toBe(200);
@@ -71,6 +71,9 @@ describe("should 200", () => {
 
 
     afterAll(() => {
+        
+        child.kill();
+        
         if (fs.existsSync('/tmp/foldXX/foldernameT')) {
             fs.rmdirSync('/tmp/foldXX/foldernameT');
         }
@@ -80,6 +83,7 @@ describe("should 200", () => {
         if (fs.existsSync('/tmp/foldXX')) {
             fs.rmdirSync('/tmp/foldXX');
         }
+        
     });
 
 })
