@@ -29,6 +29,7 @@ describe("should 200", () => {
         if (!fs.existsSync('/tmp/foldXX/foldername2')) {
             fs.mkdirSync('/tmp/foldXX/foldername2', { recursive: true });
         }
+        
 
         child = shell.exec('./bin/http-up /tmp ', {async:true});
     });
@@ -48,7 +49,7 @@ describe("should 200", () => {
 
         const formData  = new FormData();
 
-        formData.append('name', '/../../foldernameT/./');
+        formData.append('name', '/../../foldername2/./');
 
 
 
@@ -74,16 +75,9 @@ describe("should 200", () => {
         
         child.kill();
         
-        if (fs.existsSync('/tmp/foldXX/foldernameT')) {
-            fs.rmdirSync('/tmp/foldXX/foldernameT');
-        }
-        if (fs.existsSync('/tmp/foldXX/foldername2')) {
-            fs.rmdirSync('/tmp/foldXX/foldername2');
-        }
         if (fs.existsSync('/tmp/foldXX')) {
-            fs.rmdirSync('/tmp/foldXX');
+            fs.rmSync('/tmp/foldXX', { recursive: true, force: true });
         }
-        
     });
 
 })
