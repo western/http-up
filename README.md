@@ -142,6 +142,12 @@ npx http-up . --tls
 
 If you put inside folder `index.html`, it will be return as content
 
+## Thumbnails support
+
+You need `convert` (ImageMagick package) for preview images `jpg, png, gif`
+
+For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, docx, xls, xlsx, odt, ods`
+
 ## Linux packages needs for full functional
 
 - `md5sum` (coreutils package) - make md5 sum of file
