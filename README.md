@@ -204,13 +204,7 @@ If you put inside folder `index.html`, it will be return as content
 ### [other history here](HISTORY.md)
 
 
-## Join to dev
+## Any questions
 
-clone repo:
-`https://github.com/western/http-up`
+https://github.com/western/http-up/issues
 
-download necessary packs:
-`npm i`
-
-run instance:
-`npm run start` or `./bin/http-up`
