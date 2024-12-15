@@ -4,7 +4,7 @@ Simple share folder via http with upload
 
 Multiple files upload to current showed folder
 
-In extended mode you can make more
+In extended mode you can doing more
 
 <p align="center">
   <img src="https://github.com/western/http-up/blob/dev/doc/screen.png?raw=true&35" />
