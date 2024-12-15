@@ -15,18 +15,6 @@ In extended mode you can doing more
   <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&35" />
 </p>
 
-## If you switch --extend-mode
-
-App will change main list view to table.
-
-Below you see display width more than 992 pix (1), less than (2) and mobile window (3):
-
-<p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare5.png?raw=true"  >
-    <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare7.png?raw=true"  >
-    <img src="https://github.com/western/http-up/blob/dev/doc/panel_buttons.png?raw=true"  >
-</p>
-
 ## Fast running without install
 
 ```console
@@ -38,6 +26,27 @@ or
 ```console
 npx http-up --port 3999 /path/to/fold
 ```
+
+## If you switch --extend-mode
+
+```console
+npx http-up --extend-mode /tmp
+```
+
+App will change main list view to table. And you can operate with files - delete, move, copy
+
+<p align="center">
+    <img src="https://github.com/western/http-up/blob/dev/doc/panel_buttons.png?raw=true"  >
+</p>
+
+Below you see display width more than 992 pix (1), less than (2) and mobile window (3):
+
+<p align="center">
+    <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare5.png?raw=true"  >
+    <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare7.png?raw=true"  >
+</p>
+
+
 
 ## Basic auth
 
