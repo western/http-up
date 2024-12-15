@@ -24,6 +24,7 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
 <p align="center">
     <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare5.png?raw=true"  >
     <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare7.png?raw=true"  >
+    <img src="https://github.com/western/http-up/blob/dev/doc/panel_buttons.png?raw=true"  >
 </p>
 
 ## Fast running without install
