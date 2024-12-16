@@ -46,7 +46,12 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
     <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare7.png?raw=true"  >
 </p>
 
+## Preview doc button
 
+<p align="center">
+    <img src="https://github.com/western/http-up/blob/dev/doc/preview_doc_button.png?raw=true"  >
+    
+</p>
 
 ## Basic auth
 
