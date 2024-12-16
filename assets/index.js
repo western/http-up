@@ -74,8 +74,10 @@ $(document).ready(function () {
                 }).done(function (data) {
                     if (data.code == 200) {
                         location.href = location.href;
-                    } else {
-                        alert(data.msg);
+                    }
+                }).fail(function(data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
                     }
                 });
             }
@@ -155,8 +157,10 @@ $(document).ready(function () {
                 }).done(function (data) {
                     if (data.code == 200) {
                         location.href = location.href;
-                    } else {
-                        alert(data.msg);
+                    }
+                }).fail(function(data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
                     }
                 });
             }
@@ -190,6 +194,10 @@ $(document).ready(function () {
             if (data.code == 200) {
                 location.href = location.href;
             }
+        }).fail(function(data) {
+            if (data.responseJSON.msg) {
+                alert(data.responseJSON.msg);
+            }
         });
     };
 
@@ -203,41 +211,11 @@ $(document).ready(function () {
         }
     });
 
+    
+
+    
+    
     // --------------------------------------------------------------------------------------------------------------------------------------
-
-    $('a.del').click((ev) => {
-        let el = ev.target;
-
-        //console.log('el=', el);
-
-        if (el.tagName == 'I') {
-            el = el.parentNode;
-            //console.log('el=', $(el).data('name'));
-
-            if (confirm('Delete "' + $(el).data('name') + '"?')) {
-                let formData = new FormData();
-
-                //formData.append('name[1]', $(el).data('name'));
-                formData.append('name', $(el).data('name'));
-
-                //console.log('formData=', formData);
-
-                $.ajax({
-                    url: '/api/delete',
-                    data: formData,
-                    type: 'POST',
-                    contentType: false,
-                    processData: false,
-                }).done(function (data) {
-                    if (data.code == 200) {
-                        location.href = location.href;
-                    } else {
-                        alert(data.msg);
-                    }
-                });
-            }
-        }
-    });
 
     $(':checkbox.head-chk').click((ev) => {
         //let checkboxes = $(':checkbox[name=fold]');
@@ -250,7 +228,38 @@ $(document).ready(function () {
     });
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    
+    $('a.del').click((ev) => {
+        let el = ev.target;
 
+        
+        if (el.tagName == 'I') {
+            el = el.parentNode;
+            
+            if (confirm('Delete "' + $(el).data('name') + '"?')) {
+                let formData = new FormData();
+
+                formData.append('name', $(el).data('name'));
+
+                $.ajax({
+                    url: '/api/delete',
+                    data: formData,
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    if (data.code == 200) {
+                        location.href = location.href;
+                    }
+                }).fail(function(data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
+                    }
+                });
+            }
+        }
+    });
+    
     $('#group_del').click((ev) => {
         let checked = [];
 
@@ -281,8 +290,10 @@ $(document).ready(function () {
             }).done(function (data) {
                 if (data.code == 200) {
                     location.href = location.href;
-                } else {
-                    alert(data.msg);
+                }
+            }).fail(function(data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
                 }
             });
         }
@@ -324,6 +335,10 @@ $(document).ready(function () {
                     location.href = '/__temp/' + data.href;
                 } else {
                     alert(data.msg);
+                }
+            }).fail(function(data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
                 }
             });
         }
@@ -429,7 +444,15 @@ function ev_target_files(files) {
         );
 
         xhr.onreadystatechange = function (ev) {
-            if (xhr.readyState == 4) {
+            
+            
+            
+            if( xhr.readyState == 4 && ev.target.status == 500  ){
+                let json = JSON.parse(ev.target.responseText);
+                alert( json.msg );
+            }
+            
+            if ( xhr.readyState == 4 && ev.target.status == 200 ) {
                 location.href = location.href;
             }
         };
