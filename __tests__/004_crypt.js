@@ -1,6 +1,7 @@
 
 
 const fs = require('fs');
+const path = require('path');
 const shell = require('shelljs');
 
 
@@ -25,14 +26,26 @@ describe("should 200", () => {
 
     let child;
     beforeAll(async() => {
-
-        //fs.rmdirSync('/tmp/foldername1');
-        if (fs.existsSync('/tmp/file1.jpg.crypt')) {
-            fs.unlinkSync('/tmp/file1.jpg.crypt');
+        
+        let src_file_path = path.join(__dirname, 'file1.jpg');
+        
+        fs.cp(src_file_path, path.join('/tmp', 'file1.jpg'), { recursive: false }, (err) => {
+            if (err) {
+                console.log(clp, 'Copy err=', err);
+            }
+        });
+        
+        
+        if (fs.existsSync('/tmp/file2.jpg')) {
+            fs.unlinkSync('/tmp/file2.jpg');
         }
-        if (fs.existsSync('/tmp/file1.jpg')) {
-            fs.unlinkSync('/tmp/file1.jpg');
-        }
+        
+        
+        fs.cp(src_file_path, path.join('/tmp', 'file3.jpg.crypt'), { recursive: false }, (err) => {
+            if (err) {
+                console.log(clp, 'Copy err=', err);
+            }
+        });
 
         child = shell.exec('./bin/http-up --extend-mode --crypt /tmp ', {async:true});
     });
@@ -42,44 +55,35 @@ describe("should 200", () => {
 
         await new Promise((r) => setTimeout(r, 1000));
 
-        let tst_folder = __dirname;
         
 
         let headers = new Headers();
-
         headers.append('Origin', 'http://127.0.0.1:4000' );
         headers.append('Referer', 'http://127.0.0.1:4000/' );
         
         
+        headers.set('Cookie', 'mode=list; sort=name; ' );
+
+        const formData  = new FormData();
         
-        // ------------------------------------------------------------------------------------------------------------------------------
         
-        {
-            
-            headers.set('Cookie', 'mode=list; sort=name; ' );
+        formData.append("fileBlob", new Blob([fs.readFileSync(__dirname + '/file1.jpg')]), "file1.jpg");
 
-            const formData  = new FormData();
-            
-            
-            formData.append("fileBlob", new Blob([fs.readFileSync(tst_folder + '/file1.jpg')]), "file1.jpg");
-
-            formData.append('fileMeta', JSON.stringify({name: 'file1.jpg'}));
+        formData.append('fileMeta', JSON.stringify({name: 'file1.jpg'}));
 
 
-            let response = await fetch(prefix + '/api/upload', {
-                method:'POST',
-                body: formData,
-                headers: headers,
-            });
+        let response = await fetch(prefix + '/api/upload', {
+            method:'POST',
+            body: formData,
+            headers: headers,
+        });
 
-            //let json = await response.json();
-            //console.log('json=', json);
-            expect(fs.existsSync('/tmp/file1.jpg')).toBe(true);
-            
-            if (fs.existsSync('/tmp/file1.jpg')) {
-                fs.unlinkSync('/tmp/file1.jpg');
-            }
-        }
+        let json = await response.json();
+        console.log('json=', json);
+        
+        expect(fs.existsSync('/tmp/file1.jpg')).toBe(true);
+        
+        
         
 
     }, 3_000);
@@ -89,44 +93,32 @@ describe("should 200", () => {
 
         await new Promise((r) => setTimeout(r, 1000));
 
-        let tst_folder = __dirname;
         
-
         let headers = new Headers();
-
         headers.append('Origin', 'http://127.0.0.1:4000' );
         headers.append('Referer', 'http://127.0.0.1:4000/' );
         
+        headers.set('Cookie', 'mode=list; sort=name; code=' );
+
+        const formData  = new FormData();
         
         
-        // ------------------------------------------------------------------------------------------------------------------------------
+        formData.append("fileBlob", new Blob([fs.readFileSync(__dirname + '/file1.jpg')]), "file2.jpg");
+
+        formData.append('fileMeta', JSON.stringify({name: 'file2.jpg'}));
+
+
+        let response = await fetch(prefix + '/api/upload', {
+            method:'POST',
+            body: formData,
+            headers: headers,
+        });
+
+        let json = await response.json();
+        console.log('json=', json);
         
-        {
-            
-            headers.set('Cookie', 'mode=list; sort=name; code=' );
-
-            const formData  = new FormData();
-            
-            
-            formData.append("fileBlob", new Blob([fs.readFileSync(tst_folder + '/file1.jpg')]), "file1.jpg");
-
-            formData.append('fileMeta', JSON.stringify({name: 'file1.jpg'}));
-
-
-            let response = await fetch(prefix + '/api/upload', {
-                method:'POST',
-                body: formData,
-                headers: headers,
-            });
-
-            //let json = await response.json();
-            //console.log('json=', json);
-            expect(fs.existsSync('/tmp/file1.jpg')).toBe(true);
-            
-            if (fs.existsSync('/tmp/file1.jpg')) {
-                fs.unlinkSync('/tmp/file1.jpg');
-            }
-        }
+        expect(fs.existsSync('/tmp/file2.jpg')).toBe(true);
+        
         
 
     }, 3_000);
@@ -137,44 +129,39 @@ describe("should 200", () => {
 
         await new Promise((r) => setTimeout(r, 1000));
 
-        let tst_folder = __dirname;
+        
         
 
         let headers = new Headers();
-
         headers.append('Origin', 'http://127.0.0.1:4000' );
         headers.append('Referer', 'http://127.0.0.1:4000/' );
         
         
         
-        // ------------------------------------------------------------------------------------------------------------------------------
         
-        {
+        headers.set('Cookie', 'mode=list; sort=name; code=aaa' );
+
+        const formData  = new FormData();
+        
+        
+        formData.append("fileBlob", new Blob([fs.readFileSync(__dirname + '/file1.jpg')]), "file3.jpg");
+
+        formData.append('fileMeta', JSON.stringify({name: 'file3.jpg'}));
+
+
+        let response = await fetch(prefix + '/api/upload', {
+            method:'POST',
+            body: formData,
+            headers: headers,
+        });
+
+        let json = await response.json();
+        console.log('json=', json);
+        
+        expect(fs.existsSync('/tmp/file3.jpg.crypt')).toBe(true);
+        
             
-            headers.set('Cookie', 'mode=list; sort=name; code=aaa' );
-
-            const formData  = new FormData();
-            
-            
-            formData.append("fileBlob", new Blob([fs.readFileSync(tst_folder + '/file1.jpg')]), "file1.jpg");
-
-            formData.append('fileMeta', JSON.stringify({name: 'file1.jpg'}));
-
-
-            let response = await fetch(prefix + '/api/upload', {
-                method:'POST',
-                body: formData,
-                headers: headers,
-            });
-
-            //let json = await response.json();
-            //console.log('json=', json);
-            expect(fs.existsSync('/tmp/file1.jpg.crypt')).toBe(true);
-            
-            if (fs.existsSync('/tmp/file1.jpg.crypt')) {
-                fs.unlinkSync('/tmp/file1.jpg.crypt');
-            }
-        }
+        
         
 
     }, 3_000);
@@ -182,16 +169,24 @@ describe("should 200", () => {
     
 
     afterAll(() => {
-        /*
-        if (fs.existsSync('/tmp/file1.jpg.crypt')) {
-            fs.unlinkSync('/tmp/file1.jpg.crypt');
-        }
+        
+        
+        
+        child.kill();
+        
+        
+        
         if (fs.existsSync('/tmp/file1.jpg')) {
             fs.unlinkSync('/tmp/file1.jpg');
         }
-        */
+        if (fs.existsSync('/tmp/file2.jpg')) {
+            fs.unlinkSync('/tmp/file2.jpg');
+        }
+        if (fs.existsSync('/tmp/file3.jpg.crypt')) {
+            fs.unlinkSync('/tmp/file3.jpg.crypt');
+        }
         
-        child.kill();
+        
     });
 
 
