@@ -53,6 +53,8 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
     
 </p>
 
+For [Thumbnails support](#thumbnails-support) read below
+
 ## Basic auth
 
 > [!IMPORTANT]  
