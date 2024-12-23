@@ -55,6 +55,15 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
 
 For [Thumbnails support](#thumbnails-support) read below
 
+## Buttons share/rename/edit
+
+<p align="center">
+    <img src="https://github.com/western/http-up/blob/dev/doc/share_rename_edit.png?raw=true"  >
+    
+</p>
+
+Edit button work for formats `html, rtf, doc, docx, odt`
+
 ## Basic auth
 
 > [!IMPORTANT]  
