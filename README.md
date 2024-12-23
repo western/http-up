@@ -206,6 +206,16 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] - what is the lib can resize images enough fast
 - [ ] - and how store thumbs (home dot cache folder?)
 
+### 2.0.0
+- [x] database support
+- [x] rename button
+- [x] share button
+- [x] edit button for `html, rtf, doc, docx, odt`
+- [x] speed up hash search for thumbnails
+- [x] event log
+- [x] upload event log as JSON
+- [x] refactoring
+
 ### 1.6.5
 - [x] add compression
 
