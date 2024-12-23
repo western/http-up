@@ -17,15 +17,18 @@
 
 
         <script>
-
+        
+        {{#if config}}
         let config = {
             files_count_max:      {{config.files_count_max}},
             fieldSize_max:        {{config.fieldSize_max}},
             fieldSize_max_human: '{{config.fieldSize_max_human}}',
         };
-
+        {{/if}}
         
-        let folderTree =   {{{folderTree_js}}}  ;
+        {{#if folderTree_js}}
+            let folderTree =   {{{folderTree_js}}}  ;
+        {{/if}}
 
 
         </script>

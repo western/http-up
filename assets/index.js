@@ -226,10 +226,207 @@ $(document).ready(function () {
         $(':checkbox[name=fold]').prop('checked', chk);
         $(':checkbox[name=file]').prop('checked', chk);
     });
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    
+    $('a.share').click((ev) => {
+        let el = ev.target;
+
+        if(el.tagName == 'I'){
+            el = el.parentNode;
+        }
+        
+        //console.log('a.rename', el);
+        
+        
+        //$('#set_share_input').val( $(el).data('name') );
+
+        //const shareModal = new bootstrap.Modal(document.getElementById('share_modal'), {});
+        //shareModal.show();
+        
+        let name = $(el).data('name');
+        let full_path = $(el).data('full-path');
+        
+        
+        let formData = new FormData();
+        if(name){
+            formData.append('name', name);
+        }
+        if(full_path){
+            formData.append('full_path', full_path);
+        }
+
+        $.ajax({
+            url: '/api/share',
+            data: formData,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+        }).done(function (data) {
+            
+            //console.log('data=', data);
+            
+            if (data.code == 200) {
+                //location.href = location.href;
+                //alert(data.c)
+                
+                if(data.share_exist){
+                    
+                    $('#ofcanv_share_name').html( name );
+                    $('#ofcanv_share_href').html( data.href );
+                    
+                    //$('#ofcanv_share_name').val( name );
+                    $('#ofcanv_share_code').val( data.c );
+                    
+                    $('#ofcanv_share_views').html( data.share_views );
+                    
+                    $('#ofcanv_share_viewers').html( data.share_viewers );
+                    
+                    
+                    
+                    new bootstrap.Offcanvas('#offcanvasShare').show();
+                    
+                }else{
+                          
+                    $('#share_modal_href').html( data.href );
+
+                    const shareModal = new bootstrap.Modal(document.getElementById('share_modal'), {});
+                    shareModal.show();
+                }
+            }
+        }).fail(function(data) {
+            if (data.responseJSON.msg) {
+                alert(data.responseJSON.msg);
+            }
+        });
+        
+        
+        
+    });
+    
+    $('#ofcanv_share_off_button').click((ev) => {
+        
+        //let name = $('#ofcanv_share_name').val();
+        let code = $('#ofcanv_share_code').val();
+        
+        //console.log('disable share button', 'code=', code);
+        
+        if(code){
+            
+            let formData = new FormData();
+            formData.append('code', code);
+            
+            
+            $.ajax({
+                url: '/api/share',
+                data: formData,
+                type: 'DELETE',
+                contentType: false,
+                processData: false,
+            }).done(function (data) {
+                
+                //console.log('data=', data);
+                
+                if (data.code == 200) {
+                    
+                    
+                    //alert('Share disabled');
+                    location.href = location.href;
+                    
+                }
+            }).fail(function(data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
+                }
+            });
+            
+        }
+        
+    });
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    
+    $('a.edit').click((ev) => {
+        let el = ev.target;
+        
+        
+        
+        if(el.tagName == 'I'){
+            el = el.parentNode;
+        }
+        
+        //console.log('a.edit', el);
+        
+        let full_path = $(el).data('full-path');
+        if(full_path){
+            location.href = '/__edit' + full_path;
+        }
+        
+    });
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    
+    $('a.rename').click((ev) => {
+        let el = ev.target;
+        
+        //console.log('a.rename', el);
+        
+        if(el.tagName == 'I'){
+            el = el.parentNode;
+        }
+        
+        //console.log('a.rename', el);
+        
+        $('#set_rename_orig').val( $(el).data('name') );
+        $('#set_rename_input').val( $(el).data('name') );
+
+        const renameModal = new bootstrap.Modal(document.getElementById('rename_modal'), {});
+        renameModal.show();
+    });
+    
+    let rename_form_submit = () => {
+        
+        let orig = $('#set_rename_orig').val();
+        let name = $('#set_rename_input').val();
+        
+        let formData = new FormData();
+        formData.append('name', orig);
+        formData.append('to', name);
+
+        $.ajax({
+            url: '/api/rename',
+            data: formData,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+        }).done(function (data) {
+            if (data.code == 200) {
+                location.href = location.href;
+            }
+        }).fail(function(data) {
+            if (data.responseJSON.msg) {
+                alert(data.responseJSON.msg);
+            }
+        });
+        
+    };
+    
+    $('#set_rename_button').click((ev) => {
+        
+        rename_form_submit();
+    });
+
+    $('#set_rename_input').on('keypress', (ev) => {
+        if (ev.which == 13) {
+            
+            rename_form_submit();
+        }
+    });
+    
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     
-    $('a.del').click((ev) => {
+    $('a.del, button.del').click((ev) => {
         let el = ev.target;
 
         

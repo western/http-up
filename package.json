@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "1.6.8",
+  "version": "2.0.0",
   "description": "Simple share folder via http with upload",
   "main": "./lib/http-up",
   "repository": {
@@ -12,15 +12,21 @@
     "command",
     "static",
     "http",
+    "https",
+    "tls",
     "http-server",
+    "web-server",
     "server",
-    "upload"
+    "upload",
+    "file-upload",
+    "share"
   ],
   "directories": {
     "lib": "lib",
     "bin": "bin",
     "views": "views",
-    "assets": "assets"
+    "assets": "assets",
+    "model": "model"
   },
   "scripts": {
     "start": "node ./bin/http-up",
@@ -33,6 +39,7 @@
     "bin",
     "views",
     "assets",
+    "model",
     "README.md"
   ],
   "bugs": {
@@ -53,6 +60,7 @@
     "multer": "^1.4.5-lts.1",
     "node-datetime": "^2.1.2",
     "shelljs": "^0.8.5",
+    "sqlite3": "^5.1.7",
     "urlencode": "^2.0.0"
   },
   "bin": {

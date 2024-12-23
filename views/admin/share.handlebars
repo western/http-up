@@ -1,0 +1,134 @@
+<br>
+<div class="container">
+    
+    <div class="row" >
+
+        
+        
+        <ul class="nav nav-tabs  justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin/">Shares</a>
+            </li>
+            <!--
+            <li class="nav-item">
+                <a class="nav-link" href="">Log</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Users</a>
+            </li>
+            -->
+            
+        </ul>
+        
+        
+
+    </div>
+    
+    <div class="row" >
+        
+        <div class="container">
+        
+            <div class="row " style="padding:10px 0;">
+                <h1>Shares</h1>
+            </div>
+            
+            
+            
+            <table class="table file-table table-hover ">
+                <thead>
+                    <tr>
+                        <th class="text-center"><!--input class="form-check-input head-chk" type="checkbox" value=""--></th>
+                        <th>name</th>
+
+                        <th class="col d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell"></th>
+                        <th class="col d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell"></th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {{#each rows}}
+
+                        
+
+                        <tr>
+                            <th scope="row" class="text-center"><!--input class="form-check-input" type="checkbox" name="file" value="{{Name}}"--></th>
+                            <td><a class="nodecor" href="{{FullPath}}?{{Rnds}}">{{Name}}</a></td>
+
+                            <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{SizeHuman}}</td>
+                            <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">
+
+
+
+                                {{ModTimeHuman}}
+                            </td>
+                            <td class="text-center">
+                                
+                                
+                                <a class=" share" href="javascript:void(0)" data-name="{{Name}}" data-full-path="{{FullPath}}"><i class="bi bi-share-fill"></i></a>
+                                
+                                <!--a class="del" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-x-lg"></i></a-->
+                                
+                                
+
+                            </td>
+                        </tr>
+
+                    
+
+                    {{/each}}
+
+
+
+                </tbody>
+            </table>
+            
+            
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="offcanvas  offcanvas-end _w-40" tabindex="-1" id="offcanvasShare">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Share</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div id="ofcanv_share_name"></div><br>
+
+        <h6>Links</h6>
+
+        <div id="ofcanv_share_href"></div>
+
+        <hr />
+
+        <input type="hidden" id="ofcanv_share_code">
+
+        <button class="btn btn-outline-danger" type="button" id="ofcanv_share_off_button">Disable sharing</button><br>
+
+        <br>
+
+        <h6>Stats</h6>
+
+        <p title="views"><i class="bi bi-eye"></i> <span id="ofcanv_share_views">0</span></p>
+
+        <div id="ofcanv_share_viewers"></div>
+
+    </div>
+</div>
+
+

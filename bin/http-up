@@ -10,8 +10,8 @@ const chalk = require('chalk');
 let HTTPUP = require('../lib/http-up');
 
 let argv = require('minimist')(process.argv.slice(2), {
-    string: ['port', 'user', 'password'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode', 'crypt'],
+    string: ['port', 'user', 'password', 'log-download'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode', 'crypt', 'admin'],
     alias: { h: 'help' },
     default: { port: '4000' },
     '--': true,
@@ -21,6 +21,8 @@ let argv = require('minimist')(process.argv.slice(2), {
 
 const config = require('../lib/config');
 const util = require('../lib/util');
+const model = require(path.join(__dirname, '..', 'model', 'index'));
+//console.log( path.join(__dirname, '..', 'model', 'index') );
 
 argv.port = argv.port || argv.p || config.defaultPort;
 
@@ -44,26 +46,41 @@ if (argv.h || argv.help) {
     console.log(
         [
             ``,
-            `v1.6.8`,
+            config.version,
             ``,
-            `usage: http-up [path] [options]`,
+            `usage: ${chalk.yellow('http-up')} [options] [path]`,
             ``,
             `options:`,
-            `     --port                    Port to use. [${config.defaultPort}]`,
+            `     --port [int]              Port to use. [${chalk.yellow(config.defaultPort)}]`,
             ``,
-            `     --user                    User for basic authorization.`,
-            `     --password                Password for basic authorization.`,
+            `                               ${chalk.yellow('--port 3999')}`,
+            ``,
+            `     --tls                     Enable TLS support`,,
+            ``,
+            `     --user     [str]          User for basic authorization.`,
+            `     --password [str]          Password for basic authorization.`,
+            ``,
+            `                               ${chalk.yellow('--user somelogin --password somepassword')}`,
+            ``,
             ``,
             `     --basic                   Set basic auth and generate several accounts every time.`,
             ``,
             `     --upload-disable`,
             `     --folder-make-disable`,
             ``,
-            `     --tls`,
             ``,
             `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
             ``,
             `     --crypt                   Enable file encrypt support.`,
+            ``,
+            `     --log-download [str]      Download all data log to out json file`,
+            ``,
+            `                               ${chalk.yellow('--log-download file.json')}`,
+            ``,
+            ``,
+            `     --admin                   Enable /admin/ interface.`,
+            ``,
+            ``,
         ].join('\n'),
     );
     process.exit();
@@ -78,10 +95,20 @@ if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     process.exit();
 }
 
+if (argv['log-download']) {
+    console.log('');
+    console.log('Save log to "' + chalk.yellow(argv['log-download']) + '" ');
+    
+    model.event_log().download_to( argv['log-download'] );
+    
+    //process.exit();
+}
+
 const homedir = os.homedir();
 const httpup_home = path.join(homedir, '.httpup');
 const httpup_thumb = path.join(homedir, '.httpup', 'thumb');
 const httpup_temp = path.join(homedir, '.httpup', 'temp');
+const httpup_db = path.join(homedir, '.httpup', 'db');
 
 if (!fs.existsSync(httpup_home)) {
     fs.mkdirSync(httpup_home);
@@ -105,28 +132,11 @@ if (!fs.existsSync(httpup_temp)) {
     console.log('');
 }
 
-/*
-if (!fs.existsSync(config.destination)) {
-    console.log('');
-    console.log('Temporary folder "' + chalk.yellow(config.destination) + '" is absent.');
-    console.log('Make new');
-
-    fs.mkdirSync(config.destination);
-
-    console.log('Done');
-    console.log('');
-} else {
-    console.log('');
-    console.log('Temporary folder "' + chalk.yellow(config.destination) + '" is exist.');
-    console.log('Run clearing...');
-
-    fs.rmSync(config.destination, { recursive: true, force: true });
-    fs.mkdirSync(config.destination);
-
-    console.log('Done');
-    console.log('');
+if (!fs.existsSync(httpup_db)) {
+    fs.mkdirSync(httpup_db);
 }
-*/
+
+
 
 process.title = 'http-up';
 

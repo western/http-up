@@ -1,0 +1,207 @@
+'use strict';
+
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
+
+
+const config = require('./config');
+
+
+const homedir = os.homedir();
+const httpup_home = path.join(homedir, '.httpup');
+const httpup_thumb = path.join(homedir, '.httpup', 'thumb');
+const httpup_temp = path.join(homedir, '.httpup', 'temp');
+const httpup_db = path.join(homedir, '.httpup', 'db');
+
+
+
+exports.get_db = () => {
+    
+    
+    //let version_file = path.join(httpup_home, config.version);
+    
+    const db = new sqlite3.Database(path.join(httpup_db, 'registry.db.'+config.version), (err) => {
+        if (err) {
+            console.error(err.message);
+        }
+    });
+    
+    
+    
+    return {
+        
+        'init': () => {
+            
+            
+            
+            //console.log('db', 'run db.init');
+            
+            
+            db.run(`
+                CREATE TABLE IF NOT EXISTS event_log (
+                    id INTEGER PRIMARY KEY ,
+                    
+                    proc_id int not null default 0,
+                    dt text not null default '',
+                    
+                    ip text not null default '',
+                    login text not null default '',
+                    
+                    code text not null default '',
+                    
+                    tag text not null default '',
+                    msg text not null default ''
+                )
+            `);
+            
+            
+            db.run(`
+                CREATE TABLE IF NOT EXISTS file (
+                    id INTEGER PRIMARY KEY ,
+                    md5 text not null default '',
+                    
+                    full_path text not null default '',
+                    filename text not null default '',
+                    ext text not null default '',
+                    
+                    is_folder int not null default 0,
+                    size int not null default 0,
+                    modified text not null default ''
+                )
+            `, () => {
+                
+                db.run(`
+                    CREATE INDEX IF NOT EXISTS indx_file_full_path on file(full_path)
+                `);
+                
+                db.run(`
+                    CREATE INDEX IF NOT EXISTS indx_file_md5 on file(md5)
+                `);
+                
+            });
+            
+            
+            db.run(`
+                CREATE TABLE IF NOT EXISTS share (
+                    id INTEGER PRIMARY KEY ,
+                    
+                    code text not null default '',
+                    status int not null default 0,
+                    registered text not null default '',
+                    
+                    md5 text not null default ''
+                    
+                    
+                )
+            `, () => {
+                
+                db.run(`
+                    CREATE unique INDEX IF NOT EXISTS indx_share_code on share(code)
+                `);
+                
+                db.run(`
+                    CREATE INDEX IF NOT EXISTS indx_share_md5 on share(md5)
+                `);
+                
+            });
+            
+            
+            
+        },
+        'log_add': (proc_id, dt, ip, code, tag, msg) => {
+            
+            //console.log(`insert into event_log (proc_id, dt, ip, code, tag, msg) values('${proc_id}', '${dt}', '${ip}', '${code}', '${tag}', '${msg}')`);
+            
+            db.run(
+                `insert into event_log (proc_id, dt, ip, code, tag, msg) values(?, ?, ?, ?, ?, ?)`,
+                [ proc_id, dt, ip, code, tag, msg ],
+                (err) => {
+                    if(err){
+                        console.log('insert into event_log err=', err);
+                    }
+                },
+            );
+            
+        },
+        'file_add': (full_path, filename, ext, is_folder, size, modified, md5) => {
+            
+            if(!full_path || full_path.length==0){
+                console.log('full_path is required param');
+                return;
+            }
+            
+            db.get(`select * from file where full_path=?`, [ full_path ], function(err, row){
+                
+                if(err){
+                    console.log('file_add search err=', err);
+                    return;
+                }
+                
+                if( row ){
+                    
+                    //console.log('update file', full_path);
+                    
+                    //db.run(`update file set filename=?, ext=?, is_folder=?, size=?, modified=?, md5=? where full_path=?`, [ filename, ext, is_folder, size, modified, md5, full_path ]);
+                    
+                }else{
+                    //console.log('insert file', full_path);
+                    //console.log(`insert into file (full_path, filename, ext, is_folder, size, modified, md5) values('${full_path}', '${filename}', '${ext}', '${is_folder}', '${size}', '${modified}', '${md5}')`);
+                    
+                    // you can not delete
+                    // files can lying in several places
+                    /*
+                    db.run(`delete from file where md5=?`, [ md5 ], (err) => {
+                        if(err){
+                            console.log('delete from file err=', err);
+                        }
+                    });
+                    */
+                    
+                    db.run(
+                        `insert into file (full_path, filename, ext, is_folder, size, modified, md5) values(?, ?, ?, ?, ?, ?, ?)`,
+                        [ full_path, filename, ext, is_folder, size, modified, md5 ],
+                        (err) => {
+                            if(err){
+                                console.log('insert into file err=', err);
+                            }
+                        },
+                    );
+                }
+            })
+            
+            
+        },
+        'file_search': async (full_path, resolve, reject) => {
+            
+            if(!full_path || full_path.length==0){
+                console.log('full_path is required param');
+                return;
+            }
+            
+            //console.log(`select * from file where full_path='${full_path}'`);
+            
+            return await db.get(`select * from file where full_path=?`, [ full_path ], function(err, row){
+                
+                if(err){
+                    console.log('file_search err=', err);
+                    reject();
+                    return;
+                }
+                
+                //console.log('row found=', row.full_path);
+                
+                if(row){
+                    resolve(row);
+                }else{
+                    reject();
+                }
+            })
+            
+        },
+    };
+    
+    
+};
+
