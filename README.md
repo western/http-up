@@ -230,13 +230,13 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 ## History
 
 ### backlog
-- [ ] - add table of files with extended information and sort instead simple list?
-- [ ] - need some aside panel with folders tree?
+- [x] - add table of files with extended information and sort instead simple list?
+- [x] - need some aside panel with folders tree?
 - [ ] - save whitespaces for filenames?
-- [ ] - add arg --tee and --log to file
-- [ ] - need tests and vulnerability tests too
+- [x] - add arg --tee and --log to file (resolve with db)
+- [x] - need tests and vulnerability tests too (primary functions)
 - [ ] - what is the lib can resize images enough fast
-- [ ] - and how store thumbs (home dot cache folder?)
+- [x] - and how store thumbs (home dot cache folder?)
 
 ### 2.0.0
 - [x] database support
