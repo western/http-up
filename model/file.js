@@ -72,19 +72,7 @@ exports.new = (db) => {
             return;
         }
         
-        /*
-        if(is_delete_previous){
-            db.run(
-                `delete from file where full_path=?`,
-                [ full_path ],
-                (err) => {
-                    if(err){
-                        console.log('add:', 'delete from file where full_path, err=', err);
-                    }
-                },
-            );
-        }
-        */
+        
         
         
         db.get(`select * from file where full_path=?`, [ full_path ], function(err, row){
@@ -149,7 +137,7 @@ exports.new = (db) => {
             return;
         }
         
-        //console.log(`select * from file where full_path='${full_path}'`);
+        
         
         db.get(`select * from file where full_path=?`, [ full_path ], function(err, row){
             
@@ -159,7 +147,7 @@ exports.new = (db) => {
                 return;
             }
             
-            //console.log('row found=', row.full_path);
+            
             
             if(row){
                 resolve(row);

@@ -17,15 +17,13 @@ exports.new = (db) => {
     
     o.attr = (name, val) => {
         if(typeof val == "undefined"){
-            //console.log('case1');
+            
             return o[name];
         }
         if(typeof val != "undefined"){
-            //console.log('case2');
+            
             o[name] = val;
-            //return val;
         }
-        //console.log('case3');
         return o;
     };
     

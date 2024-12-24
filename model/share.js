@@ -42,7 +42,7 @@ exports.new = (db) => {
                     return;
                 }
                 
-                //console.log('data[0]', data[0] );
+                
                 
                 
                 let rows = [];
@@ -51,15 +51,12 @@ exports.new = (db) => {
                     
                     
                     let full_path = el.full_path;
-                    //console.log('argv.fold=', argv.fold);
                     
                     
-                    //console.log('full_path1=', full_path);
                     
-                    // argv.fold
                     full_path = full_path.replace(argv.fold, '');
                     
-                    //console.log('full_path2=', full_path);
+                    
                     
                     
                     rows.push({
@@ -137,15 +134,7 @@ exports.new = (db) => {
             
             if(row){
                 
-                //console.log('share.get_file_bycode row=', row);
                 
-                /*
-                let ext = util.get_ext_norm(row.full_path);
-                
-                res.setHeader('Content-Type', mime.getType(ext));
-                res.sendFile(row.full_path);
-                return;
-                */
                 
                 model.event_log().write( req, 200, 'sendFile', `sendFile by code "${code}" "${row.full_path}"` );
                 
@@ -176,19 +165,7 @@ exports.new = (db) => {
             return;
         }
         
-        /*
-        console.log(`
-            
-            select s.*
-            from share s
-            inner join file f
-                on f.md5=s.md5
-            where
-                f.full_path='${full_path}' and
-                s.status=1
-                
-        `);
-        */
+        
         
         db.get(`
             
@@ -318,7 +295,7 @@ exports.new = (db) => {
                         
                         if( row_file ){
                     
-                            //console.log('set_public_code', 'row_file exist');
+                            
                             
                             
                             
@@ -359,7 +336,7 @@ exports.new = (db) => {
                         
                         if( !row_file ){
                             
-                            //console.log('set_public_code', 'row_file is not exist');
+                            
                             
                             
                             
@@ -373,7 +350,7 @@ exports.new = (db) => {
                             let modtime = dateTime.create(stats.mtime);
                             let modtime_human = modtime.format('Y-m-d H:M:S');
                             
-                            //res.locals.db.file_add(full_path, name+'.'+ext, ext, 0, stats.size, modtime_human, md5_hash);
+                            
                             model.file().add(full_path, name+'.'+ext, ext, 0, stats.size, modtime_human, md5_hash);
                             
                             
