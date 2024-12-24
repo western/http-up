@@ -213,7 +213,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [x] edit button for `html, rtf, doc, docx, odt`
 - [x] speed up hash search for thumbnails
 - [x] event log
-- [x] upload event log as JSON
+- [x] download event log as JSON
 - [x] refactoring
 
 ### 1.6.5
