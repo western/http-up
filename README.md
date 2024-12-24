@@ -62,13 +62,15 @@ For [Thumbnails support](#thumbnails-support) read below
     
 </p>
 
-Edit button work for formats `html, rtf, doc, docx, odt`
+Edit button work with formats `html, rtf, doc, docx, odt`
 
 ## Share motivation
 
 Imagine, that you run app with basic auth `npx http-up --user XXX --password YYY --extend-mode .`
 
 And you not want to share with your login/password
+
+And you need to show only one file
 
 ## Basic auth
 
