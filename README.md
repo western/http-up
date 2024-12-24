@@ -193,7 +193,7 @@ Or `show all events, contain "spring" substring`:
 jq '.[] | select(.msg | contains("spring"))' file.json
 ```
 
-Or you can work with SQL directly inside .httpup/db folder
+Or you can work with SQL directly inside `.httpup/db` folder
 
 ## Magic file index.html inside any folder
 
