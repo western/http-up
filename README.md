@@ -208,11 +208,11 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 ## Linux packages needs for full functional
 
 - `md5sum` (coreutils package) - make md5 sum of file
-- `convert` (ImageMagick package) - for thumbnails
-- `libreoffice` (free office) - for thumbnails
+- `convert` (ImageMagick package) - for make thumbnails
+- `libreoffice` (free office) - for thumbnails, for doc files edit
 - `easyrsa` - package for certs build
-- `openssl` - encrypt support
-- `zip` - cmd util
+- `openssl` - encrypt file support
+- `zip` - cmd util for zip and download
 
 
 ## Notes
