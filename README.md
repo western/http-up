@@ -64,6 +64,12 @@ For [Thumbnails support](#thumbnails-support) read below
 
 Edit button work for formats `html, rtf, doc, docx, odt`
 
+## Share motivation
+
+Imagine, that you run app with basic auth `npx http-up --user XXX --password YYY --extend-mode .`
+
+And you not want to share with your login/password
+
 ## Basic auth
 
 > [!IMPORTANT]  
