@@ -211,7 +211,7 @@ exports.new = (db) => {
                         
                         let html = [];
                         all_stat_users.forEach((el) => {
-                            html.push( el.dt + ' ' + el.ip )
+                            html.push( el.dt + ' - ' + el.ip )
                         });
                         
                         
@@ -220,7 +220,7 @@ exports.new = (db) => {
                             c: row.code,
                             href: href.join('<br/>'),
                             share_exist: 1,
-                            share_views: all_stat_users.length,
+                            share_downloads: all_stat_users.length,
                             share_viewers: html.join('<br/>'),
                         });
                         return;

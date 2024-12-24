@@ -278,7 +278,7 @@ $(document).ready(function () {
                     //$('#ofcanv_share_name').val( name );
                     $('#ofcanv_share_code').val( data.c );
                     
-                    $('#ofcanv_share_views').html( data.share_views );
+                    $('#ofcanv_share_downloads').html( data.share_downloads );
                     
                     $('#ofcanv_share_viewers').html( data.share_viewers );
                     
