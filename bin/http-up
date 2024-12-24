@@ -73,9 +73,9 @@ if (argv.h || argv.help) {
             ``,
             `     --crypt                   Enable file encrypt support.`,
             ``,
-            `     --log-download [str]      Download all data log to out json file`,
+            `     --log-export [str]        Export all data log to out json file`,
             ``,
-            `                               ${chalk.yellow('--log-download file.json')}`,
+            `                               ${chalk.yellow('--log-export file.json')}`,
             ``,
             ``,
             `     --admin                   Enable /admin/ interface.`,
@@ -95,11 +95,11 @@ if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     process.exit();
 }
 
-if (argv['log-download']) {
+if (argv['log-export']) {
     console.log('');
-    console.log('Save log to "' + chalk.yellow(argv['log-download']) + '" ');
+    console.log('Save log to "' + chalk.yellow(argv['log-export']) + '" ');
     
-    model.event_log().download_to( argv['log-download'] );
+    model.event_log().export_to( argv['log-export'] );
     
     //process.exit();
 }

@@ -27,7 +27,7 @@ exports.new = (db) => {
         return o;
     };
     
-    o.download_to = async (filename) => {
+    o.export_to = async (filename) => {
         
         
         await db.all(
@@ -39,6 +39,11 @@ exports.new = (db) => {
                     console.log(err);
                     return;
                 }
+                
+                data.forEach((el) => {
+                    el.msg = el.msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+                    //console.log('el.msg=', el.msg);
+                });
                 
                 try {
                     fs.writeFileSync(filename, JSON.stringify(data));
