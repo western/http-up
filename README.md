@@ -62,7 +62,9 @@ For [Thumbnails support](#thumbnails-support) read below
     
 </p>
 
-Edit button work with formats `html, rtf, doc, docx, odt`
+Edit button work with formats `html, rtf, doc, docx, odt`.
+
+For document edit you need `libreoffice` package.
 
 ## Share motivation
 
