@@ -178,7 +178,7 @@ npx http-up . --tls
 After export log data to file
 
 ```console
-npx http-up --log-download file.json
+npx http-up --log-export file.json
 ```
 
 You can ask `show all data for client "192.168.0.102" ` inside with `jq`:
