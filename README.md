@@ -66,7 +66,7 @@ Edit button work with formats `html, rtf, doc, docx, odt`.
 
 For document edit you need `libreoffice` package.
 
-## Share motivation
+## Motivation for share button
 
 Imagine, that you run app with basic auth `npx http-up --user XXX --password YYY --extend-mode .`
 
