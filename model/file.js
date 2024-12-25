@@ -92,7 +92,7 @@ exports.new = (db) => {
                 
                 let filename = util.get_name(full_path);
                 
-                let ext = path.parse(filename).ext;
+                let ext = path.parse(full_path).ext;
                 ext = ext.replace(/\./g, '');
                 ext = ext.toLowerCase();
                 
