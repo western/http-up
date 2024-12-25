@@ -150,7 +150,8 @@ exports.new = (db) => {
             
             model.event_log().write( req, 404, 'share', `file for code "${code}" not found` );
             
-            res.status(404).json({ code: 404 });
+            //res.status(404).json({ code: 404 });
+            res.status(404).send(util.error_page_content('404', '404 Not found'));
             return;
         });
         
