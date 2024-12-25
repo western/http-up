@@ -134,6 +134,15 @@ exports.new = (db) => {
             
             if(row && phase && phase == 'phase1'){
                 
+                if (!fs.existsSync(row.full_path)) {
+                    
+                    model.event_log().write( req, 404, 'share', `${phase} file "${row.full_path}" for code "${code}" not found` );
+                    
+                    res.status(404).send(util.error_page_content('404', `File for code "${code}" not found`));
+                    return;
+                }
+                
+                
                 res.render('share', {
                     code: req.params['code'],
                 });
@@ -141,6 +150,15 @@ exports.new = (db) => {
             }
             
             if(row && phase && phase == 'phase2'){
+                
+                
+                if (!fs.existsSync(row.full_path)) {
+                    
+                    model.event_log().write( req, 404, 'share', `${phase} file "${row.full_path}" for code "${code}" not found` );
+                    
+                    res.status(404).send(util.error_page_content('404', `File for code "${code}" not found`));
+                    return;
+                }
                 
                 
                 
