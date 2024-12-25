@@ -1,0 +1,137 @@
+<br>
+<div class="container">
+    
+    <div class="row" >
+
+        
+        
+        <ul class="nav nav-tabs  justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin/">Event log</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/admin/shares">Shares</a>
+            </li>
+            <!--
+            <li class="nav-item">
+                <a class="nav-link" href="">Users</a>
+            </li>
+            -->
+            
+        </ul>
+        
+        
+
+    </div>
+    
+    <div class="row" >
+        
+        <div class="container">
+        
+            <div class="row " style="padding:10px 0;">
+                <h1>Event log</h1>
+            </div>
+            
+            <div class="row " style="padding:10px 0;">
+                <h2>Last problems</h2>
+            </div>
+            
+            <table class="table file-table table-hover ">
+                <thead>
+                    <tr>
+                        
+                        <th scope="row" >id</th>
+                        <th>proc_id</th>
+                        <th>dt</th>
+                        <th>ip</th>
+                        <th>login</th>
+                        <th>code</th>
+                        <th>tag</th>
+                        <th>msg</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {{#each last_problems}}
+                        
+                        <tr>
+                            <th scope="row" >{{id}}</th>
+                            <td>{{proc_id}}</td>
+                            <td>{{dt}}</td>
+                            <td>{{ip}}</td>
+                            <td>{{login}}</td>
+                            {{#if is_not_200}}
+                                <td class="table-danger" >{{code}}</td>
+                            {{else}}
+                                <td class="table-success" >{{code}}</td>
+                            {{/if}}
+                            <td>{{tag}}</td>
+                            <td>{{msg}}</td>
+                        </tr>
+
+                    {{/each}}
+
+                </tbody>
+            </table>
+            
+            <div class="row " style="padding:10px 0;">
+                <h2>Last events</h2>
+            </div>
+            
+            <table class="table file-table table-hover ">
+                <thead>
+                    <tr>
+                        
+                        <th scope="row" >id</th>
+                        <th>proc_id</th>
+                        <th>dt</th>
+                        <th>ip</th>
+                        <th>login</th>
+                        <th>code</th>
+                        <th>tag</th>
+                        <th>msg</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {{#each last_records}}
+                        
+                        <tr>
+                            <th scope="row" >{{id}}</th>
+                            <td>{{proc_id}}</td>
+                            <td>{{dt}}</td>
+                            <td>{{ip}}</td>
+                            <td>{{login}}</td>
+                            {{#if is_not_200}}
+                                <td class="table-danger" >{{code}}</td>
+                            {{else}}
+                                <td class="table-success" >{{code}}</td>
+                            {{/if}}
+                            <td>{{tag}}</td>
+                            <td>{{msg}}</td>
+                        </tr>
+
+                    {{/each}}
+
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

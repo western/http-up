@@ -122,6 +122,84 @@ exports.new = (db) => {
     }
     
     
+    o.admin_log = (res) => {
+        
+        
+        db.all(
+            `
+                select *
+                from event_log
+                
+                order by id desc
+                limit 20
+            `,
+            [ ],
+            (err, data) => {
+                
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                
+                
+                
+                data.forEach((el) => {
+                    el.msg = el.msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+                    
+                    el.is_not_200 = false;
+                    if( el.code != 200 ){
+                        el.is_not_200 = true;
+                    }
+                });
+                
+                
+                
+                
+                db.all(
+                    `
+                        select *
+                        from event_log
+                        where
+                            code != 200
+                        order by id desc
+                        limit 10
+                    `,
+                    [ ],
+                    (err2, data2) => {
+                        
+                        if(err2){
+                            console.log(err2);
+                            return;
+                        }
+                        
+                        
+                        data2.forEach((el) => {
+                            el.msg = el.msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+                            
+                            el.is_not_200 = true;
+                        });
+                        
+                        res.render('admin/log', {
+                            
+                            last_problems: data2,
+                            last_records: data,
+                        });
+                        
+                        return;
+                    }
+                );
+                
+                
+                
+            }
+        );
+        
+        
+        
+        
+    }
+    
+    
     return o;
 };
 
