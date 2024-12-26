@@ -7,7 +7,7 @@ Multiple files upload to current showed folder
 In extended mode you can doing more
 
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen-top3.png?raw=true" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen-top4.png?raw=true" />
 </p>
 
 ## Mobile window
