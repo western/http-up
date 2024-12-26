@@ -238,6 +238,18 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] rich frontend (react, vue) ?
 - [ ] search
 
+### 2.0.5
+- [x] show monitor page for /admin/
+
+### 2.0.4
+- [x] send 404 html page for share problems
+
+### 2.0.3
+- [x] remove ansi colors from export string
+
+### 2.0.2
+- [x] allow /assets/ prefix without password
+
 ### 2.0.0
 - [x] database support
 - [x] rename button
