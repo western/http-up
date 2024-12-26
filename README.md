@@ -12,7 +12,7 @@ In extended mode you can doing more
 
 ## Mobile window
 <p align="center">
-  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile.png?raw=true&35" />
+  <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile2.png?raw=true" />
 </p>
 
 ## Fast running without install
