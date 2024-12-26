@@ -237,6 +237,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
 - [ ] search
+- [ ] should i support no_database version?
 
 ### 2.0.5
 - [x] show monitor page for /admin/
