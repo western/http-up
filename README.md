@@ -64,7 +64,7 @@ For [Thumbnails support](#thumbnails-support) read below
 
 Edit button work with formats `html, rtf, doc, docx, odt`.
 
-For document edit you need `libreoffice` package.
+For document online edit you need `libreoffice` package.
 
 ## Motivation for share button
 
@@ -209,10 +209,10 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 - `md5sum` (coreutils package) - make md5 sum of file
 - `convert` (ImageMagick package) - for make thumbnails
-- `libreoffice` (free office) - for thumbnails, for doc files edit
+- `libreoffice` - for thumbnails, for doc files online edit
 - `easyrsa` - package for certs build
 - `openssl` - encrypt file support
-- `zip` - cmd util for zip and download
+- `zip` - cmd util for zip_and_download
 
 
 ## Notes
@@ -261,7 +261,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [x] add sort operation
 - [x] add move group API (with side panel folder)
 - [x] add copy group API (with side panel folder)
-- [x] add zip and download group API
+- [x] add zip_and_download group API
 
 ### 1.4.0
 - [x] make root config folder as /home/USERNAME/.httpup/
