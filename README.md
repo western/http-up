@@ -233,6 +233,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] save whitespaces for filenames?
 - [ ] what is the lib can resize images enough fast
 - [ ] database migration
+- [ ] project needs middleware (or module arch) or not
 
 ### 2.0.0
 - [x] database support
