@@ -162,7 +162,7 @@ exports.new = (db) => {
                 
                 
                 
-                model.event_log().write( req, 200, 'sendFile', `sendFile by code "${code}" "${row.full_path}"` );
+                model.event_log().write( req, 200, 'share', `sendFile by code "${code}" "${row.full_path}"` );
                 
                 let name = util.get_name(row.full_path);
                 let ext = util.get_ext_norm(row.full_path);
