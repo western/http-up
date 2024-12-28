@@ -122,7 +122,7 @@ You need `libreoffice` package.
 <br>
 
 <p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/code_to_encrypt5.png?raw=true"  >
+    <img src="https://github.com/western/http-up/blob/dev/doc/code_to_encrypt5.png?raw=true" width="60%"  >
     
 </p>
 
