@@ -104,6 +104,13 @@ read for [TLS Support](#automatic-tls-keys-generate) below
 npx http-up --upload-disable --folder-make-disable /tmp/fold
 ```
 
+## Office doc online edit
+
+You can online edit doc files `html|rtf|doc|docx|odt`.
+
+You need `libreoffice` package.
+
+
 ## File encrypt
 
 > [!IMPORTANT]  
