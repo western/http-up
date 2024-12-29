@@ -104,15 +104,20 @@ read for [TLS Support](#automatic-tls-keys-generate) below
 npx http-up --upload-disable --folder-make-disable /tmp/fold
 ```
 
-## Office doc online edit
+## Online editor
 
-You can online edit doc files `html|rtf|doc|docx|odt`.
+You can online edit doc files `html|rtf|doc|docx|odt` as office files.
 
-You need `libreoffice` package.
+Or `html|txt|js|css|md` formats as source code.
 
 <p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/online_editor.png?raw=true" width="70%" />
+    <img src="https://github.com/western/http-up/blob/dev/doc/online_editor_cmp.png?raw=true"  />
+    
 </p>
+
+You need `libreoffice` package for office files.
+
+Office files follow this flow: `file.doc => file.html, edit => file.doc`
 
 ## File encrypt
 
