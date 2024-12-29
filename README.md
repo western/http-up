@@ -249,6 +249,9 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] search
 - [ ] should i support no_database version?
 
+### 2.1.0
+- [x] add source code editor for `html|txt|js|css|md`
+
 ### 2.0.5
 - [x] show monitor page for /admin/
 
