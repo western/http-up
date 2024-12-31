@@ -64,13 +64,24 @@
                 <input class="form-control" type="file" id="upload_file2" multiple>
                 {{/if}}
                 
-                {{#if arg_folder_make_disable}}
+                
+                {{#if arg_extend_mode}}
+                    {{#if arg_folder_make_disable}}
+                    {{else}}
+                    <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg2" title="New folder" ><i class="bi bi-folder-plus"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" id="new_file_dlg2" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                    {{/if}}
+                    
+                    <button class="btn btn-outline-secondary" type="button" id="search_dlg2" title="Search" ><i class="bi bi-search"></i></button>
                 {{else}}
-                <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg2" title="New folder" ><i class="bi bi-folder-plus"></i></button>
-                <button class="btn btn-outline-secondary" type="button" id="new_file_dlg2" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                    {{#if arg_folder_make_disable}}
+                    {{else}}
+                    <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg2" title="New folder" ><i class="bi bi-folder-plus"></i></button>
+                    
+                    {{/if}}
                 {{/if}}
                 
-                <button class="btn btn-outline-secondary" type="button" id="search_dlg2" title="Search" ><i class="bi bi-search"></i></button>
+                
                 
             </div>
             
@@ -102,13 +113,21 @@
                 <input class="form-control" type="file" id="upload_file" multiple>
                 {{/if}}
                 
-                {{#if arg_folder_make_disable}}
+                {{#if arg_extend_mode}}
+                    {{#if arg_folder_make_disable}}
+                    {{else}}
+                    <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg" title="New folder" ><i class="bi bi-folder-plus"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" id="new_file_dlg" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                    {{/if}}
+                    
+                    <button class="btn btn-outline-secondary" type="button" id="search_dlg" title="Search" ><i class="bi bi-search"></i></button>
                 {{else}}
-                <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg" title="New folder" ><i class="bi bi-folder-plus"></i></button>
-                <button class="btn btn-outline-secondary" type="button" id="new_file_dlg" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                    {{#if arg_folder_make_disable}}
+                    {{else}}
+                    <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg" title="New folder" ><i class="bi bi-folder-plus"></i></button>
+                    
+                    {{/if}}
                 {{/if}}
-                
-                <button class="btn btn-outline-secondary" type="button" id="search_dlg" title="Search" ><i class="bi bi-search"></i></button>
                 
             </div>
             
