@@ -35,37 +35,7 @@
     
     
     
-    <!--nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav-->
+    
     
     
     
@@ -89,10 +59,17 @@
             
             <div class="input-group input-group-lg mb-3">
                 
+                {{#if arg_upload_disable}}
+                {{else}}
                 <input class="form-control" type="file" id="upload_file2" multiple>
+                {{/if}}
                 
+                {{#if arg_folder_make_disable}}
+                {{else}}
                 <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg2" title="New folder" ><i class="bi bi-folder-plus"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="new_file_dlg2" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                {{/if}}
+                
                 <button class="btn btn-outline-secondary" type="button" id="search_dlg2" title="Search" ><i class="bi bi-search"></i></button>
                 
             </div>
@@ -120,10 +97,17 @@
             
             <div class="input-group input-group-lg mb-3">
                 
+                {{#if arg_upload_disable}}
+                {{else}}
                 <input class="form-control" type="file" id="upload_file" multiple>
+                {{/if}}
                 
+                {{#if arg_folder_make_disable}}
+                {{else}}
                 <button class="btn btn-outline-secondary" type="button" id="make_folder_dlg" title="New folder" ><i class="bi bi-folder-plus"></i></button>
                 <button class="btn btn-outline-secondary" type="button" id="new_file_dlg" title="New file" ><i class="bi bi-file-earmark"></i></button>
+                {{/if}}
+                
                 <button class="btn btn-outline-secondary" type="button" id="search_dlg" title="Search" ><i class="bi bi-search"></i></button>
                 
             </div>
@@ -132,7 +116,7 @@
         
     </div>
 
-    <!-- d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell -->
+    
     
     
 
