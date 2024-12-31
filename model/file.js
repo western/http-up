@@ -142,7 +142,7 @@ exports.new = (db) => {
         db.get(`select * from file where full_path=?`, [ full_path ], function(err, row){
             
             if(err){
-                console.log('file_search err=', err);
+                console.log('file.search err=', err);
                 reject();
                 return;
             }
@@ -155,6 +155,67 @@ exports.new = (db) => {
                 reject();
             }
         })
+        
+    };
+    
+    o.search_result = async ( argv, res, s ) => {
+        
+        if(!s || s.length==0){
+            console.log('s is required param');
+            return;
+        }
+        
+        
+        
+        db.all(
+            `
+                select *
+                
+                from file
+                
+                where full_path like ?
+                
+                order by full_path
+            `,
+            [ '%'+s+'%' ],
+            (err, data) => {
+                
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                
+                let readFolder = argv.fold;
+                
+                
+                data.forEach((el) => {
+                    
+                    el.full_path = el.full_path.replace(readFolder, '');
+                    
+                    //el.full_path = el.full_path.replace(/$.+\/(.+?)$/, '');
+                    
+                    let arr = el.full_path.split('/');
+                    arr.shift();
+                    arr.pop();
+                    //console.log('arr=', arr);
+                    
+                    el.only_fold = '/'+arr.join('/');
+                    //el.only_fold = el.only_fold.replace(readFolder, '');
+                    
+                    
+                    el.SizeHuman = util.humanFileSize(el.size);
+                    
+                });
+                        
+                res.render('search', {
+                    
+                    
+                    result_list: data,
+                });
+                
+                
+            }
+        );
         
     };
     
