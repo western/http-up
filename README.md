@@ -251,8 +251,13 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] project needs middleware (or module arch) or not
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
-- [ ] search
+- [x] search
 - [ ] should i support no_database version?
+
+### 2.3.0
+- [x] new head interface
+- [x] search
+- [x] create new file
 
 ### 2.1.0
 - [x] add source code editor for `html|txt|js|css|md`
