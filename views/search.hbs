@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     
-                    <th scope="row" ></th>
+                    <th  ></th>
                     <th></th>
                     <th>ext</th>
                     <th>size</th>
@@ -37,11 +37,11 @@
                 {{#each result_list}}
                     
                     <tr>
-                        <th scope="row" >
-                            <a href="{{only_fold}}">{{only_fold}}</a>
+                        <th  >
+                            <a href="{{only_fold}}">{{{only_fold_html}}}</a>
                         </th>
                         <td>
-                            <a href="{{full_path}}">{{filename}}</a>
+                            <a href="{{full_path}}">{{{filename_html}}}</a>
                         </td>
                         <td>{{ext}}</td>
                         <td>{{SizeHuman}}</td>

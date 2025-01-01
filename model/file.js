@@ -192,16 +192,18 @@ exports.new = (db) => {
                     
                     el.full_path = el.full_path.replace(readFolder, '');
                     
-                    //el.full_path = el.full_path.replace(/$.+\/(.+?)$/, '');
                     
                     let arr = el.full_path.split('/');
                     arr.shift();
                     arr.pop();
-                    //console.log('arr=', arr);
                     
                     el.only_fold = '/'+arr.join('/');
-                    //el.only_fold = el.only_fold.replace(readFolder, '');
                     
+                    el.only_fold_html = el.only_fold;
+                    el.only_fold_html = el.only_fold_html.replace(s, '<span style="background-color:yellow;">'+s+'</span>');
+                    
+                    el.filename_html = el.filename;
+                    el.filename_html = el.filename_html.replace(s, '<span style="background-color:yellow;">'+s+'</span>');
                     
                     el.SizeHuman = util.humanFileSize(el.size);
                     
