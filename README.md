@@ -112,12 +112,21 @@ Or `html|txt|js|css|md` formats as source code.
 
 <p align="center">
     <img src="https://github.com/western/http-up/blob/dev/doc/online_editor_cmp.png?raw=true"  />
-    
 </p>
 
 You need `libreoffice` package for office files.
 
 Office files follow this flow: `file.doc => file.html, edit => file.doc`
+
+## New filename ext
+
+<p align="center">
+    <img src="https://github.com/western/http-up/blob/dev/doc/new_filename_ext.png?raw=true"  />
+</p>
+
+If you set extension for file as `rtf|doc|docx|odt`, after create you can edit it with online WYSIWYG.
+
+If you set extension `html|txt|js|css|md`, you will edit it with code editor.
 
 ## File encrypt
 
