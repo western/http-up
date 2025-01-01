@@ -60,6 +60,8 @@ exports.new = (db) => {
         
     };
     
+    // write(req, '200', 'core', 'some message', 'other msg')
+    // write(undefined, '', 'core', 'some message', 'other msg')
     o.write = (req, code, tag, ...msg) => {
         
         let ret = [];
@@ -73,13 +75,17 @@ exports.new = (db) => {
         let formatted = dt.format('Y-m-d H:M:S.N');
         ret.push(formatted);
         
-        
-        let client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        client_ip = client_ip.toString();
-        ret.push(client_ip);
+        let client_ip = '';
+        if(req){
+            client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            client_ip = client_ip.toString();
+            ret.push(client_ip);
+        }else{
+            ret.push('');
+        }
         
         let req_auth_user = '';
-        if (req.auth && req.auth.user) {
+        if (req && req.auth && req.auth.user) {
             ret.push(req.auth.user);
             req_auth_user = req.auth.user;
         }else{
@@ -87,7 +93,6 @@ exports.new = (db) => {
         }
         
         let color = 'green';
-        
         if (code) {
             
             if(code != 200){
@@ -97,12 +102,13 @@ exports.new = (db) => {
             ret.push( chalk[color](code) );
             
         }else{
+            code = '';
             ret.push('');
         }
         
         
-        
         console.log( chalk[color]('|')+' ['+ret.join('] [')+'] ', ...msg );
+        
         
         
         if(o.is_dbwrite){
