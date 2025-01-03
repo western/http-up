@@ -293,6 +293,8 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [x] export event log as JSON
 - [x] refactoring
 
+<hr>
+
 ### 1.6.5
 - [x] add compression
 
