@@ -23,11 +23,15 @@ twin brother rewrite to v1.2.0
 - [x] - add --extend-mode (table view, thumbnails and delete)
 - [x] - decomposition of code
 
+<hr>
+
 ### 1.0.57
 - [x] - add folder tree
 
 ### 1.0.51
 - [x] - add two experimental view modes
+
+<hr>
 
 ### 1.0.48
 - [x] - show upload progress as simple as possible
@@ -111,6 +115,8 @@ twin brother rewrite to v1.2.0
 
 ### 1.0.13
 - [x] - decomposition for lib/http-up.js
+
+<hr>
 
 ### 1.0.12
 - [x] - make new folder via web interface
