@@ -46,6 +46,9 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
     <img src="https://github.com/western/http-up/blob/dev/doc/width_screen_compare11.png?raw=true"  >
 </p>
 
+> [!IMPORTANT]  
+> During group operations COPY or MOVE all target files/folders will be rewrite
+
 ## Preview doc button
 
 <p align="center">
