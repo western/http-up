@@ -173,11 +173,13 @@ exports.new = (db) => {
                 
                 from file
                 
-                where full_path like ?
+                where
+                    full_path like ? and
+                    full_path like ?
                 
                 order by full_path
             `,
-            [ '%'+s+'%' ],
+            [ argv.fold+'%', '%'+s+'%' ],
             (err, data) => {
                 
                 if(err){
