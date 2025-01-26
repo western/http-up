@@ -265,6 +265,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] rich frontend (react, vue) ?
 - [x] search
 - [ ] should i support no_database version?
+- [ ] tabs
 
 ### 2.3.0
 - [x] new head interface
