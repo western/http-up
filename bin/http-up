@@ -11,13 +11,19 @@ let HTTPUP = require('../lib/http-up');
 
 let argv = require('minimist')(process.argv.slice(2), {
     string: ['port', 'user', 'password', 'log-download'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'extend-mode', 'crypt', 'admin'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'tls-debug', 'extend-mode', 'crypt', 'admin'],
     alias: { h: 'help' },
     default: { port: '4000' },
     '--': true,
     stopEarly: false /* populate _ with first non-option */,
     //unknown: function () { ... } /* invoked on unknown param */
 });
+
+if( argv['tls-debug'] ){
+    argv.tls = true
+}
+
+
 
 const config = require('../lib/config');
 const util = require('../lib/util');
@@ -55,7 +61,7 @@ if (argv.h || argv.help) {
             ``,
             `                               ${chalk.yellow('--port 3999')}`,
             ``,
-            `     --tls                     Enable TLS support`,,
+            `     --tls                     Enable TLS support`,
             ``,
             `     --user     [str]          User for basic authorization.`,
             `     --password [str]          Password for basic authorization.`,
@@ -121,15 +127,15 @@ if (!fs.existsSync(httpup_thumb)) {
 if (!fs.existsSync(httpup_temp)) {
     fs.mkdirSync(httpup_temp);
 } else {
-    console.log('');
-    console.log('Temporary folder "' + chalk.yellow(httpup_temp) + '" is exist.');
-    console.log('Run clearing...');
+    //console.log('');
+    //console.log('Temporary folder "' + chalk.yellow(httpup_temp) + '" is exist.');
+    //console.log('Run clearing...');
 
     fs.rmSync(httpup_temp, { recursive: true, force: true });
     fs.mkdirSync(httpup_temp);
 
-    console.log('Done');
-    console.log('');
+    //console.log('Done');
+    //console.log('');
 }
 
 if (!fs.existsSync(httpup_db)) {

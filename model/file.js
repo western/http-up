@@ -244,6 +244,51 @@ exports.new = (db) => {
         
     };
     
+    o.check_exists = async () => {
+        
+        db.each(`
+            select * from file
+        `,
+        (err, row) => {
+            if(err){
+                //console.log('select from file err: ', err);
+                return;
+            }
+            
+            //console.log('row=', row);
+            
+            if( row && row.full_path && !fs.existsSync(row.full_path) ){
+                
+                //console.log('file not found, remove: ', row.full_path);
+                
+                db.run(
+                    `delete from file where id=?`,
+                    [ row.id ],
+                    (err) => {
+                        if(err){
+                            console.log('delete from file err: ', err);
+                        }
+                    },
+                );
+                
+                db.run(`
+                    delete from share where md5 not in (select md5 from file)
+                `, () => {
+                    
+                });
+        
+            }
+        });
+        
+        
+        db.run(`
+            delete from share where md5 not in (select md5 from file)
+        `, () => {
+            
+        });
+        
+    };
+    
     return o;
 };
 
