@@ -236,7 +236,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 - `md5sum` (coreutils package) - make md5 sum of file
 - `convert` (ImageMagick package) - for make thumbnails
-- `libreoffice` - for thumbnails, for doc files online edit
+- `libreoffice` - for doc thumbnails, for doc files online edit
 - `easyrsa` (easy-rsa package) - package for certs build
 - `openssl` - encrypt file support
 - `zip` - cmd util for zip_and_download
