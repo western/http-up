@@ -267,6 +267,11 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] should i support no_database version?
 - [ ] tabs
 
+### 2.3.5
+- [x] run model.file().check_exists() after operations
+- [x] hide tls generator output
+- [x] (2.3.4) files_count_max to 100
+
 ### 2.3.0
 - [x] new head interface
 - [x] search
