@@ -86,7 +86,15 @@ if (argv.h || argv.help) {
             ``,
             `     --admin                   Enable /admin/ interface.`,
             ``,
-            ``,
+			``,
+			`examples:`,
+			``,
+			`     The safest run`,
+			`                        `+chalk.yellow(`npx http-up`)+` --tls --basic `+chalk.white(`/some/path`),
+			``,
+			`     Only share`,
+			`                        `+chalk.yellow(`npx http-up`)+` --upload-disable --folder-make-disable `+chalk.white(`/tmp/fold`),
+			``,
         ].join('\n'),
     );
     process.exit();
