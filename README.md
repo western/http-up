@@ -269,7 +269,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 ### 2.3.5
 - [x] run model.file().check_exists() after operations
-- [x] hide tls generator output
+- [x] hide tls generator output (new tls-debug arg)
 - [x] (2.3.4) files_count_max to 100
 
 ### 2.3.0
