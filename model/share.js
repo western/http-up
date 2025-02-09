@@ -232,7 +232,7 @@ exports.new = (db) => {
                 
                 
                 db.all(
-                    `select dt, ip from event_log where tag='sendFile' and msg like '%"${row.code}"%' order by id`,
+                    `select dt, ip from event_log where tag='share' and msg like 'sendFile by code "${row.code}"%' order by id`,
                     [  ],
                     (err, all_stat_users) => {
                         
