@@ -111,9 +111,9 @@ npx http-up --upload-disable --folder-make-disable /tmp/fold
 
 ## Online editor
 
-You can online edit doc files `html|rtf|doc|docx|odt` as office files.
+You can online edit files `html, rtf, doc, docx, odt` as office files.
 
-Or `html|txt|js|css|md` formats as source code.
+Or `html, txt, js, css, md` formats as source code.
 
 <p align="center">
     <img src="https://github.com/western/http-up/blob/dev/doc/online_editor_cmp.png?raw=true"  />
@@ -129,9 +129,9 @@ Office files follow this flow: `file.doc => file.html, edit => file.doc`
     <img src="https://github.com/western/http-up/blob/dev/doc/new_filename_ext.png?raw=true"  />
 </p>
 
-If you set extension for file as `rtf|doc|docx|odt`, after create you can edit it with online WYSIWYG.
+If you set extension for file as `rtf, doc, docx, odt`, after create you can edit it with online WYSIWYG.
 
-If you set extension `html|txt|js|css|md`, you will edit it with code editor.
+If you set extension `html, txt, js, css, md`, you will edit it with code editor.
 
 ## File encrypt
 
