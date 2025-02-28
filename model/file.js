@@ -97,28 +97,57 @@ exports.new = (db) => {
                 ext = ext.toLowerCase();
                 
                 
-                exec(`md5sum "${full_path}"`, function (error, stdout, stderr) {
+                
+                let is_preview_img = ext.match(/^(jpg|jpeg|png|gif)$/i);
+                let is_preview_doc = ext.match(/^(html|txt|js|css|md|pdf|rtf|doc|docx|xls|xlsx|odt|ods)$/i);
+                
+                
+                
+                if(
+                    is_preview_img || is_preview_doc || stats.size < 20 * 1024 * 1024
+                ){
+                    
+                    //console.log('add2:', full_path, 'with md5');
+                    
+                    exec(`md5sum "${full_path}"`, function (error, stdout, stderr) {
+                            
+                        let arr = stdout.split(/\s+/);
+                        let md5_file = arr[0];
                         
-                    let arr = stdout.split(/\s+/);
-                    let md5_file = arr[0];
+                        if (md5_file.length == 0) {
+                            console.log('add2:', 'error md5 for '+full_path);
+                            return;
+                        }
+                        
+                        
+                        
+                        db.run(
+                            `insert into file (full_path, filename, ext, is_folder, size, modified, md5) values(?, ?, ?, ?, ?, ?, ?)`,
+                            [ full_path, filename, ext, 0, stats.size, modtime_human, md5_file ],
+                            (err) => {
+                                if(err){
+                                    console.log('add2:', 'insert into file err=', err);
+                                }
+                            },
+                        );
+                    });
                     
-                    if (md5_file.length == 0) {
-                        console.log('add2:', 'error md5 for '+full_path);
-                        return;
-                    }
+                }else{
                     
-                    
+                    // without md5
+                    //console.log('add2:', full_path, 'WITHOUT md5');
                     
                     db.run(
                         `insert into file (full_path, filename, ext, is_folder, size, modified, md5) values(?, ?, ?, ?, ?, ?, ?)`,
-                        [ full_path, filename, ext, 0, stats.size, modtime_human, md5_file ],
+                        [ full_path, filename, ext, 0, stats.size, modtime_human, "" ],
                         (err) => {
                             if(err){
-                                console.log('add:', 'insert into file err=', err);
+                                console.log('add2:', 'insert into file err=', err);
                             }
                         },
                     );
-                });
+                    
+                }
                 
             }
         })
