@@ -216,8 +216,18 @@ $(document).ready(function () {
     
     $('#make_folder_dlg, #make_folder_dlg2').click(function (ev) {
         
-        const mkfolderModal = new bootstrap.Modal(document.getElementById('make_folder_modal'), {});
+        //const mkfolderModal = new bootstrap.Modal(document.getElementById('make_folder_modal'), {});
+        //mkfolderModal.show();
+        
+        let folder_modal = document.getElementById('make_folder_modal');
+        
+        folder_modal.addEventListener('shown.bs.modal', () => {
+            $('#make_folder_input').focus()
+        })
+        
+        const mkfolderModal = new bootstrap.Modal(folder_modal, {});
         mkfolderModal.show();
+        
     });
     
     
@@ -299,8 +309,18 @@ $(document).ready(function () {
     
     $('#new_file_dlg, #new_file_dlg2').click(function (ev) {
         
-        const mkfileModal = new bootstrap.Modal(document.getElementById('make_file_modal'), {});
+        //const mkfileModal = new bootstrap.Modal(document.getElementById('make_file_modal'), {});
+        //mkfileModal.show();
+        
+        let file_modal = document.getElementById('make_file_modal');
+        
+        file_modal.addEventListener('shown.bs.modal', () => {
+            $('#make_file_input').focus()
+        })
+        
+        const mkfileModal = new bootstrap.Modal(file_modal, {});
         mkfileModal.show();
+        
     });
     
     
@@ -335,8 +355,18 @@ $(document).ready(function () {
     
     $('#search_dlg, #search_dlg2').click(function (ev) {
         
-        const searchModal = new bootstrap.Modal(document.getElementById('search_modal'), {});
-        searchModal.show();
+        //const searchModal = new bootstrap.Modal(document.getElementById('search_modal'), {});
+        //searchModal.show();
+        
+        let search_modal = document.getElementById('search_modal');
+        
+        search_modal.addEventListener('shown.bs.modal', () => {
+            $('#search_input').focus()
+        })
+        
+        const mkfileModal = new bootstrap.Modal(search_modal, {});
+        mkfileModal.show();
+        
     });
     
     // --------------------------------------------------------------------------------------------------------------------------------------
