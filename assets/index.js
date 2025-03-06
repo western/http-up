@@ -216,8 +216,7 @@ $(document).ready(function () {
     
     $('#make_folder_dlg, #make_folder_dlg2').click(function (ev) {
         
-        //const mkfolderModal = new bootstrap.Modal(document.getElementById('make_folder_modal'), {});
-        //mkfolderModal.show();
+        
         
         let folder_modal = document.getElementById('make_folder_modal');
         
@@ -309,8 +308,7 @@ $(document).ready(function () {
     
     $('#new_file_dlg, #new_file_dlg2').click(function (ev) {
         
-        //const mkfileModal = new bootstrap.Modal(document.getElementById('make_file_modal'), {});
-        //mkfileModal.show();
+        
         
         let file_modal = document.getElementById('make_file_modal');
         
@@ -355,8 +353,7 @@ $(document).ready(function () {
     
     $('#search_dlg, #search_dlg2').click(function (ev) {
         
-        //const searchModal = new bootstrap.Modal(document.getElementById('search_modal'), {});
-        //searchModal.show();
+        
         
         let search_modal = document.getElementById('search_modal');
         
@@ -541,19 +538,26 @@ $(document).ready(function () {
     $('a.rename').click((ev) => {
         let el = ev.target;
         
-        //console.log('a.rename', el);
         
         if(el.tagName == 'I'){
             el = el.parentNode;
         }
         
-        //console.log('a.rename', el);
         
         $('#set_rename_orig').val( $(el).data('name') );
         $('#set_rename_input').val( $(el).data('name') );
 
-        const renameModal = new bootstrap.Modal(document.getElementById('rename_modal'), {});
+        
+        
+        let rename_modal = document.getElementById('rename_modal');
+        
+        rename_modal.addEventListener('shown.bs.modal', () => {
+            $('#set_rename_input').focus()
+        })
+        
+        const renameModal = new bootstrap.Modal(rename_modal, {});
         renameModal.show();
+        
     });
     
     let rename_form_submit = () => {
