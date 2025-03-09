@@ -81,9 +81,12 @@
                     let arr = full_path.split('/');
                     arr.pop();
                     
+                    let result_url = arr.join('/')
+                    if( result_url.length == 0 ){
+                        result_url = '/';
+                    }
                     
-                    location.href = arr.join('/');
-                    
+                    location.href = result_url;
                 }
             }).fail(function(data) {
                 if (data.responseJSON.msg) {
@@ -99,7 +102,12 @@
             let arr = full_path.split('/');
             arr.pop();
             
-            location.href = arr.join('/');
+            let result_url = arr.join('/')
+            if( result_url.length == 0 ){
+                result_url = '/';
+            }
+            
+            location.href = result_url;
         });
         
         
