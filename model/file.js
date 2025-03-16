@@ -230,11 +230,13 @@ exports.new = (db) => {
                     
                     el.only_fold = '/'+arr.join('/');
                     
+                    const s_regex = new RegExp( s, "i" );
+                    
                     el.only_fold_html = el.only_fold;
-                    el.only_fold_html = el.only_fold_html.replace(s, '<span style="background-color:yellow;">'+s+'</span>');
+                    el.only_fold_html = el.only_fold_html.replace(s_regex, '<span style="background-color:yellow;">'+s+'</span>');
                     
                     el.filename_html = el.filename;
-                    el.filename_html = el.filename_html.replace(s, '<span style="background-color:yellow;">'+s+'</span>');
+                    el.filename_html = el.filename_html.replace(s_regex, '<span style="background-color:yellow;">'+s+'</span>');
                     
                     el.SizeHuman = util.humanFileSize(el.size);
                     

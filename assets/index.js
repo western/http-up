@@ -171,6 +171,66 @@ $(document).ready(function () {
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     
+    /*
+    let now = () => {
+        const d = new Date();
+        let s = d.toISOString();
+        
+        return s;
+    };
+    
+    $('a').each((indx, el) => {
+        
+        el = $(el);
+        let img_preview = el.data('img-preview');
+        
+        if( img_preview ){
+            
+            //console.log('img_preview=', img_preview);
+            
+            
+            let get_thumb_with_chk = (img_p) => {
+            
+                fetch('/__thumb' + img_p, {
+                    method: 'GET',
+                }).then(r => {
+                    
+                    
+                    const ct = r.headers.get("content-type");
+                    
+                    if (ct && ct.indexOf("application/json") !== -1) {
+                        
+                        return r.json().then(data => {
+                            
+                            //console.log(now(), 'return json', data);
+                            
+                            setTimeout(()=>{
+                                get_thumb_with_chk(img_p);
+                            }, 800);
+                        });
+                        
+                    } else {
+                        
+                        //console.log(now(), 'return NON json');
+                        
+                        
+                        let div = $('div.card-img-top', el);
+                        //console.log('div=', div);
+                        
+                        div.css('background-image', 'url(' + img_preview + ')');
+                    }
+                });
+            };
+            
+            get_thumb_with_chk(img_preview);
+            
+            
+        }
+    });
+    */
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    
     
     let make_new_folder = function (ev) {
         let val = $('input[type=text]', ev.target.parentNode).val();
@@ -248,7 +308,7 @@ $(document).ready(function () {
         formData.append('name', val);
 
         $.ajax({
-            url: '/api/file',
+            url: '/api/file/touch',
             data: formData,
             type: 'POST',
             contentType: false,
@@ -784,17 +844,7 @@ function ev_target_files(files) {
     });
 
     let submit = async function () {
-        /*
-        let response = await fetch('/api/upload', {
-            method: 'POST',
-            body: formData
-        });
-
-        let result = await response.json();
-        if(result.code == 200){
-            location.href = location.href;
-        }
-        */
+        
 
         $('#progress').attr('max', 100);
         $('#progress').attr('value', 0);
@@ -806,8 +856,7 @@ function ev_target_files(files) {
             'progress',
             function (ev, th) {
                 if (ev.lengthComputable) {
-                    //let percentComplete = (ev.loaded / ev.total) * 100;
-                    //console.log('percentComplete=', percentComplete);
+                    
 
                     $('#progress').attr('max', ev.total);
                     $('#progress').attr('value', ev.loaded);
@@ -829,7 +878,7 @@ function ev_target_files(files) {
                 location.href = location.href;
             }
         };
-        xhr.open('POST', '/api/upload');
+        xhr.open('POST', '/api/file/upload');
         xhr.send(formData);
     };
 
@@ -920,7 +969,7 @@ function setCookie(name, value, options = {}) {
         }
     }
 
-    //console.log('updatedCookie=', updatedCookie);
+    
     document.cookie = updatedCookie;
 }
 

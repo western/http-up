@@ -107,7 +107,10 @@ exports.new = (db) => {
         }
         
         
-        console.log( chalk[color]('|')+' ['+ret.join('] [')+'] ', ...msg );
+        ret.push( tag );
+        
+        
+        console.log( chalk[color]('|')+' ['+ret.join('] [')+']', ...msg );
         
         
         
