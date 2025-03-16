@@ -10,7 +10,7 @@
 /* Desktop (960px)
 ================================================== */
 .container2 { position:relative; _width:960px; margin:0 auto; padding:0; }
-.container2 .columns { float:left; display:inline; margin-left:10px; margin-right:10px; }
+.container2 .columns { float:left; display:inline; _margin-left:10px; _margin-right:10px; }
 .container2 .twelve.columns { width:100%; }
 .container2 .offset-by-two { _padding-left:120px; }
 
@@ -140,23 +140,29 @@ a[id^="btn"]:hover { _background-color:#161616; background-color:silver; }
 ================================================== */
 
 /* Tablet Portrait to Desktop (960px) */
+/*
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 audio { width:528px; }
 }
+*/
 
 /* Mobile Landscape to Tablet Portrait */
+/*
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 audio { width:391px; }
 #npAction { position:absolute; }
 #npTitle { width:261px; }
 }
+*/
 
 /* Mobile Portrait to Mobile Landscape */
+/*
 @media only screen and (max-width: 479px) {
 audio { width:271px; }
 #npAction { position:absolute; }
 #npTitle { width:156px; }
 }
+*/
 
 /* Chrome Hacks */
 @media
