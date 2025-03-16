@@ -75,11 +75,19 @@ exports.new = (db) => {
         let formatted = dt.format('Y-m-d H:M:S.N');
         ret.push(formatted);
         
-        let client_ip = '';
+        let client_ip = '0';
         if(req){
-            client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-            client_ip = client_ip.toString();
-            ret.push(client_ip);
+
+            try {
+                client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+                client_ip = client_ip.toString();
+                ret.push(client_ip);
+            }
+            catch(err) {
+                //console.log('client_ip detect err=', err);
+            }
+
+            
         }else{
             ret.push('');
         }
