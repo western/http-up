@@ -9,7 +9,11 @@
     
     <div class="container2">
         <div class="twelve columns offset-by-two">
-            <h1 class="center">Audio Player</h1>
+            <h1 class="center">
+                <a href="javascript:void(0);" class="return_back" title="Return back"><i class="bi bi-arrow-left-square"></i></a>
+                
+                Audio Player
+            </h1>
           
         </div>
         <div class="twelve columns offset-by-two add-bottom">
@@ -61,6 +65,18 @@
 
 <script>
 
+$(document).ready(() => {
+    
+    $('a.return_back').click(()=> {
+        
+        
+        
+        let loc = location.pathname;
+        loc = loc.replace(/\/__player/, '');
+        
+        location.href = loc;
+    })
+})
 
 let b = document.documentElement;
 b.setAttribute('data-useragent',  navigator.userAgent);
@@ -73,7 +89,7 @@ jQuery(function ($) {
         let index = 0,
             playing = false;
         
-        mediaPath = '{{mediapath}}',
+        mediaPath = '{{mediapath}}/',
         extension = 'mp3',
         tracks = [
             {{#each files}}

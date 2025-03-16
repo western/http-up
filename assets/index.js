@@ -595,6 +595,41 @@ $(document).ready(function () {
     
     // --------------------------------------------------------------------------------------------------------------------------------------
     
+    $('a.player').click((ev) => {
+        let el = ev.target;
+        
+        
+        if(el.tagName == 'I'){
+            el = el.parentNode;
+        }
+        
+        
+        
+        /*
+        $('#set_rename_orig').val( $(el).data('name') );
+        $('#set_rename_input').val( $(el).data('name') );
+
+        
+        
+        let rename_modal = document.getElementById('rename_modal');
+        
+        rename_modal.addEventListener('shown.bs.modal', () => {
+            $('#set_rename_input').focus()
+        })
+        
+        const renameModal = new bootstrap.Modal(rename_modal, {});
+        renameModal.show();
+        */
+        
+        let name = $(el).data('name');
+        if(name){
+            location.href = '/__player' + location.pathname + '/' + name;
+        }
+        
+    });
+    
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    
     $('a.rename').click((ev) => {
         let el = ev.target;
         

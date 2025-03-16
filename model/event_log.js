@@ -75,7 +75,7 @@ exports.new = (db) => {
         let formatted = dt.format('Y-m-d H:M:S.N');
         ret.push(formatted);
         
-        let client_ip = '0';
+        let client_ip = '';
         if(req){
 
             try {
@@ -85,6 +85,7 @@ exports.new = (db) => {
             }
             catch(err) {
                 //console.log('client_ip detect err=', err);
+                client_ip = '';
             }
 
             
