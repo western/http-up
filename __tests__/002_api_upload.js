@@ -72,7 +72,7 @@ describe("should 200", () => {
         formData.append('fileMeta', JSON.stringify({name: 'file2.jpg'}));
 
 
-        let response = await fetch(prefix + '/api/upload', {
+        let response = await fetch(prefix + '/api/file/upload', {
             method:'POST',
             body: formData,
             headers: headers,
@@ -103,7 +103,7 @@ describe("should 200", () => {
         
 
 
-        let response = await fetch(prefix + '/api/upload', {
+        let response = await fetch(prefix + '/api/file/upload', {
             method:'POST',
             body: formData,
             headers: headers,
@@ -134,7 +134,7 @@ describe("should 200", () => {
         
 
 
-        let response = await fetch(prefix + '/api/upload', {
+        let response = await fetch(prefix + '/api/file/upload', {
             method:'POST',
             body: formData,
             headers: headers,
