@@ -2,6 +2,31 @@
 
 
 
+### 1.6.5
+- [x] add compression
+
+### 1.6.4
+- [x] fix upload with code undefined
+
+### 1.6.1
+- [x] API: remove target file or folder while COPY or MOVE
+
+### 1.6.0
+- [x] file encrypt
+
+### 1.5.0
+- [x] move group operation buttons to top panel
+- [x] add sort operation
+- [x] add move group API (with side panel folder)
+- [x] add copy group API (with side panel folder)
+- [x] add zip_and_download group API
+
+### 1.4.0
+- [x] make root config folder as /home/USERNAME/.httpup/
+- [x] temp and easyrsa folder moved to root config folder
+- [x] add /__thumb/ preview generator for img and documents
+
+<hr>
 
 ### 1.3.0
 - [x] - check file index.html inside folder and show it
