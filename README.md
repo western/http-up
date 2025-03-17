@@ -269,6 +269,15 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] should i support no_database version?
 - [ ] tabs
 
+### 2.4.0
+- [x] code restructure
+- [x] search highlight fix
+- [x] API changes
+- [x] add player for folder
+- [x] more stable for get file (res.sendFile err catch)
+- [x] add TAG show for log info
+- [x] check move/copy API source and target path
+
 ### 2.3.6
 - [x] fix download info for share
 
@@ -307,31 +316,6 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [x] export event log as JSON
 - [x] refactoring
 
-<hr>
-
-### 1.6.5
-- [x] add compression
-
-### 1.6.4
-- [x] fix upload with code undefined
-
-### 1.6.1
-- [x] API: remove target file or folder while COPY or MOVE
-
-### 1.6.0
-- [x] file encrypt
-
-### 1.5.0
-- [x] move group operation buttons to top panel
-- [x] add sort operation
-- [x] add move group API (with side panel folder)
-- [x] add copy group API (with side panel folder)
-- [x] add zip_and_download group API
-
-### 1.4.0
-- [x] make root config folder as /home/USERNAME/.httpup/
-- [x] temp and easyrsa folder moved to root config folder
-- [x] add /__thumb/ preview generator for img and documents
 
 
 
