@@ -277,43 +277,6 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [x] add TAG show for log info
 - [x] check move/copy API source and target path
 
-### 2.3.6
-- [x] fix download info for share
-
-### 2.3.5
-- [x] run model.file().check_exists() after operations
-- [x] hide tls generator output (new tls-debug arg)
-- [x] (2.3.4) files_count_max to 100
-
-### 2.3.0
-- [x] new head interface
-- [x] search
-- [x] create new file
-
-### 2.1.0
-- [x] add source code editor for `html|txt|js|css|md`
-
-### 2.0.5
-- [x] show monitor page for /admin/
-
-### 2.0.4
-- [x] send 404 html page for share problems
-
-### 2.0.3
-- [x] remove ansi colors from export string
-
-### 2.0.2
-- [x] allow /assets/ prefix without password
-
-### 2.0.0
-- [x] database support
-- [x] rename button
-- [x] share button
-- [x] edit button for `html, rtf, doc, docx, odt`
-- [x] speed up hash search for thumbnails
-- [x] event log
-- [x] export event log as JSON
-- [x] refactoring
 
 
 
