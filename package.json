@@ -17,10 +17,13 @@
     "http-server",
     "https-server",
     "web-server",
+    "webserver",
     "server",
     "upload",
     "file-upload",
-    "share"
+    "share",
+    "file-server",
+    "download"
   ],
   "directories": {
     "lib": "lib",
