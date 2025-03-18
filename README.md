@@ -188,7 +188,7 @@ npx http-up /tmp
 
 ## Automatic TLS keys generate
 
-- For start HTTPS server you need `easyrsa` (easy-rsa package) linux package
+- For start HTTPS server you need `openssl` linux package
 - When you start server with `--tls` option, all keys generate automatically
 
 ```console
@@ -239,8 +239,7 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - `md5sum` (coreutils package) - make md5 sum of file
 - `convert` (ImageMagick package) - for make thumbnails
 - `libreoffice` - for doc thumbnails, for doc files online edit
-- `easyrsa` (easy-rsa package) - package for certs build
-- `openssl` - encrypt file support
+- `openssl` - encrypt file support, package for certs build
 - `zip` - cmd util for zip_and_download
 
 
