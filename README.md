@@ -268,6 +268,9 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] should i support no_database version?
 - [ ] tabs
 
+### 2.4.2
+- [x] generate tls keys via openssl directly: remove easyrsa dependence
+
 ### 2.4.0
 - [x] code restructure
 - [x] search highlight fix
