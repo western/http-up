@@ -131,6 +131,8 @@ Office files follow this flow: `file.doc => file.html, edit => file.doc`
 
 If you set extension for file as `rtf, doc, docx, odt`, after create you can edit it with online WYSIWYG.
 
+(For formats `rtf, doc, docx, odt` you need `libreoffice` package)
+
 If you set extension `html, txt, js, css, md`, you will edit it with code editor.
 
 ## File encrypt
