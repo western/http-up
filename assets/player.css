@@ -1,6 +1,3 @@
-
-
-
 /* Font Family
 ================================================== */
 /*
@@ -9,132 +6,288 @@
 
 /* Desktop (960px)
 ================================================== */
-.container2 { position:relative; _width:960px; margin:0 auto; padding:0; }
-.container2 .columns { float:left; display:inline; _margin-left:10px; _margin-right:10px; }
-.container2 .twelve.columns { width:100%; }
-.container2 .offset-by-two { _padding-left:120px; }
-
-
-
+.container2 {
+    position: relative;
+    _width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}
+.container2 .columns {
+    float: left;
+    display: inline;
+    _margin-left: 10px;
+    _margin-right: 10px;
+}
+.container2 .twelve.columns {
+    width: 100%;
+}
+.container2 .offset-by-two {
+    _padding-left: 120px;
+}
 
 /* Self Clearing Goodness
 ================================================== */
 .container2:after {
-clear:both;
-content:"\0020";
-display:block;
-height:0;
-visibility:hidden;
+    clear: both;
+    content: '\0020';
+    display: block;
+    height: 0;
+    visibility: hidden;
 }
-
 
 /* CSS Reset
 ================================================== */
-html,body,div,span,h1,h6,p,a,ul,li,audio {
-border:0;
-font:inherit;
-font-size:100%;
-margin:0;
-padding:0;
-vertical-align:baseline;
+html,
+body,
+div,
+span,
+h1,
+h6,
+p,
+a,
+ul,
+li,
+audio {
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
 }
 
-body { line-height:1; }
-ul { list-style:none; }
-
+body {
+    line-height: 1;
+}
+ul {
+    list-style: none;
+}
 
 /* Basic Styles
 ================================================== */
-html,body {
--webkit-font-smoothing:antialiased;
--webkit-text-size-adjust:100%;
-_background-color:#111;
-_color:#C8C7C8;
-font:18px/20px "Yanone Kaffeesatz", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-weight:300;
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    _background-color: #111;
+    _color: #c8c7c8;
+    font:
+        18px/20px 'Yanone Kaffeesatz',
+        HelveticaNeue,
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight: 300;
 }
-
 
 /* Typography
 ================================================== */
-h1,h6 { color:#808080; font-weight:300; }
-h1 { font-size:42px; line-height:44px; margin:20px 0 0; }
-h6 { font-size:18px; line-height:20px; margin:0 0 20px; }
-p { margin:0 0 20px; }
-
+h1,
+h6 {
+    color: #808080;
+    font-weight: 300;
+}
+h1 {
+    font-size: 42px;
+    line-height: 44px;
+    margin: 20px 0 0;
+}
+h6 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0 0 20px;
+}
+p {
+    margin: 0 0 20px;
+}
 
 /* Links
 ================================================== */
-a,a:visited { color:#ddd; outline:0; text-decoration:underline; }
-a:hover,a:focus { color:#bbb; }
-p a,p a:visited { line-height:inherit; }
-
+a,
+a:visited {
+    color: #ddd;
+    outline: 0;
+    text-decoration: underline;
+}
+a:hover,
+a:focus {
+    color: #bbb;
+}
+p a,
+p a:visited {
+    line-height: inherit;
+}
 
 /* Misc.
 ================================================== */
-.add-bottom { margin-bottom:20px !important; }
-.left { float:left; }
-.right { float:right; }
-.center { text-align:center; }
-
+.add-bottom {
+    margin-bottom: 20px !important;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.center {
+    text-align: center;
+}
 
 /* Custom Styles
 ================================================== */
-html,body {
--webkit-font-smoothing:antialiased;
--webkit-text-size-adjust:100%;
-_background-color:#111;
-_color:#C8C7C8;
-font:18px/20px "Yanone Kaffeesatz", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-weight:300;
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    _background-color: #111;
+    _color: #c8c7c8;
+    font:
+        18px/20px 'Yanone Kaffeesatz',
+        HelveticaNeue,
+        'Helvetica Neue',
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-weight: 300;
 }
 
 /* CSS Transitions */
 * {
--moz-transition:all 100ms ease;
--o-transition:all 100ms ease;
--webkit-transition:all 100ms ease;
-transition:all 100ms ease;
+    -moz-transition: all 100ms ease;
+    -o-transition: all 100ms ease;
+    -webkit-transition: all 100ms ease;
+    transition: all 100ms ease;
 }
 
 /* Highlight Styles */
-::selection { background-color:#262223; color:#444; }
-::-moz-selection { background-color:#262223; color:#444; }
-
-/* Music Player (Default - Firefox) */
-audio { margin:0 14px; width:672px; }
-#audiowrap { _background-color:#231F20; margin:0 auto; }
-#plwrap { margin:0 auto; }
-#tracks { min-height:66px; position:relative; text-align:center; text-decoration:none; top:16px; }
-#nowPlay { display:inline; }
-#npTitle { margin:0; padding:21px; text-align:right; }
-#npAction { padding:21px; }
-#plList { margin:0; }
-#plList li { _background-color:#231F20; cursor:pointer; margin:0; padding:21px 0; }
-#plList li:hover { _background-color:#262223; }
-.plItem { position:relative; }
-.plTitle { left:40px; overflow:hidden; position:absolute; right:65px; text-overflow:ellipsis; top:0; white-space:nowrap; }
-.plNum { padding-left:21px; width:25px; }
-.plLength { padding-left:21px; position:absolute; right:21px; top:0; }
-.plSel,.plSel:hover { _background-color:#262223!important; background-color:silver!important; cursor:default!important; }
-a[id^="btn"] { _background-color:#231F20; color:#C8C7C8; cursor:pointer; font-size:50px; margin:0; padding:0 27px 11px; text-decoration:none; }
-a[id^="btn"]:last-child { margin-left:-3px; }
-a[id^="btn"]:hover,a[id^=btn]:active { _background-color:#262223; }
-a[id^="btn"]::-moz-focus-inner { border:0; padding:0; }
-
-/* Music Player (Chrome) */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-audio { margin:0; width:100%!important; }
-#audiowrap { _background-color:#131313; }
-a[id^="btn"] { _background-color:#131313; }
-a[id^="btn"]:hover { _background-color:#161616; background-color:silver; }
-#plList li { _background-color:#131313; }
-#plList li:hover { _background-color:#161616;  }
-.plSel,.plSel:hover { _background-color:#161616!important; }
+::selection {
+    background-color: #262223;
+    color: #444;
+}
+::-moz-selection {
+    background-color: #262223;
+    color: #444;
 }
 
+/* Music Player (Default - Firefox) */
+audio {
+    margin: 0 14px;
+    width: 672px;
+}
+#audiowrap {
+    _background-color: #231f20;
+    margin: 0 auto;
+}
+#plwrap {
+    margin: 0 auto;
+}
+#tracks {
+    min-height: 66px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    top: 16px;
+}
+#nowPlay {
+    display: inline;
+}
+#npTitle {
+    margin: 0;
+    padding: 21px;
+    text-align: right;
+}
+#npAction {
+    padding: 21px;
+}
+#plList {
+    margin: 0;
+}
+#plList li {
+    _background-color: #231f20;
+    cursor: pointer;
+    margin: 0;
+    padding: 21px 0;
+}
+#plList li:hover {
+    _background-color: #262223;
+}
+.plItem {
+    position: relative;
+}
+.plTitle {
+    left: 40px;
+    overflow: hidden;
+    position: absolute;
+    right: 65px;
+    text-overflow: ellipsis;
+    top: 0;
+    white-space: nowrap;
+}
+.plNum {
+    padding-left: 21px;
+    width: 25px;
+}
+.plLength {
+    padding-left: 21px;
+    position: absolute;
+    right: 21px;
+    top: 0;
+}
+.plSel,
+.plSel:hover {
+    _background-color: #262223 !important;
+    background-color: silver !important;
+    cursor: default !important;
+}
+a[id^='btn'] {
+    _background-color: #231f20;
+    color: #c8c7c8;
+    cursor: pointer;
+    font-size: 50px;
+    margin: 0;
+    padding: 0 27px 11px;
+    text-decoration: none;
+}
+a[id^='btn']:last-child {
+    margin-left: -3px;
+}
+a[id^='btn']:hover,
+a[id^='btn']:active {
+    _background-color: #262223;
+}
+a[id^='btn']::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
 
-
+/* Music Player (Chrome) */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    audio {
+        margin: 0;
+        width: 100% !important;
+    }
+    #audiowrap {
+        _background-color: #131313;
+    }
+    a[id^='btn'] {
+        _background-color: #131313;
+    }
+    a[id^='btn']:hover {
+        _background-color: #161616;
+        background-color: silver;
+    }
+    #plList li {
+        _background-color: #131313;
+    }
+    #plList li:hover {
+        _background-color: #161616;
+    }
+    .plSel,
+    .plSel:hover {
+        _background-color: #161616 !important;
+    }
+}
 
 /* Media Queries (Screen Width)
 ================================================== */
@@ -165,11 +318,10 @@ audio { width:271px; }
 */
 
 /* Chrome Hacks */
-@media
-only screen and (max-width: 959px) and (min-width: 768px) and (-webkit-min-device-pixel-ratio:0),
-only screen and (max-width: 767px) and (min-width: 480px) and (-webkit-min-device-pixel-ratio:0),
-only screen and (max-width: 479px) and (-webkit-min-device-pixel-ratio:0) {
-audio { width: 100%; }
+@media only screen and (max-width: 959px) and (min-width: 768px) and (-webkit-min-device-pixel-ratio: 0),
+    only screen and (max-width: 767px) and (min-width: 480px) and (-webkit-min-device-pixel-ratio: 0),
+    only screen and (max-width: 479px) and (-webkit-min-device-pixel-ratio: 0) {
+    audio {
+        width: 100%;
+    }
 }
-
-

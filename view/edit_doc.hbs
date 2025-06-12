@@ -27,7 +27,7 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" crossorigin="anonymous"></script>
+<!--script src="https://code.jquery.com/jquery-3.7.0.min.js" crossorigin="anonymous"></script-->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js" crossorigin="anonymous"></script>
@@ -35,7 +35,65 @@
 
 
 <script>
-    $(document).ready(() => {
+    
+    
+
+if (typeof window.$$ != 'function') {
+    
+    //console.log('function $$ not exist');
+    
+    window.$$ = (arg0, arg1) => {
+        if (arg0 && arg1) {
+            return arg0.querySelectorAll(arg1);
+        }
+
+        if (arg0 && !arg1) {
+            return document.querySelectorAll(arg0);
+        }
+
+        //console.log('qu error: arg is absent ', arg0, arg1);
+    };
+    
+}else{
+    //console.log('function $$ are exist');
+}
+
+
+
+// qu('#upload_file')
+// qu(parent_element, 'li')
+//
+// return Element
+
+
+if (typeof window.$ != 'function') {
+    
+    //console.log('function $ not exist');
+    
+    window.$ = (arg0, arg1) => {
+        if (arg0 && arg1) {
+            return arg0.querySelector(arg1);
+        }
+
+        if (arg0 && !arg1) {
+            return document.querySelector(arg0);
+        }
+
+        //console.log('qu error: arg is absent ', arg0, arg1);
+    };
+    
+}else{
+    //console.log('function $ are exist');
+}
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+    
+    
+    
+    
+    
+    (() => {
         
         tinymce.init({
             selector: '#textarea1',
@@ -63,7 +121,7 @@
         
         let full_path = `{{full_path}}`;
         
-        
+        /*
         $('#save_button').on('click', () => {
             
             let body = tinymce.get("textarea1").getContent();
@@ -103,7 +161,51 @@
             
             
         });
+        */
         
+        const save_button = $('#save_button');
+        if (save_button) {
+            save_button.addEventListener('click', (ev) => {
+                
+                let body = tinymce.get("textarea1").getContent();
+                
+                let formData = new FormData();
+                formData.append('full_path', full_path);
+                formData.append('body', body);
+                
+
+                fetch('/api/file/edit', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then((r) => r.json())
+                    .then((js) => {
+                        if (js.code == '200') {
+                            
+                            let arr = full_path.split('/');
+                            arr.pop();
+                            
+                            let result_url = arr.join('/')
+                            if( result_url.length == 0 ){
+                                result_url = '/';
+                            }
+                            
+                            location.href = result_url;
+                            
+                        } else {
+                            if (js.msg) {
+                                alert(js.msg);
+                            }
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                    
+            });
+        }
+        
+        /*
         $('#cancel_button').on('click', () => {
             
             let arr = full_path.split('/');
@@ -115,11 +217,28 @@
             }
             
             location.href = result_url;
-        });
+        });*/
+        
+        const cancel_button = $('#cancel_button');
+        if (cancel_button) {
+            cancel_button.addEventListener('click', (ev) => {
+                
+                let arr = full_path.split('/');
+                arr.pop();
+                
+                let result_url = arr.join('/')
+                if( result_url.length == 0 ){
+                    result_url = '/';
+                }
+                
+                location.href = result_url;
+                    
+            });
+        }
         
         
         
-    });
+    })();
     
 </script>
 

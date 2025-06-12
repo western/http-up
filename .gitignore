@@ -1,5 +1,2 @@
-node_modules/
-public/*.png
-public/*.jpg
-lib/easyrsa/
-/t/
+readme.txt
+/node_modules/
