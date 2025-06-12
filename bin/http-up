@@ -90,7 +90,7 @@ if (argv.h || argv.help) {
             `     --share-only              Set --upload-disable and --folder-make-disable`,
             ``,
             ``,
-            //`     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
+            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
             ``,
             //`     --crypt                   Enable file encrypt support.`,
             ``,

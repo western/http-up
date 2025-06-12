@@ -1,11 +1,11 @@
 {
-  "name": "http-up3",
+  "name": "http-up",
   "version": "3.0.0",
   "description": "Simple share folder via http with upload",
   "type": "module",
-  "main": "./bin/http-up3",
+  "main": "./bin/http-up",
   "bin": {
-    "http-up3": "./bin/http-up3"
+    "http-up": "./bin/http-up"
   },
   "scripts": {
     "prettier": "npx prettier bin lib assets --check",
@@ -29,12 +29,12 @@
   "author": "https://github.com/western",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/western/http-up3/issues"
+    "url": "https://github.com/western/http-up/issues"
   },
-  "homepage": "https://github.com/western/http-up3#readme",
+  "homepage": "https://github.com/western/http-up#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/western/http-up3.git"
+    "url": "git+https://github.com/western/http-up.git"
   },
   "keywords": [
     "cli",
