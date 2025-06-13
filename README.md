@@ -60,25 +60,6 @@ Below you see display width more than 992 pix (1), less than (2) and mobile wind
 
 For [Thumbnails support](#thumbnails-support) read below
 
-## Buttons share/rename/edit
-
-<p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/share_rename_edit.png?raw=true"  >
-    
-</p>
-
-Edit button work with formats `html, rtf, doc, docx, odt`.
-
-For document online edit you need `libreoffice` package.
-
-## Motivation for share button
-
-Imagine, that you run app with basic auth `npx http-up --user XXX --password YYY --extend-mode .`
-
-And you not want to share with your login/password
-
-And you need to show only one file
-
 ## Basic auth
 
 > [!IMPORTANT]  
@@ -106,8 +87,9 @@ read for [TLS Support](#automatic-tls-keys-generate) below
 ## Only share
 
 ```console
-npx http-up --upload-disable --folder-make-disable /tmp/fold
+npx http-up --share-only /tmp/fold
 ```
+it is disable "upload" button and disable "make new folder" button
 
 ## Online editor
 
@@ -134,58 +116,6 @@ If you set extension for file as `rtf, doc, docx, odt`, after create you can edi
 (For formats `rtf, doc, docx, odt` you need `libreoffice` package)
 
 If you set extension `html, txt, js, css, md`, you will edit it with code editor.
-
-## File encrypt
-
-> [!IMPORTANT]  
-> Be careful. If you download `.crypt` file with WRONG password, it file will be contain MESS of bytes
-
-<br>
-
-<p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/code_to_encrypt5.png?raw=true" width="60%"  >
-    
-</p>
-
-Your server need package `openssl`. It will be use `openssl aes-256-cbc`
-
-```console
-npx http-up --extend-mode --crypt /tmp
-```
-
-Then, set your passcode to the form. The passcode store on the form between requests and you not need input it every time (if you clear it server will not use openssl).
-
-During the process of uploading, your files will be encrypt and their EXT change to `.crypt`
-
-When files lying on your server, their data is crypted.
-
-If you need decrypt any `.crypt` flles, set your passcode, and click on file. During download this file, it will be decrypt on the fly.
-
-### Server will be encrypt upload file:
-```console
-npx http-up --extend-mode --crypt /tmp
-```
-- if you set `--crypt` arg on cmd
-- if you set passcode (pass code set by form)
-
-### Server will be decrypt download file:
-```console
-npx http-up --extend-mode --crypt /tmp
-```
-- if you set `--crypt` arg on cmd
-- if filename contain `.crypt` extension
-- if you set right passcode (pass code set by form)
-
-### Server will be decrypt download file (case 2):
-```console
-npx http-up /tmp
-```
-- if filename contain `.crypt` extension
-- if you get file with `code` param: `/fold3/file.jpg.crypt?code=YOUR_PASS_HERE`
-
-
-
-
 
 
 ## Automatic TLS keys generate
