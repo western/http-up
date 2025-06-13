@@ -74,7 +74,7 @@ npx http-up --basic .
 or only one basic auth specific user
 
 ```console
-npx http-up --user login1 --password EAJteG5 .
+npx http-up --login login1 --password EAJteG5 .
 ```
 
 ## The safest run
