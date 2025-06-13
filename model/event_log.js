@@ -1,5 +1,5 @@
 
-
+import fs from 'fs';
 import chalk from 'chalk';
 import * as dateTime from 'node-datetime';
 
@@ -138,3 +138,38 @@ export const print = ( res, req, code, tag, ...msg) => {
 
 
 
+export const export_to = (filename) => {
+    
+    let db = model.connect();
+        
+    db.all(
+        `select * from event_log order by id`,
+        [ ],
+        (err, data) => {
+            
+            if(err){
+                console.log('export_to err=', err);
+                return;
+            }
+            
+            /*
+            data.forEach((el) => {
+                el.msg = el.msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+                //console.log('el.msg=', el.msg);
+            });*/
+            
+            try {
+                fs.writeFileSync(filename, JSON.stringify(data));
+                
+            } catch (err) {
+                console.log(err);
+            }
+            
+            console.log('Table event_log was saved to '+filename);
+            process.exit();
+            return;
+        }
+    );
+        
+        
+};

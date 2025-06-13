@@ -9,6 +9,7 @@ import minimist from 'minimist';
 import * as core from '../lib/core.js';
 import config from '../lib/config.js';
 import * as util from '../lib/util.js';
+import * as model from '../model/index.js';
 
 // -----------------------------------------------------------------------------------------------------------------------
 
@@ -94,9 +95,9 @@ if (argv.h || argv.help) {
             ``,
             //`     --crypt                   Enable file encrypt support.`,
             ``,
-            //`     --log-export [str]        Export all data log to out json file`,
+            `     --log-export [str]        Export all data log to out json file`,
             ``,
-            //`                               ${chalk.yellow('--log-export file.json')}`,
+            `                               ${chalk.yellow('--log-export file.json')}`,
             ``,
             ``,
             `     --silence                 Disable all console messages`,
@@ -118,20 +119,18 @@ if (argv.h || argv.help) {
 
 // -----------------------------------------------------------------------------------------------------------------------
 
-/*
 if (argv['log-export']) {
     console.log('');
     console.log('Save log to "' + chalk.yellow(argv['log-export']) + '" ');
-    
-    model.event_log().export_to( argv['log-export'] );
-    
+
+    model.event_log.export_to(argv['log-export']);
+
     //process.exit();
 }
-*/
 
 // -----------------------------------------------------------------------------------------------------------------------
 
-process.title = 'http-up3';
+process.title = 'http-up';
 
 process.on('SIGINT', function () {
     console.log('http-up stopped.');
