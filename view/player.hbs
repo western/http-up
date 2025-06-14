@@ -1,0 +1,177 @@
+
+<link href="/__assets/player.css" rel="stylesheet" crossorigin="anonymous">
+
+
+
+
+<div class="container">
+
+    
+    <div class="container2">
+        <div class="twelve columns offset-by-two">
+            <h1 >
+                <a href="javascript:void(0);" class="return_back" title="Return back"><i class="bi bi-arrow-left-square"></i></a>
+                
+                Audio Player
+            </h1>
+          
+        </div>
+        <div class="twelve columns offset-by-two add-bottom">
+        <div id="nowPlay">
+            <span class="left" id="npAction">Paused</span>
+            <span class="right" id="npTitle"></span>
+        </div>
+        <div id="audiowrap">
+            <div id="audio0">
+                <audio preload id="audio1" controls="controls">Your browser does not support HTML5 Audio</audio>
+            </div>
+            <div id="tracks">
+                <a id="btnPrev">&laquo;</a>
+                <a id="btnNext">&raquo;</a>
+            </div>
+        </div>
+        <div id="plwrap">
+            <ul id="plList">
+                
+                
+                {{#each files}}
+                <li>
+                    <div class="plItem">
+                        <div class="plNum">{{track}}.</div>
+                        <div class="plTitle">{{name}}</div>
+                        <div class="plLength">{{length}}</div>
+                    </div>
+                </li>
+                {{/each}}
+                
+            </ul>
+        </div>
+        </div>
+        <div class="twelve columns offset-by-two add-bottom">
+            <p class="center">
+                
+            </p>
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" crossorigin="anonymous"></script>
+
+
+
+<script>
+
+$(document).ready(() => {
+    
+    $('a.return_back').click(()=> {
+        
+        
+        
+        let loc = location.pathname;
+        loc = loc.replace(/\/__player/, '');
+        
+        location.href = loc;
+    })
+})
+
+let b = document.documentElement;
+b.setAttribute('data-useragent',  navigator.userAgent);
+b.setAttribute('data-platform', navigator.platform );
+
+
+jQuery(function ($) {
+    let supportsAudio = !! document.createElement('audio').canPlayType;
+    if (supportsAudio) {
+        let index = 0,
+            playing = false;
+        
+        mediaPath = '{{mediapath}}/',
+        extension = '',
+        tracks = [
+            {{#each files}}
+            {
+                "track": {{track}},
+                "name": "{{{name}}}",
+                "length": "{{length}}",
+                "file": "{{{file}}}",
+            },
+            {{/each}}
+        ],
+        
+        
+        
+        trackCount = tracks.length,
+        npAction = $('#npAction'),
+        npTitle = $('#npTitle'),
+        audio = $('#audio1').bind('play', function () {
+            playing = true;
+            npAction.text('Now Playing');
+        }).bind('pause', function () {
+            playing = false;
+            npAction.text('Paused');
+        }).bind('ended', function () {
+            npAction.text('Paused');
+            if ((index + 1) < trackCount) {
+                index++;
+                loadTrack(index);
+                audio.play();
+            } else {
+                audio.pause();
+                index = 0;
+                loadTrack(index);
+            }
+        }).get(0),
+        btnPrev = $('#btnPrev').click(function () {
+            if ((index - 1) > -1) {
+                index--;
+                loadTrack(index);
+                if (playing) {
+                    audio.play();
+                }
+            } else {
+                audio.pause();
+                index = 0;
+                loadTrack(index);
+            }
+        }),
+        btnNext = $('#btnNext').click(function () {
+            if ((index + 1) < trackCount) {
+                index++;
+                loadTrack(index);
+                if (playing) {
+                    audio.play();
+                }
+            } else {
+                audio.pause();
+                index = 0;
+                loadTrack(index);
+            }
+        }),
+        li = $('#plList li').click(function () {
+            let id = parseInt($(this).index());
+            if (id !== index) {
+                playTrack(id);
+            }
+        }),
+        loadTrack = function (id) {
+            $('.plSel').removeClass('plSel');
+            $('#plList li:eq(' + id + ')').addClass('plSel');
+            npTitle.text(tracks[id].name);
+            index = id;
+            audio.src = mediaPath + tracks[id].file + extension;
+        },
+        playTrack = function (id) {
+            loadTrack(id);
+            audio.play();
+        };
+        extension = audio.canPlayType('audio/mpeg') ? '.mp3' : audio.canPlayType('audio/ogg') ? '.ogg' : '';
+        loadTrack(index);
+    }
+});    
+    
+</script>
+
