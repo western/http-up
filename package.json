@@ -1,6 +1,6 @@
 {
   "name": "http-up",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Simple share folder via http with upload",
   "type": "module",
   "main": "./bin/http-up",
