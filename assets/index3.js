@@ -6,14 +6,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 */
 
-// [] = quAll('#upload_file')
-// [] = quAll(parent_element, 'li')
-//
-// return NodeList []
-
 if (typeof window.$$ != 'function') {
-    //console.log('function $$ not exist');
-
     window.$$ = (arg0, arg1) => {
         if (arg0 && arg1) {
             return arg0.querySelectorAll(arg1);
@@ -22,21 +15,10 @@ if (typeof window.$$ != 'function') {
         if (arg0 && !arg1) {
             return document.querySelectorAll(arg0);
         }
-
-        console.log('qu error: arg is absent ', arg0, arg1);
     };
-} else {
-    //console.log('function $$ are exist');
 }
 
-// qu('#upload_file')
-// qu(parent_element, 'li')
-//
-// return Element
-
 if (typeof window.$ != 'function') {
-    //console.log('function $ not exist');
-
     window.$ = (arg0, arg1) => {
         if (arg0 && arg1) {
             return arg0.querySelector(arg1);
@@ -45,16 +27,10 @@ if (typeof window.$ != 'function') {
         if (arg0 && !arg1) {
             return document.querySelector(arg0);
         }
-
-        //console.log('qu error: arg is absent ', arg0, arg1);
     };
-} else {
-    //console.log('function $ are exist');
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------
-
-//let mkfolderModal;
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -134,6 +110,17 @@ if (typeof window.$ != 'function') {
                             location.href = location.href;
                         } else {
                             if (js.msg) {
+                                // reset clipboard on error
+                                localStorage.setItem('clipboard', JSON.stringify({}));
+
+                                let el;
+                                if ((el = $('a.group_copy'))) {
+                                    el.classList.remove('active');
+                                }
+                                if ((el = $('a.group_move'))) {
+                                    el.classList.remove('active');
+                                }
+
                                 alert(js.msg);
                             }
                         }
@@ -356,19 +343,19 @@ if (typeof window.$ != 'function') {
             .then((r) => r.json())
             .then((js) => {
                 if (js.code == '200') {
-                    //location.href = location.href;
+                    let openOnlineEditor = $('#openOnlineEditor');
+                    if (openOnlineEditor && !openOnlineEditor.checked) {
+                        location.href = location.href;
+                        return;
+                    }
 
                     let regx = /\.(.+?)$/.exec(val);
-
-                    //console.log('regx=', regx);
-
                     if (!regx) {
                         location.href = location.href;
                         return;
                     }
 
                     let ext = regx.slice(1)[0];
-                    //console.log('ext=', ext);
 
                     let is_edit_doc = ext.match(/^(rtf|doc|docx|odt)$/i);
                     let is_edit_code = ext.match(/^(html|txt|js|css)$/i);
@@ -620,8 +607,6 @@ if (typeof window.$ != 'function') {
             if (el.tagName == 'I') {
                 el = el.parentNode;
             }
-            //console.log('el=', el);
-            //console.log('el=', el.dataset.name);
 
             location.href = '/__code' + location.pathname + '/' + el.dataset.name;
         });
@@ -634,8 +619,6 @@ if (typeof window.$ != 'function') {
             if (el.tagName == 'I') {
                 el = el.parentNode;
             }
-            //console.log('el=', el);
-            //console.log('el=', el.dataset.name);
 
             location.href = '/__doc' + location.pathname + '/' + el.dataset.name;
         });
@@ -648,10 +631,20 @@ if (typeof window.$ != 'function') {
             if (el.tagName == 'I') {
                 el = el.parentNode;
             }
-            //console.log('el=', el);
-            //console.log('el=', el.dataset.name);
 
             location.href = '/__md' + location.pathname + '/' + el.dataset.name;
+        });
+    });
+
+    $$('a.player').forEach((aa) => {
+        aa.addEventListener('click', (ev) => {
+            let el = ev.target;
+
+            if (el.tagName == 'I') {
+                el = el.parentNode;
+            }
+
+            location.href = '/__player' + location.pathname + '/' + el.dataset.name;
         });
     });
 
