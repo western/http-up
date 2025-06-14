@@ -258,7 +258,7 @@
                                                 <ul class="dropdown-menu">
 
                                                     <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
-                                                    <!--li><a class="dropdown-item player" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-music-note-beamed"></i> Open in Audio Player</a></li-->
+                                                    <li><a class="dropdown-item player" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-music-note-beamed"></i> Open in Audio Player</a></li>
                                                     <!--li><a class="dropdown-item" href="#">Something else here</a></li>
                                                     <li><hr class="dropdown-divider"></li>
                                                     <li><a class="dropdown-item" href="#">Separated link</a></li-->
@@ -272,7 +272,15 @@
 
                                     <tr>
                                         <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="file" value="{{Name}}"></th>
-                                        <td><a class="nodecor" href="{{FullPath}}?{{Rnds}}">{{Name}}</a></td>
+                                        <td>
+                                            <a class="nodecor" href="{{FullPath}}?{{Rnds}}">{{Name}}</a>
+                                            
+                                            
+                                            <div class="text-body-secondary   d-block d-sm-block d-md-block    d-lg-none d-xl-none">
+                                                <small>{{ModTimeHuman}}</small>&nbsp;
+                                                <span class="badge text-bg-secondary">{{SizeHuman}}</span>
+                                            </div>
+                                        </td>
 
                                         <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{SizeHuman}}</td>
                                         <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">
@@ -530,13 +538,13 @@
                                                     <div class="btn-group">
 
                                                         {{#if IsPreviewImg}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-lightbox="image-1" data-title="{{Name}}">
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{Name}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
 
                                                         {{#if IsPreviewDoc}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-lightbox="image-1" data-title="{{Name}}">
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{Name}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
@@ -724,12 +732,25 @@
                     <button class="btn btn-outline-secondary" type="button" id="make_file_button">Do</button>
                 </div>
                 
+                <div class="form-check" style="margin:20px 0;">
+                    <input class="form-check-input" type="checkbox" value="" id="openOnlineEditor" checked>
+                    <label class="form-check-label" for="openOnlineEditor">
+                        Open online editor after create
+                    </label>
+                </div>
+                
+                
+                
                 <p>
                     If you set extension for file as <span class="badge text-bg-secondary">rtf, doc, docx, odt</span> after create you can edit it with online WYSIWYG.
                 </p>
                 
                 <p>
-                    If you set extension <span class="badge text-bg-secondary">html, txt, js, css, md</span> you will edit it with code editor.
+                    <span class="badge text-bg-secondary">html, txt, js, css</span> => code editor
+                </p>
+                
+                <p>
+                    <span class="badge text-bg-secondary">md</span> => markdown editor
                 </p>
 
             </div>
