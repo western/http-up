@@ -38,7 +38,7 @@ npx http-up --extend-mode /tmp
 App will change main list view to table. And you can operate with files - delete, move, copy
 
 <p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/panel_buttons.png?raw=true"  >
+    <img src="https://github.com/western/http-up/blob/dev/doc/panel_buttons2.png?raw=true"  >
 </p>
 
 Below you see display width more than 992 pix (1), less than (2) and mobile window (3):
@@ -89,7 +89,7 @@ read for [TLS Support](#automatic-tls-keys-generate) below
 ```console
 npx http-up --share-only /tmp/fold
 ```
-it is disable "upload" button and disable "make new folder" button
+it is disable "upload" and disable "make new folder" buttons
 
 ## Online editor
 
@@ -97,8 +97,10 @@ You can online edit files `html, rtf, doc, docx, odt` as office files.
 
 Or `html, txt, js, css, md` formats as source code.
 
+Or `md` as markdown.
+
 <p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/online_editor_cmp.png?raw=true"  />
+    <img src="https://github.com/western/http-up/blob/dev/doc/online_editor_cmp2.png?raw=true"  />
 </p>
 
 You need `libreoffice` package for office files.
@@ -108,7 +110,7 @@ Office files follow this flow: `file.doc => file.html, edit => file.doc`
 ## New filename ext
 
 <p align="center">
-    <img src="https://github.com/western/http-up/blob/dev/doc/new_filename_ext.png?raw=true"  />
+    <img src="https://github.com/western/http-up/blob/dev/doc/new_filename_ext2.png?raw=true"  />
 </p>
 
 If you set extension for file as `rtf, doc, docx, odt`, after create you can edit it with online WYSIWYG.
@@ -124,7 +126,7 @@ If you set extension `html, txt, js, css, md`, you will edit it with code editor
 - When you start server with `--tls` option, all keys generate automatically
 
 ```console
-npx http-up . --tls
+npx http-up --tls .
 ```
 
 - Server use self signed certs, generated at first time. Thus you need approve this connection on your clients.
@@ -186,33 +188,31 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - If you run application under some User, this user should be have privileges to write target folder
 
 
-
 ## History
 
 ### backlog
 - [ ] save whitespaces for filenames?
 - [ ] what is the lib can resize images enough fast
-- [ ] database migration
 - [ ] project needs middleware (or module arch) or not
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
-- [x] search
-- [ ] should i support no_database version?
 - [ ] tabs
 
-### 2.4.2
-- [x] generate tls keys via openssl directly: remove easyrsa dependence
-
-### 2.4.0
-- [x] code restructure
-- [x] search highlight fix
-- [x] API changes
-- [x] add player for folder
-- [x] more stable for get file (res.sendFile err catch)
-- [x] add TAG show for log info
-- [x] check move/copy API source and target path
-
-
+### 3.0.0
+- [x] fresh packages
+- [x] code rewrite
+- [ ] async everywhere
+- [x] new MARKDOWN editor
+- [x] database is disabled by default
+- [x] log output disable option
+- [x] remove jquery
+- [x] remove tree_walk, remove bstreeview (rewrite to "clipboard style")
+- [ ] can i print without template engine? (remove handlebars?)
+- [ ] facilitate css grid
+- [ ] combine all css to html page
+- [x] remove SHARE option
+- [x] remove ADMIN console
+- [x] remove file ENCRYPT option
 
 
 
