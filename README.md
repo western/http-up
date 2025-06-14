@@ -1,4 +1,4 @@
-# http-up3
+# http-up
 
 Simple zero-configuration command line http server with lightweight interface to work with files
 
