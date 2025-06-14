@@ -1,11 +1,40 @@
 {
   "name": "http-up",
-  "version": "2.4.6",
+  "version": "3.0.0",
   "description": "Simple share folder via http with upload",
-  "main": "./lib/http-up",
+  "type": "module",
+  "main": "./bin/http-up",
+  "bin": {
+    "http-up": "./bin/http-up"
+  },
+  "scripts": {
+    "prettier": "npx prettier bin lib assets --check",
+    "prettier:fix": "npm run prettier -- --write"
+  },
+  "directories": {
+    "lib": "lib",
+    "bin": "bin",
+    "view": "view",
+    "assets": "assets",
+    "model": "model"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "view",
+    "assets",
+    "model",
+    "README.md"
+  ],
+  "author": "https://github.com/western",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/western/http-up/issues"
+  },
+  "homepage": "https://github.com/western/http-up#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/western/http-up.git"
+    "url": "git+https://github.com/western/http-up.git"
   },
   "keywords": [
     "cli",
@@ -25,49 +54,19 @@
     "file-server",
     "download"
   ],
-  "directories": {
-    "lib": "lib",
-    "bin": "bin",
-    "views": "views",
-    "assets": "assets",
-    "model": "model"
-  },
-  "scripts": {
-    "start": "node ./bin/http-up",
-    "prettier": "npx prettier bin lib --check",
-    "prettier:fix": "npm run prettier -- --write",
-    "test": "jest --watchAll --runInBand"
-  },
-  "files": [
-    "lib",
-    "bin",
-    "views",
-    "assets",
-    "model",
-    "README.md"
-  ],
-  "bugs": {
-    "url": "https://github.com/western/http-up/issues"
-  },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "compression": "^1.7.5",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
+    "chalk": "^5.4.1",
+    "compression": "^1.8.0",
+    "express": "^5.1.0",
     "express-basic-auth": "^1.2.1",
     "express-handlebars": "^8.0.1",
-    "jest": "^29.7.0",
-    "mime": "^3.0.0",
+    "mime": "^4.0.7",
     "minimist": "^1.2.8",
     "multer": "^2.0.1",
     "node-datetime": "^2.1.2",
-    "shelljs": "^0.8.5",
+    "path": "^0.12.7",
+    "shelljs": "^0.10.0",
     "sqlite3": "^5.1.7",
     "urlencode": "^2.0.0"
-  },
-  "bin": {
-    "http-up": "./bin/http-up"
   }
 }

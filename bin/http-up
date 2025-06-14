@@ -1,36 +1,37 @@
 #!/usr/bin/env node
 
-'use strict';
+import os from 'os';
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import minimist from 'minimist';
 
-const os = require('os');
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
+import * as core from '../lib/core.js';
+import config from '../lib/config.js';
+import * as util from '../lib/util.js';
+import * as model from '../model/index.js';
 
-let core = require('../lib/core');
+// -----------------------------------------------------------------------------------------------------------------------
 
-let argv = require('minimist')(process.argv.slice(2), {
+const argv = minimist(process.argv.slice(2), {
     string: ['port', 'user', 'password', 'log-download'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'tls', 'tls-debug', 'extend-mode', 'crypt', 'admin'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'share-only', 'tls', 'tls-debug', 'extend-mode', 'crypt', 'silence', 'usedb'],
     alias: { h: 'help' },
-    default: { port: '4000' },
+    default: { port: config.defaultPort },
     '--': true,
-    stopEarly: false /* populate _ with first non-option */,
-    //unknown: function () { ... } /* invoked on unknown param */
+    stopEarly: false,
 });
 
-if( argv['tls-debug'] ){
-    argv.tls = true
+if (argv['share-only']) {
+    argv['upload-disable'] = true;
+    argv['folder-make-disable'] = true;
 }
 
+if (argv['tls-debug']) {
+    argv.tls = true;
+}
 
-
-const config = require('../lib/config');
-const util = require('../lib/util');
-const model = require(path.join(__dirname, '..', 'model', 'index'));
-//console.log( path.join(__dirname, '..', 'model', 'index') );
-
-argv.port = argv.port || argv.p || config.defaultPort;
+// -----------------------------------------------------------------------------------------------------------------------
 
 argv.fold = process.cwd();
 
@@ -48,58 +49,6 @@ if (argv._[0] && argv._[0] == '.') {
     argv.fold = path.normalize(argv.fold);
 }
 
-if (argv.h || argv.help) {
-    console.log(
-        [
-            ``,
-            config.version,
-            ``,
-            `usage: ${chalk.yellow('http-up')} [options] [path]`,
-            ``,
-            `options:`,
-            `     --port [int]              Port to use. [${chalk.yellow(config.defaultPort)}]`,
-            ``,
-            `                               ${chalk.yellow('--port 3999')}`,
-            ``,
-            `     --tls                     Enable TLS support`,
-            ``,
-            `     --user     [str]          User for basic authorization.`,
-            `     --password [str]          Password for basic authorization.`,
-            ``,
-            `                               ${chalk.yellow('--user somelogin --password somepassword')}`,
-            ``,
-            ``,
-            `     --basic                   Set basic auth and generate several accounts every time.`,
-            ``,
-            `     --upload-disable`,
-            `     --folder-make-disable`,
-            ``,
-            ``,
-            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
-            ``,
-            `     --crypt                   Enable file encrypt support.`,
-            ``,
-            `     --log-export [str]        Export all data log to out json file`,
-            ``,
-            `                               ${chalk.yellow('--log-export file.json')}`,
-            ``,
-            ``,
-            `     --admin                   Enable /admin/ interface.`,
-            ``,
-			``,
-			`examples:`,
-			``,
-			`     The safest run`,
-			`                        `+chalk.yellow(`npx http-up`)+` --tls --basic `+chalk.white(`/some/path`),
-			``,
-			`     Only share`,
-			`                        `+chalk.yellow(`npx http-up`)+` --upload-disable --folder-make-disable `+chalk.white(`/tmp/fold`),
-			``,
-        ].join('\n'),
-    );
-    process.exit();
-}
-
 if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     console.log('');
     console.log('Folder "' + chalk.yellow(argv.fold) + '" is absent.');
@@ -109,52 +58,79 @@ if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
     process.exit();
 }
 
+// -----------------------------------------------------------------------------------------------------------------------
+
+if (argv.h || argv.help) {
+    console.log(
+        [
+            ``,
+            config.version,
+            ``,
+            `usage: ${chalk.yellow('http-up')} [options] [path]`,
+            ``,
+            `options:`,
+            ``,
+            `     --port [int]              Port to use. [${chalk.yellow(config.defaultPort)}]`,
+            ``,
+            `                               ${chalk.yellow('--port 3999')}`,
+            ``,
+            `     --tls                     Enable TLS support`,
+            ``,
+            `     --login    [str]          User for basic authorization.`,
+            `     --password [str]          Password for basic authorization.`,
+            ``,
+            `                               ${chalk.yellow('--login somelogin --password somepassword')}`,
+            ``,
+            ``,
+            `     --basic                   Set basic auth and generate several accounts every time.`,
+            ``,
+            ``,
+            //`     --upload-disable`,
+            //`     --folder-make-disable`,
+            ``,
+            `     --share-only              Set --upload-disable and --folder-make-disable`,
+            ``,
+            ``,
+            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
+            ``,
+            //`     --crypt                   Enable file encrypt support.`,
+            ``,
+            `     --log-export [str]        Export all data log to out json file`,
+            ``,
+            `                               ${chalk.yellow('--log-export file.json')}`,
+            ``,
+            ``,
+            `     --silence                 Disable all console messages`,
+            `     --usedb                   Database use`,
+            ``,
+            ``,
+            `examples:`,
+            ``,
+            `     The safest run`,
+            `                        ` + chalk.yellow(`npx http-up`) + ` --tls --basic ` + chalk.white(`/some/path`),
+            ``,
+            `     Share only`,
+            `                        ` + chalk.yellow(`npx http-up`) + ` --share-only ` + chalk.white(`/tmp/fold`),
+            ``,
+        ].join('\n'),
+    );
+    process.exit();
+}
+
+// -----------------------------------------------------------------------------------------------------------------------
+
 if (argv['log-export']) {
     console.log('');
     console.log('Save log to "' + chalk.yellow(argv['log-export']) + '" ');
-    
-    model.event_log().export_to( argv['log-export'] );
-    
+
+    model.event_log.export_to(argv['log-export']);
+
     //process.exit();
 }
 
-const homedir = os.homedir();
-const httpup_home = path.join(homedir, '.httpup');
-const httpup_thumb = path.join(homedir, '.httpup', 'thumb');
-const httpup_temp = path.join(homedir, '.httpup', 'temp');
-const httpup_db = path.join(homedir, '.httpup', 'db');
-
-if (!fs.existsSync(httpup_home)) {
-    fs.mkdirSync(httpup_home);
-}
-
-if (!fs.existsSync(httpup_thumb)) {
-    fs.mkdirSync(httpup_thumb);
-}
-
-if (!fs.existsSync(httpup_temp)) {
-    fs.mkdirSync(httpup_temp);
-} else {
-    //console.log('');
-    //console.log('Temporary folder "' + chalk.yellow(httpup_temp) + '" is exist.');
-    //console.log('Run clearing...');
-
-    fs.rmSync(httpup_temp, { recursive: true, force: true });
-    fs.mkdirSync(httpup_temp);
-
-    //console.log('Done');
-    //console.log('');
-}
-
-if (!fs.existsSync(httpup_db)) {
-    fs.mkdirSync(httpup_db);
-}
-
-
+// -----------------------------------------------------------------------------------------------------------------------
 
 process.title = 'http-up';
-
-core.makeServer(argv);
 
 process.on('SIGINT', function () {
     console.log('http-up stopped.');
@@ -165,3 +141,7 @@ process.on('SIGTERM', function () {
     console.log('http-up stopped.');
     process.exit();
 });
+
+// -----------------------------------------------------------------------------------------------------------------------
+
+core.makeServer(argv);

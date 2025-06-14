@@ -1,6 +1,17 @@
 ## History
 
 
+### 2.4.2
+- [x] generate tls keys via openssl directly: remove easyrsa dependence
+
+### 2.4.0
+- [x] code restructure
+- [x] search highlight fix
+- [x] API changes
+- [x] add player for folder
+- [x] more stable for get file (res.sendFile err catch)
+- [x] add TAG show for log info
+- [x] check move/copy API source and target path
 
 ### 2.3.6
 - [x] fix download info for share

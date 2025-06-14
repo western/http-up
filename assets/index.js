@@ -71,15 +71,17 @@ $(document).ready(function () {
                     type: 'POST',
                     contentType: false,
                     processData: false,
-                }).done(function (data) {
-                    if (data.code == 200) {
-                        location.href = location.href;
-                    }
-                }).fail(function(data) {
-                    if (data.responseJSON.msg) {
-                        alert(data.responseJSON.msg);
-                    }
-                });
+                })
+                    .done(function (data) {
+                        if (data.code == 200) {
+                            location.href = location.href;
+                        }
+                    })
+                    .fail(function (data) {
+                        if (data.responseJSON.msg) {
+                            alert(data.responseJSON.msg);
+                        }
+                    });
             }
         });
 
@@ -154,15 +156,17 @@ $(document).ready(function () {
                     type: 'POST',
                     contentType: false,
                     processData: false,
-                }).done(function (data) {
-                    if (data.code == 200) {
-                        location.href = location.href;
-                    }
-                }).fail(function(data) {
-                    if (data.responseJSON.msg) {
-                        alert(data.responseJSON.msg);
-                    }
-                });
+                })
+                    .done(function (data) {
+                        if (data.code == 200) {
+                            location.href = location.href;
+                        }
+                    })
+                    .fail(function (data) {
+                        if (data.responseJSON.msg) {
+                            alert(data.responseJSON.msg);
+                        }
+                    });
             }
         });
 
@@ -170,7 +174,7 @@ $(document).ready(function () {
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     /*
     let now = () => {
         const d = new Date();
@@ -228,10 +232,9 @@ $(document).ready(function () {
         }
     });
     */
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
-    
+
     let make_new_folder = function (ev) {
         let val = $('input[type=text]', ev.target.parentNode).val();
         console.log('val=', val);
@@ -250,15 +253,17 @@ $(document).ready(function () {
             type: 'POST',
             contentType: false,
             processData: false,
-        }).done(function (data) {
-            if (data.code == 200) {
-                location.href = location.href;
-            }
-        }).fail(function(data) {
-            if (data.responseJSON.msg) {
-                alert(data.responseJSON.msg);
-            }
-        });
+        })
+            .done(function (data) {
+                if (data.code == 200) {
+                    location.href = location.href;
+                }
+            })
+            .fail(function (data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
+                }
+            });
     };
 
     $('#make_folder_button').click(function (ev) {
@@ -270,30 +275,20 @@ $(document).ready(function () {
             make_new_folder(ev);
         }
     });
-    
-    
-    
-    
+
     $('#make_folder_dlg, #make_folder_dlg2').click(function (ev) {
-        
-        
-        
         let folder_modal = document.getElementById('make_folder_modal');
-        
+
         folder_modal.addEventListener('shown.bs.modal', () => {
-            $('#make_folder_input').focus()
-        })
-        
+            $('#make_folder_input').focus();
+        });
+
         const mkfolderModal = new bootstrap.Modal(folder_modal, {});
         mkfolderModal.show();
-        
     });
-    
-    
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
-    
+
     let make_new_file = function (ev) {
         let val = $('input[type=text]', ev.target.parentNode).val();
         console.log('val=', val);
@@ -303,7 +298,6 @@ $(document).ready(function () {
             return;
         }
 
-        
         let formData = new FormData();
         formData.append('name', val);
 
@@ -313,46 +307,46 @@ $(document).ready(function () {
             type: 'POST',
             contentType: false,
             processData: false,
-        }).done(function (data) {
-            if (data.code == 200) {
-                //location.href = location.href;
-                //location.href = '';
-                
-                /*
-                let ext = path.parse(val).ext;
-                ext = ext.replace(/\./g, '');
-                ext = ext.toLowerCase();
-                */
-                
-                let regx = /\.(.+?)$/.exec(val);
-                
-                //console.log('regx=', regx);
-                
-                if( !regx ){
-                    location.href = location.href;
-                    return;
+        })
+            .done(function (data) {
+                if (data.code == 200) {
+                    //location.href = location.href;
+                    //location.href = '';
+
+                    /*
+                    let ext = path.parse(val).ext;
+                    ext = ext.replace(/\./g, '');
+                    ext = ext.toLowerCase();
+                    */
+
+                    let regx = /\.(.+?)$/.exec(val);
+
+                    //console.log('regx=', regx);
+
+                    if (!regx) {
+                        location.href = location.href;
+                        return;
+                    }
+
+                    let ext = regx.slice(1)[0];
+                    //console.log('ext=', ext);
+
+                    let is_edit_doc = ext.match(/^(rtf|doc|docx|odt)$/i);
+                    let is_edit_code = ext.match(/^(html|txt|js|css|md)$/i);
+
+                    if (is_edit_doc) {
+                        location.href = '/__doc' + location.pathname + '/' + val;
+                    }
+                    if (is_edit_code) {
+                        location.href = '/__code' + location.pathname + '/' + val;
+                    }
                 }
-                
-                let ext = regx.slice(1)[0];
-                //console.log('ext=', ext);
-                
-                let is_edit_doc = ext.match(/^(rtf|doc|docx|odt)$/i);
-                let is_edit_code = ext.match(/^(html|txt|js|css|md)$/i);
-                
-                if ( is_edit_doc ){
-                    location.href = '/__doc' + location.pathname + '/' + val;
+            })
+            .fail(function (data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
                 }
-                if ( is_edit_code ){
-                    location.href = '/__code' + location.pathname + '/' + val;
-                }
-                
-            }
-        }).fail(function(data) {
-            if (data.responseJSON.msg) {
-                alert(data.responseJSON.msg);
-            }
-        });
-        
+            });
     };
 
     $('#make_file_button').click(function (ev) {
@@ -364,26 +358,20 @@ $(document).ready(function () {
             make_new_file(ev);
         }
     });
-    
-    
+
     $('#new_file_dlg, #new_file_dlg2').click(function (ev) {
-        
-        
-        
         let file_modal = document.getElementById('make_file_modal');
-        
+
         file_modal.addEventListener('shown.bs.modal', () => {
-            $('#make_file_input').focus()
-        })
-        
+            $('#make_file_input').focus();
+        });
+
         const mkfileModal = new bootstrap.Modal(file_modal, {});
         mkfileModal.show();
-        
     });
-    
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     let search_submit = function (ev) {
         let val = $('input[type=text]', ev.target.parentNode).val();
         console.log('val=', val);
@@ -393,14 +381,10 @@ $(document).ready(function () {
             return;
         }
 
-        
         location.href = '/__search/?s=' + val;
-        
     };
-    
 
     $('#search_button').click(function (ev) {
-        
         search_submit(ev);
     });
 
@@ -409,23 +393,18 @@ $(document).ready(function () {
             search_submit(ev);
         }
     });
-    
-    
+
     $('#search_dlg, #search_dlg2').click(function (ev) {
-        
-        
-        
         let search_modal = document.getElementById('search_modal');
-        
+
         search_modal.addEventListener('shown.bs.modal', () => {
-            $('#search_input').focus()
-        })
-        
+            $('#search_input').focus();
+        });
+
         const searchModal = new bootstrap.Modal(search_modal, {});
         searchModal.show();
-        
     });
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
 
     $(':checkbox.head-chk').click((ev) => {
@@ -437,33 +416,31 @@ $(document).ready(function () {
         $(':checkbox[name=fold]').prop('checked', chk);
         $(':checkbox[name=file]').prop('checked', chk);
     });
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     $('a.share').click((ev) => {
         let el = ev.target;
 
-        if(el.tagName == 'I'){
+        if (el.tagName == 'I') {
             el = el.parentNode;
         }
-        
+
         //console.log('a.rename', el);
-        
-        
+
         //$('#set_share_input').val( $(el).data('name') );
 
         //const shareModal = new bootstrap.Modal(document.getElementById('share_modal'), {});
         //shareModal.show();
-        
+
         let name = $(el).data('name');
         let full_path = $(el).data('full-path');
-        
-        
+
         let formData = new FormData();
-        if(name){
+        if (name) {
             formData.append('name', name);
         }
-        if(full_path){
+        if (full_path) {
             formData.append('full_path', full_path);
         }
 
@@ -473,178 +450,145 @@ $(document).ready(function () {
             type: 'POST',
             contentType: false,
             processData: false,
-        }).done(function (data) {
-            
-            //console.log('data=', data);
-            
-            if (data.code == 200) {
-                //location.href = location.href;
-                //alert(data.c)
-                
-                if(data.share_exist){
-                    
-                    $('#ofcanv_share_name').html( name );
-                    $('#ofcanv_share_href').html( data.href );
-                    
-                    //$('#ofcanv_share_name').val( name );
-                    $('#ofcanv_share_code').val( data.c );
-                    
-                    $('#ofcanv_share_downloads').html( data.share_downloads );
-                    
-                    $('#ofcanv_share_viewers').html( data.share_viewers );
-                    
-                    
-                    
-                    new bootstrap.Offcanvas('#offcanvasShare').show();
-                    
-                }else{
-                          
-                    $('#share_modal_href').html( data.href );
+        })
+            .done(function (data) {
+                //console.log('data=', data);
 
-                    const shareModal = new bootstrap.Modal(document.getElementById('share_modal'), {});
-                    shareModal.show();
+                if (data.code == 200) {
+                    //location.href = location.href;
+                    //alert(data.c)
+
+                    if (data.share_exist) {
+                        $('#ofcanv_share_name').html(name);
+                        $('#ofcanv_share_href').html(data.href);
+
+                        //$('#ofcanv_share_name').val( name );
+                        $('#ofcanv_share_code').val(data.c);
+
+                        $('#ofcanv_share_downloads').html(data.share_downloads);
+
+                        $('#ofcanv_share_viewers').html(data.share_viewers);
+
+                        new bootstrap.Offcanvas('#offcanvasShare').show();
+                    } else {
+                        $('#share_modal_href').html(data.href);
+
+                        const shareModal = new bootstrap.Modal(document.getElementById('share_modal'), {});
+                        shareModal.show();
+                    }
                 }
-            }
-        }).fail(function(data) {
-            if (data.responseJSON.msg) {
-                alert(data.responseJSON.msg);
-            }
-        });
-        
-        
-        
+            })
+            .fail(function (data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
+                }
+            });
     });
-    
+
     $('#ofcanv_share_off_button').click((ev) => {
-        
         //let name = $('#ofcanv_share_name').val();
         let code = $('#ofcanv_share_code').val();
-        
+
         //console.log('disable share button', 'code=', code);
-        
-        if(code){
-            
+
+        if (code) {
             let formData = new FormData();
             formData.append('code', code);
-            
-            
+
             $.ajax({
                 url: '/api/share',
                 data: formData,
                 type: 'DELETE',
                 contentType: false,
                 processData: false,
-            }).done(function (data) {
-                
-                //console.log('data=', data);
-                
-                if (data.code == 200) {
-                    
-                    
-                    //alert('Share disabled');
-                    location.href = location.href;
-                    
-                }
-            }).fail(function(data) {
-                if (data.responseJSON.msg) {
-                    alert(data.responseJSON.msg);
-                }
-            });
-            
+            })
+                .done(function (data) {
+                    //console.log('data=', data);
+
+                    if (data.code == 200) {
+                        //alert('Share disabled');
+                        location.href = location.href;
+                    }
+                })
+                .fail(function (data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
+                    }
+                });
         }
-        
     });
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     $('a.edit_doc').click((ev) => {
         let el = ev.target;
-        
-        
-        
-        if(el.tagName == 'I'){
+
+        if (el.tagName == 'I') {
             el = el.parentNode;
         }
-        
+
         //console.log('a.edit', el);
-        
+
         let full_path = $(el).data('full-path');
-        if(full_path){
+        if (full_path) {
             location.href = '/__doc' + full_path;
         }
-        
     });
-    
+
     $('a.edit_code').click((ev) => {
         let el = ev.target;
-        
-        
-        
-        if(el.tagName == 'I'){
+
+        if (el.tagName == 'I') {
             el = el.parentNode;
         }
-        
-        
-        
+
         let full_path = $(el).data('full-path');
-        if(full_path){
+        if (full_path) {
             location.href = '/__code' + full_path;
         }
-        
     });
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     $('a.player').click((ev) => {
         let el = ev.target;
-        
-        
-        if(el.tagName == 'I'){
+
+        if (el.tagName == 'I') {
             el = el.parentNode;
         }
-        
-        
-        
-        
+
         let name = $(el).data('name');
-        if(name){
+        if (name) {
             location.href = '/__player' + location.pathname + '/' + name;
         }
-        
     });
-    
+
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     $('a.rename').click((ev) => {
         let el = ev.target;
-        
-        
-        if(el.tagName == 'I'){
+
+        if (el.tagName == 'I') {
             el = el.parentNode;
         }
-        
-        
-        $('#set_rename_orig').val( $(el).data('name') );
-        $('#set_rename_input').val( $(el).data('name') );
 
-        
-        
+        $('#set_rename_orig').val($(el).data('name'));
+        $('#set_rename_input').val($(el).data('name'));
+
         let rename_modal = document.getElementById('rename_modal');
-        
+
         rename_modal.addEventListener('shown.bs.modal', () => {
-            $('#set_rename_input').focus()
-        })
-        
+            $('#set_rename_input').focus();
+        });
+
         const renameModal = new bootstrap.Modal(rename_modal, {});
         renameModal.show();
-        
     });
-    
+
     let rename_form_submit = () => {
-        
         let orig = $('#set_rename_orig').val();
         let name = $('#set_rename_input').val();
-        
+
         let formData = new FormData();
         formData.append('name', orig);
         formData.append('to', name);
@@ -655,40 +599,37 @@ $(document).ready(function () {
             type: 'POST',
             contentType: false,
             processData: false,
-        }).done(function (data) {
-            if (data.code == 200) {
-                location.href = location.href;
-            }
-        }).fail(function(data) {
-            if (data.responseJSON.msg) {
-                alert(data.responseJSON.msg);
-            }
-        });
-        
+        })
+            .done(function (data) {
+                if (data.code == 200) {
+                    location.href = location.href;
+                }
+            })
+            .fail(function (data) {
+                if (data.responseJSON.msg) {
+                    alert(data.responseJSON.msg);
+                }
+            });
     };
-    
+
     $('#set_rename_button').click((ev) => {
-        
         rename_form_submit();
     });
 
     $('#set_rename_input').on('keypress', (ev) => {
         if (ev.which == 13) {
-            
             rename_form_submit();
         }
     });
-    
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    
+
     $('a.del, button.del').click((ev) => {
         let el = ev.target;
 
-        
         if (el.tagName == 'I') {
             el = el.parentNode;
-            
+
             if (confirm('Delete "' + $(el).data('name') + '"?')) {
                 let formData = new FormData();
 
@@ -700,19 +641,21 @@ $(document).ready(function () {
                     type: 'POST',
                     contentType: false,
                     processData: false,
-                }).done(function (data) {
-                    if (data.code == 200) {
-                        location.href = location.href;
-                    }
-                }).fail(function(data) {
-                    if (data.responseJSON.msg) {
-                        alert(data.responseJSON.msg);
-                    }
-                });
+                })
+                    .done(function (data) {
+                        if (data.code == 200) {
+                            location.href = location.href;
+                        }
+                    })
+                    .fail(function (data) {
+                        if (data.responseJSON.msg) {
+                            alert(data.responseJSON.msg);
+                        }
+                    });
             }
         }
     });
-    
+
     $('#group_del').click((ev) => {
         let checked = [];
 
@@ -740,15 +683,17 @@ $(document).ready(function () {
                 type: 'POST',
                 contentType: false,
                 processData: false,
-            }).done(function (data) {
-                if (data.code == 200) {
-                    location.href = location.href;
-                }
-            }).fail(function(data) {
-                if (data.responseJSON.msg) {
-                    alert(data.responseJSON.msg);
-                }
-            });
+            })
+                .done(function (data) {
+                    if (data.code == 200) {
+                        location.href = location.href;
+                    }
+                })
+                .fail(function (data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
+                    }
+                });
         }
     });
 
@@ -781,19 +726,21 @@ $(document).ready(function () {
                 type: 'POST',
                 contentType: false,
                 processData: false,
-            }).done(function (data) {
-                //console.log('data=', data);
+            })
+                .done(function (data) {
+                    //console.log('data=', data);
 
-                if (data.code == 200) {
-                    location.href = '/__temp/' + data.href;
-                } else {
-                    alert(data.msg);
-                }
-            }).fail(function(data) {
-                if (data.responseJSON.msg) {
-                    alert(data.responseJSON.msg);
-                }
-            });
+                    if (data.code == 200) {
+                        location.href = '/__temp/' + data.href;
+                    } else {
+                        alert(data.msg);
+                    }
+                })
+                .fail(function (data) {
+                    if (data.responseJSON.msg) {
+                        alert(data.responseJSON.msg);
+                    }
+                });
         }
     });
 
@@ -864,8 +811,6 @@ function ev_target_files(files) {
     });
 
     let submit = async function () {
-        
-
         $('#progress').attr('max', 100);
         $('#progress').attr('value', 0);
         $('#progress').show();
@@ -876,8 +821,6 @@ function ev_target_files(files) {
             'progress',
             function (ev, th) {
                 if (ev.lengthComputable) {
-                    
-
                     $('#progress').attr('max', ev.total);
                     $('#progress').attr('value', ev.loaded);
                 }
@@ -886,15 +829,12 @@ function ev_target_files(files) {
         );
 
         xhr.onreadystatechange = function (ev) {
-            
-            
-            
-            if( xhr.readyState == 4 && ev.target.status == 500  ){
+            if (xhr.readyState == 4 && ev.target.status == 500) {
                 let json = JSON.parse(ev.target.responseText);
-                alert( json.msg );
+                alert(json.msg);
             }
-            
-            if ( xhr.readyState == 4 && ev.target.status == 200 ) {
+
+            if (xhr.readyState == 4 && ev.target.status == 200) {
                 location.href = location.href;
             }
         };
@@ -989,7 +929,6 @@ function setCookie(name, value, options = {}) {
         }
     }
 
-    
     document.cookie = updatedCookie;
 }
 

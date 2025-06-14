@@ -1,60 +1,80 @@
 
-'use strict';
+
+import fs from 'fs';
+import path from 'path';
 
 
-const os = require('os');
-const fs = require('fs');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
+import sqlite3 from 'sqlite3';
+sqlite3.verbose();
+
+//import Database from 'better-sqlite3';
+
+// -------------------------------------------------------------------------------------------------------------------------------
+
+import * as event_log from '../model/event_log.js';
+export { event_log };
 
 
-
-const config = require(path.join(__dirname, '..', 'lib', 'config'));
-
-
-const homedir = os.homedir();
-const httpup_home = path.join(homedir, '.httpup');
-const httpup_thumb = path.join(homedir, '.httpup', 'thumb');
-const httpup_temp = path.join(homedir, '.httpup', 'temp');
-const httpup_db = path.join(homedir, '.httpup', 'db');
+import * as file from '../model/file.js';
+export { file };
 
 
-if (!fs.existsSync(httpup_home)) {
-    fs.mkdirSync(httpup_home);
-}
-
-if (!fs.existsSync(httpup_db)) {
-    fs.mkdirSync(httpup_db);
-}
+import config from '../lib/config.js';
 
 
-const share = require(path.join(__dirname, '..', 'model', 'share.js'));
-const event_log = require(path.join(__dirname, '..', 'model', 'event_log.js'));
-const file_pkg = require(path.join(__dirname, '..', 'model', 'file.js'));
+// -------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------
 
-
-//console.log(path.join(httpup_db, 'registry.db.'+config.version));
-const db = new sqlite3.Database(path.join(httpup_db, 'registry.db.'+config.version), (err) => {
-    if (err) {
-        console.error(err.message);
+export const connect = (argv) => {
+    
+    if (!fs.existsSync(config.httpup_home)) {
+        fs.mkdirSync(config.httpup_home);
     }
-});
 
-/*
-db.on('trace', (el) => {
-    console.log('trace=', el);
-});
-db.on('profile', (el) => {
-    console.log('profile=', el);
-});
-*/
+    if (!fs.existsSync(config.httpup_db)) {
+        fs.mkdirSync(config.httpup_db);
+    }
+    
+    /*
+    if (!argv || !argv.usedb) {
+        return null;
+    }*/
+    
+    //console.log('model.connect() call')
+    
+    // -------------------------------------------------------------------------------------------------------
+    
+    let path_to_db = path.join(config.httpup_db, 'registry.db.'+config.version);
+    
+    
+    const db = new sqlite3.Database(path_to_db, (err) => {
+        if (err) {
+            console.error(err.message);
+        }
+    });
+    
+    //const db = new Database(path_to_db, { verbose: console.log });
+    //db.pragma('journal_mode = WAL');
+    
+    return db;
+}
 
-exports.init_db = () => {
+
+
+export const init_db = (argv) => {
     
-    //console.log('db', 'run model/index.init_db');
+    
+    let db = connect(argv);
     
     
-    db.run(`
+    
+    
+    if(!db ){
+        return;
+    }
+    
+    
+    db.exec(`
         CREATE TABLE IF NOT EXISTS event_log (
             id INTEGER PRIMARY KEY ,
             
@@ -72,7 +92,7 @@ exports.init_db = () => {
     `);
     
     
-    db.run(`
+    db.exec(`
         CREATE TABLE IF NOT EXISTS file (
             id INTEGER PRIMARY KEY ,
             md5 text not null default '',
@@ -81,48 +101,34 @@ exports.init_db = () => {
             filename text not null default '',
             ext text not null default '',
             
-            is_folder int not null default 0,
+            
             size int not null default 0,
             modified text not null default ''
-        )
-    `, () => {
+        );
         
-        db.run(`
-            CREATE INDEX IF NOT EXISTS indx_file_full_path on file(full_path)
-        `);
+        CREATE INDEX IF NOT EXISTS indx_file_full_path on file(full_path);
         
-        db.run(`
-            CREATE INDEX IF NOT EXISTS indx_file_md5 on file(md5)
-        `);
+        CREATE INDEX IF NOT EXISTS indx_file_md5 on file(md5);
         
-        
-    });
+    `);
     
     
-    db.run(`
-        CREATE TABLE IF NOT EXISTS share (
-            id INTEGER PRIMARY KEY ,
-            
-            code text not null default '',
-            status int not null default 0,
-            registered text not null default '',
-            
-            md5 text not null default ''
-            
-            
-        )
-    `, () => {
-        
-        db.run(`
-            CREATE unique INDEX IF NOT EXISTS indx_share_code on share(code)
-        `);
-        
-        db.run(`
-            CREATE INDEX IF NOT EXISTS indx_share_md5 on share(md5)
-        `);
-        
-    });
     
+    
+    // --------------------------------------------------------------------------------------------------------------------
+    
+    /*
+    const stmt = db.prepare('select * from file');
+
+    for (const row of stmt.iterate()) {
+        
+        if( row && row.full_path && !fs.existsSync(row.full_path) ){
+            
+            const del_stmt = db.prepare(`delete from file where id=?`);
+            const info = del_stmt.run(row.id);
+        }
+    }
+    */
     
     // --------------------------------------------------------------------------------------------------------------------
     
@@ -160,33 +166,7 @@ exports.init_db = () => {
         }
     });
     
-    // --------------------------------------------------------------------------------------------------------------------
-    
-    
-    db.run(`
-        delete from share where md5 not in (select md5 from file)
-    `, () => {
-        
-    });
-    
-    
-    
     
     
 }
-
-
-
-exports.share = () => {
-    return share.new(db);
-}
-
-exports.event_log = () => {
-    return event_log.new(db);
-}
-
-exports.file = () => {
-    return file_pkg.new(db);
-}
-
 
