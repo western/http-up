@@ -6,7 +6,7 @@
         
         <div class="col text-truncate">
             <h2>
-                <i class="bi bi-pencil"></i> {{ file_name }}
+                <i class="bi bi-filetype-md"></i> {{ file_name }}
             </h2>
         </div>
         <div class="col text-end">
@@ -15,7 +15,11 @@
                     <i class="bi bi-toggle-off"></i>
                     View
                 </a>
-                &nbsp;&nbsp;
+                
+            </h2>
+        </div>
+        <div class="col text-end">
+            <h2>
                 
                 <a href="javascript:void(0)" id="save_button" title="Save file"><i class="bi bi-floppy"></i></a>
                 &nbsp;&nbsp;
@@ -24,14 +28,10 @@
         </div>
         
         
-        
-        
-        
-        
-        
+    </div>
+    
+    <div class="row " >
         <div id="editor1"></div>
-        
-        
     </div>
 
 </div>
@@ -46,9 +46,6 @@
     
 
 if (typeof window.$$ != 'function') {
-    
-    //console.log('function $$ not exist');
-    
     window.$$ = (arg0, arg1) => {
         if (arg0 && arg1) {
             return arg0.querySelectorAll(arg1);
@@ -57,26 +54,10 @@ if (typeof window.$$ != 'function') {
         if (arg0 && !arg1) {
             return document.querySelectorAll(arg0);
         }
-
-        //console.log('qu error: arg is absent ', arg0, arg1);
     };
-    
-}else{
-    //console.log('function $$ are exist');
 }
 
-
-
-// qu('#upload_file')
-// qu(parent_element, 'li')
-//
-// return Element
-
-
 if (typeof window.$ != 'function') {
-    
-    //console.log('function $ not exist');
-    
     window.$ = (arg0, arg1) => {
         if (arg0 && arg1) {
             return arg0.querySelector(arg1);
@@ -85,12 +66,7 @@ if (typeof window.$ != 'function') {
         if (arg0 && !arg1) {
             return document.querySelector(arg0);
         }
-
-        //console.log('qu error: arg is absent ', arg0, arg1);
     };
-    
-}else{
-    //console.log('function $ are exist');
 }
 
 
@@ -100,14 +76,20 @@ if (typeof window.$ != 'function') {
     
     (() => {
         
+        let decodeHtmlEntities = (str) => { 
+            const textarea = document.createElement('textarea'); 
+            textarea.innerHTML = str; 
+            return textarea.value; 
+        };
         
+        let val = decodeHtmlEntities(`{{ file_data }}`);
         
         const editor = new toastui.Editor({
             el: document.querySelector('#editor1'),
             height: '900px',
             initialEditType: 'markdown',
             previewStyle: 'tab',
-            initialValue: `{{ file_data }}`,
+            initialValue: val,
             usageStatistics: false,
         });
 
