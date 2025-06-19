@@ -106,7 +106,7 @@ export const init_db = (argv) => {
             modified text not null default ''
         );
         
-        CREATE INDEX IF NOT EXISTS indx_file_full_path on file(full_path);
+        CREATE unique INDEX IF NOT EXISTS indx_file_full_path on file(full_path);
         
         CREATE INDEX IF NOT EXISTS indx_file_md5 on file(md5);
         
