@@ -55,11 +55,13 @@
     "download"
   ],
   "dependencies": {
+    "basic-auth": "^2.0.1",
     "chalk": "^5.4.1",
     "compression": "^1.8.0",
     "express": "^5.1.0",
-    "express-basic-auth": "^1.2.1",
     "express-handlebars": "^8.0.1",
+    "image-thumbnail": "^1.0.17",
+    "md5-file": "^5.0.0",
     "mime": "^4.0.7",
     "minimist": "^1.2.8",
     "multer": "^2.0.1",
