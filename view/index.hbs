@@ -300,13 +300,13 @@
                                                 <ul class="dropdown-menu">
                                                     <!--li><a class="dropdown-item share" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-share-fill"></i> Share</a></li-->
                                                     <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
-                                                    {{#if IsEditDoc }}
+                                                    {{#if isEditDoc }}
                                                         <li><a class="dropdown-item edit_doc" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-file-earmark-word"></i> Open as DOC</a></li>
                                                     {{/if}}
-                                                    {{#if IsEditCode }}
+                                                    {{#if isEditCode }}
                                                         <li><a class="dropdown-item edit_code" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-pencil"></i> Open as CODE</a></li>
                                                     {{/if}}
-                                                    {{#if IsEditMd }}
+                                                    {{#if isEditMd }}
                                                         <li><a class="dropdown-item edit_md" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-pencil"></i> Open as MARKDOWN</a></li>
                                                     {{/if}}
                                                     
