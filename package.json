@@ -40,6 +40,7 @@
     "cli",
     "command",
     "static",
+    "static-server",
     "http",
     "https",
     "tls",
