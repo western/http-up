@@ -543,14 +543,14 @@
                                                 <small class="text-body-secondary">
                                                     <div class="btn-group">
 
-                                                        {{#if IsPreviewImg}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
+                                                        {{#if isPreviewImg}}
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{relativePathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
 
-                                                        {{#if IsPreviewDoc}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
+                                                        {{#if isPreviewDoc}}
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{relativePathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
