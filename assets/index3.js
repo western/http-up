@@ -667,23 +667,18 @@ const ev_target_files = async (files) => {
     }
 
     let formData = new FormData();
+    
+    
     Array.prototype.forEach.call(files, function (file) {
         if (file.size > config.fieldSize_max) {
             alert('File "' + file.name + `" size is overload "${config.fieldSize_max_human}"`);
         } else {
             formData.append('fileBlob', file);
-            formData.append(
-                'fileMeta',
-                JSON.stringify({
-                    lastModified: file.lastModified,
-                    lastModifiedDate: file.lastModifiedDate,
-                    name: file.name,
-                    size: file.size,
-                    type: file.type,
-                }),
-            );
         }
     });
+    
+    
+    
 
     let submit = async function () {
         $('#progress').setAttribute('max', 100);
@@ -719,3 +714,7 @@ const ev_target_files = async (files) => {
 
     submit();
 };
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+
