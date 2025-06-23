@@ -649,12 +649,14 @@ if (typeof window.$ != 'function') {
     });
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-
+    
+    /*
     $$('#upload_file, #upload_file2').forEach((upl) => {
         upl.addEventListener('change', (ev) => {
             ev_target_files(ev.target.files);
         });
     });
+    */
 
     // --------------------------------------------------------------------------------------------------------------------------------------
 })();
@@ -760,6 +762,10 @@ class DefaultClient {
     waitTime(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
+    
+    generateFileId(file) {
+        return `${file.name}--${file.size}--${file.lastModified}`;
+    }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     // ENGINE
@@ -826,7 +832,7 @@ class DefaultUploadClient extends DefaultClient {
     // ENGINE
 
     async prepareAndUploadFile(file) {
-        const fileId = `${file.name}--${file.size}--${file.lastModified}`;
+        const fileId = this.generateFileId(file);
         const sessionInfo = {
             fileId,
             name: file.name,
@@ -848,7 +854,7 @@ class DefaultUploadClient extends DefaultClient {
     }
 
     async uploadFile(file) {
-        const fileId = `${file.name}--${file.size}--${file.lastModified}`;
+        const fileId = this.generateFileId(file);
 
         let formData = new FormData();
         formData.append('fileBlob', file);
@@ -999,7 +1005,7 @@ class partUploadClient extends DefaultClient {
     // ENGINE
 
     async prepareAndUploadFile(file) {
-        const file_id = `${file.name}--${file.size}--${file.lastModified}`;
+        const file_id = this.generateFileId(file);
 
         const chunks = this.getFileChunks(file);
 
