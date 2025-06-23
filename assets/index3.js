@@ -659,6 +659,8 @@ if (typeof window.$ != 'function') {
     // --------------------------------------------------------------------------------------------------------------------------------------
 })();
 
+// --------------------------------------------------------------------------------------------------------------------------------------
+
 const ev_target_files = async (files) => {
     if (files.length > config.files_count_max) {
         alert(`Count of files is more than ${config.files_count_max}.`);
@@ -667,8 +669,7 @@ const ev_target_files = async (files) => {
     }
 
     let formData = new FormData();
-    
-    
+
     Array.prototype.forEach.call(files, function (file) {
         if (file.size > config.fieldSize_max) {
             alert('File "' + file.name + `" size is overload "${config.fieldSize_max_human}"`);
@@ -676,9 +677,6 @@ const ev_target_files = async (files) => {
             formData.append('fileBlob', file);
         }
     });
-    
-    
-    
 
     let submit = async function () {
         $('#progress').setAttribute('max', 100);
@@ -717,4 +715,425 @@ const ev_target_files = async (files) => {
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
+class DefaultClient {
+    constructor(args = {}) {
+        this.prefixUrl = args.prefixUrl || '/api/file';
 
+        this.retryDelay = args.retryDelay || 1000;
+        this.maxRetries = args.maxRetries || 2;
+        this.requestTimeout = args.requestTimeout || 5000;
+        if (args.requestTimeout === 0) {
+            this.requestTimeout = 0;
+        }
+        this.sessions = new Map();
+
+        this.sizeSum = 0;
+        this.sizeValue = 0;
+
+        this.onProgress = args.onProgress || (() => {});
+        this.onComplete = args.onComplete || (() => {});
+        this.onError = args.onError || (() => {});
+        this.onFailed = args.onFailed || (() => {});
+    }
+
+    async fetchWithTimeout(url, options, timeout) {
+        // without timeout
+        if (timeout == 0) {
+            return fetch(url, options);
+        }
+
+        // with
+        return Promise.race([
+            fetch(url, options),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('fetchWithTimeout timeout ' + timeout)), timeout)),
+        ]);
+    }
+
+    humanFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KiB', 'MiB', 'GiB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    waitTime(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {}
+
+    async uploadFile(file) {}
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // INPUT LISTENER
+
+    on(nme, cb) {
+        switch (nme.toLowerCase()) {
+            case 'progress':
+                this.onProgress = cb;
+                break;
+            case 'complete':
+                this.onComplete = cb;
+                break;
+            case 'error':
+                this.onError = cb;
+                break;
+            case 'failed':
+                this.onFailed = cb;
+                break;
+        }
+    }
+
+    async handleInputListener(ev) {
+        let files = ev.target.files;
+        let promises = [];
+
+        this.sizeSum = 0;
+        this.sizeValue = 0;
+        this.onProgress('open');
+
+        for (let a = 0; a < files.length; a++) {
+            promises.push(this.prepareAndUploadFile(files[a]));
+        }
+
+        await Promise.all(promises);
+
+        this.onProgress('close');
+    }
+
+    setupEventListener(qu) {
+        const fileInputs = document.querySelectorAll(qu);
+        fileInputs.forEach((input) => {
+            input.addEventListener('change', this.handleInputListener.bind(this));
+        });
+    }
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+class DefaultUploadClient extends DefaultClient {
+    constructor(args = {}) {
+        super(args);
+
+        this.prefixUrl = args.prefixUrl || '/api/file';
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {
+        const fileId = `${file.name}--${file.size}--${file.lastModified}`;
+        const sessionInfo = {
+            fileId,
+            name: file.name,
+            size: file.size,
+            sizeHuman: this.humanFileSize(file.size),
+            errors: [],
+            isDelayed: false,
+            isFailed: false,
+            isDone: false,
+            startTime: Date.now(),
+            endTime: undefined,
+        };
+
+        this.sizeSum += file.size;
+
+        this.sessions.set(fileId, sessionInfo);
+
+        return this.uploadFile(file);
+    }
+
+    async uploadFile(file) {
+        const fileId = `${file.name}--${file.size}--${file.lastModified}`;
+
+        let formData = new FormData();
+        formData.append('fileBlob', file);
+        formData.append('path', location.pathname);
+
+        for (let a = 0; a < this.maxRetries; a++) {
+            let sessionInfo = this.sessions.get(fileId);
+
+            if (sessionInfo.isDone) {
+                continue;
+            }
+
+            if (sessionInfo.isDelayed) {
+                await this.waitTime(this.retryDelay);
+            }
+
+            await this.fetchWithTimeout(
+                this.prefixUrl,
+                {
+                    method: 'POST',
+                    body: formData,
+                },
+                this.requestTimeout,
+            )
+                .then((r) => {
+                    if (r.status != 200) {
+                        throw new Error(r.status + ' ' + r.statusText);
+                    }
+
+                    return r;
+                })
+                .then((r) => r.text())
+                .then((text) => {
+                    try {
+                        const js = JSON.parse(text);
+
+                        sessionInfo.isDone = true;
+                        sessionInfo.endTime = Date.now();
+
+                        this.sizeValue += sessionInfo.size;
+                        this.onProgress('process_done', sessionInfo, this.sizeSum, this.sizeValue);
+
+                        this.sessions.set(fileId, sessionInfo);
+                        this.onComplete(sessionInfo, js);
+                    } catch (err) {
+                        //console.error('fetch TRY err=', err);
+                        this.onError(err);
+
+                        sessionInfo.isDelayed = true;
+                        sessionInfo.errors.push(err);
+                        this.sessions.set(fileId, sessionInfo);
+                    }
+                })
+                .catch((err) => {
+                    //console.error('fetch CATCH err=', err);
+                    this.onError(err);
+
+                    sessionInfo.isDelayed = true;
+                    sessionInfo.errors.push(err);
+                    this.sessions.set(fileId, sessionInfo);
+                });
+        }
+
+        let sessionInfo = this.sessions.get(fileId);
+        if (!sessionInfo.endTime) {
+            sessionInfo.endTime = Date.now();
+        }
+        if (!sessionInfo.isDone) {
+            sessionInfo.isFailed = true;
+        }
+        if (!sessionInfo.isDone) {
+            this.onFailed(sessionInfo);
+        }
+
+        this.sessions.set(fileId, sessionInfo);
+    }
+}
+
+(() => {
+    let uploadClient = new DefaultUploadClient({
+        prefixUrl: '/api/file',
+        retryDelay: 2000,
+        maxRetries: 2,
+        requestTimeout: 0, // disable timeout
+        onProgress: (mode, sessionInfo, sizeSum, sizeValue) => {
+            //console.info('onProgress', mode);
+
+            if (mode == 'open') {
+                $('#progress').setAttribute('max', 100);
+                $('#progress').setAttribute('value', 0);
+                $('#progress').style.display = 'block';
+            }
+
+            // this.onProgress('process_done', sessionInfo, this.sizeSum, this.sizeValue);
+            if (mode == 'process_done') {
+                $('#progress').setAttribute('max', sizeSum);
+                $('#progress').setAttribute('value', sizeValue);
+            }
+
+            if (mode == 'close') {
+                $('#progress').style.display = 'none';
+            }
+        },
+        onComplete: (sessionInfo, js) => {
+            console.info('onComplete', sessionInfo.name, js);
+
+            if (js && js.code == 200) {
+                //location.href = location.href;
+            }
+        },
+        onError: (err) => {
+            console.info('onError', err.name, err.message);
+        },
+        onFailed: (sessionInfo) => {
+            console.info('onFailed', sessionInfo);
+        },
+    });
+
+    //uploadClient.setupEventListener('#upload_file, #upload_file2');
+})();
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+class partUploadClient extends DefaultClient {
+    constructor(args = {}) {
+        super(args);
+
+        this.prefixUrl = args.prefixUrl || '/api/file/part';
+
+        this.chunkSize = args.chunkSize || 8 * 1024 * 1024;
+    }
+
+    getFileChunks(file) {
+        const chunks = [];
+        let start = 0;
+
+        while (start < file.size) {
+            const end = Math.min(start + this.chunkSize, file.size);
+            const chunk = file.slice(start, end);
+            chunks.push(chunk);
+            start = end;
+        }
+
+        return chunks;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {
+        const file_id = `${file.name}--${file.size}--${file.lastModified}`;
+
+        const chunks = this.getFileChunks(file);
+
+        const fileInfo = {
+            file_id,
+            name: file.name,
+            size: file.size,
+            size_human: this.humanFileSize(file.size),
+            chunks,
+            uploadedChunks: 0,
+            errors: [],
+            to_path: location.pathname,
+        };
+
+        this.sessions.set(file_id, fileInfo);
+
+        this.sizeSum += file.size;
+
+        await this.uploadFile(file_id, fileInfo);
+
+        console.log('prepareAndUploadFile end');
+    }
+
+    async uploadFile(file_id) {
+        let fileInfo = this.sessions.get(file_id);
+        let promises = [];
+
+        for (let a = 0; a < fileInfo.chunks.length; a++) {
+            let pr = this.uploadChunk(file_id, a);
+            promises.push(pr);
+        }
+
+        await Promise.all(promises);
+
+        console.log(fileInfo.name, 'done!');
+        return this.uploadChunkDone(file_id);
+    }
+
+    async uploadChunk(file_id, chunk_index) {
+        let fileInfo = this.sessions.get(file_id);
+
+        let formData = new FormData();
+        formData.append('file_id', fileInfo.file_id);
+        formData.append('chunk_index', chunk_index);
+        formData.append('data', fileInfo.chunks[chunk_index]);
+
+        return this.fetchWithTimeout(
+            this.prefixUrl,
+            {
+                method: 'POST',
+                body: formData,
+            },
+            this.requestTimeout,
+        )
+            .then((r) => r.json())
+            .then((js) => {
+                this.sizeValue += fileInfo.chunks[chunk_index].size;
+                this.onProgress('process_done', fileInfo, this.sizeSum, this.sizeValue);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
+    async uploadChunkDone(file_id) {
+        let fileInfo = this.sessions.get(file_id);
+
+        let formData = new FormData();
+        formData.append('file_id', file_id);
+        formData.append('name', fileInfo.name);
+        formData.append('to_path', fileInfo.to_path);
+        formData.append('chunk_cnt', fileInfo.chunks.length);
+
+        return fetch(this.prefixUrl + '/done', {
+            method: 'POST',
+            body: formData,
+        })
+            .then((r) => r.json())
+            .then((js) => {
+                if (js.code == '200') {
+                    //location.href = location.href;
+                } else {
+                    if (js.msg) {
+                        //alert(js.msg);
+                    }
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+}
+
+(() => {
+    let uploadClient = new partUploadClient({
+        chunkSize: 10 * 1024 * 1024,
+        retryDelay: 2000,
+        maxRetries: 2,
+        requestTimeout: 0, // disable timeout
+        onProgress: (mode, sessionInfo, sizeSum, sizeValue) => {
+            //console.info('onProgress', mode);
+
+            if (mode == 'open') {
+                $('#progress').setAttribute('max', 100);
+                $('#progress').setAttribute('value', 0);
+                $('#progress').style.display = 'block';
+            }
+
+            // this.onProgress('process_done', sessionInfo, this.sizeSum, this.sizeValue);
+            if (mode == 'process_done') {
+                $('#progress').setAttribute('max', sizeSum);
+                $('#progress').setAttribute('value', sizeValue);
+            }
+
+            if (mode == 'close') {
+                $('#progress').style.display = 'none';
+            }
+        },
+        onComplete: (sessionInfo, js) => {
+            console.info('onComplete', sessionInfo.name, js);
+
+            if (js && js.code == 200) {
+                //location.href = location.href;
+            }
+        },
+        onError: (err) => {
+            console.info('onError', err.name, err.message);
+        },
+        onFailed: (sessionInfo) => {
+            console.info('onFailed', sessionInfo);
+        },
+    });
+
+    //uploadClient.setupEventListener('#upload_file, #upload_file2');
+})();
+
+// --------------------------------------------------------------------------------------------------------------------------------------
