@@ -29,6 +29,10 @@ or
 npx http-up --port 3999 /path/to/fold
 ```
 
+```console
+npx http-up --help
+```
+
 ## If you switch --extend-mode
 
 ```console
