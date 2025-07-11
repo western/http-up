@@ -519,7 +519,7 @@ class API {
     
     initMakeNewFolder(){
         const make_new_folder = async (ev) => {
-            let val = $(ev.target.parentNode, 'input[type=text]').value;
+            let val = $('input[type=text]', ev.target.parentNode).value;
 
             if (val.length == 0) {
                 alert('Please fill folder name');
@@ -594,7 +594,7 @@ class API {
     initSearch(){
         
         let search_submit = function (ev) {
-            let val = $(ev.target.parentNode, 'input[type=text]').value;
+            let val = $('input[type=text]', ev.target.parentNode).value;
 
             if (val.length == 0) {
                 alert('Please fill search field');
