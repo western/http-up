@@ -1,71 +1,66 @@
-
 if (typeof window.$ != 'function') {
     window.$ = (query, cntx = document) => {
-        const el = cntx.querySelector(query)
-        if(!el){
+        const el = cntx.querySelector(query);
+        if (!el) {
             console.warn(`Element ${query} not found`);
         }
         return el;
-    }
+    };
 }
 
 if (typeof window.$$ != 'function') {
     window.$$ = (query, cntx = document) => {
-        return Array.from(cntx.querySelectorAll(query))
-    }
+        return Array.from(cntx.querySelectorAll(query));
+    };
 }
-
 
 class DOM {
-    static show(el){
-        if(el) el.style.display = 'block';
+    static show(el) {
+        if (el) el.style.display = 'block';
     }
-    static hide(el){
-        if(el) el.style.display = 'none';
+    static hide(el) {
+        if (el) el.style.display = 'none';
     }
-    static addClass(el, className){
-        if(el) el.classList.add(className);
+    static addClass(el, className) {
+        if (el) el.classList.add(className);
     }
-    static removeClass(el, className){
-        if(el) el.classList.remove(className);
+    static removeClass(el, className) {
+        if (el) el.classList.remove(className);
     }
-    static toggleClass(el, className){
-        if(el) el.classList.toggle(className);
+    static toggleClass(el, className) {
+        if (el) el.classList.toggle(className);
     }
-    static setValue(el, val){
-        if(el) el.value = val;
+    static setValue(el, val) {
+        if (el) el.value = val;
     }
-    static getValue(el){
+    static getValue(el) {
         return el ? el.value : '';
     }
-    static setAttribute(el, attr, val){
-        if(el) el.setAttribute(attr, val);
+    static setAttribute(el, attr, val) {
+        if (el) el.setAttribute(attr, val);
     }
-    static getAttribute(el, attr){
+    static getAttribute(el, attr) {
         return el ? el.getAttribute(attr) : '';
     }
-    static focus(el){
-        if(el) el.focus();
+    static focus(el) {
+        if (el) el.focus();
     }
-    static eventAdd(el, type, listener){
-        if(el) el.addEventListener(type, listener);
+    static eventAdd(el, type, listener) {
+        if (el) el.addEventListener(type, listener);
     }
-    
 }
 
-
 class Clipboard {
-    
-    constructor(){
-        this.init()
-        this.initGroupPaste()
-        this.initGroupCopy()
-        this.initGroupMove()
+    constructor() {
+        this.init();
+        this.initGroupPaste();
+        this.initGroupCopy();
+        this.initGroupMove();
     }
-    
-    init(){
+
+    init() {
         let clipboard = JSON.parse(localStorage.getItem('clipboard') || '{}');
-        
+
         if (clipboard && clipboard.mode && clipboard.mode == 'copy') {
             let el;
             if ((el = $('a.group_copy'))) {
@@ -75,10 +70,8 @@ class Clipboard {
                 el.classList.remove('active');
             }
         }
-        
-        if (clipboard && clipboard.mode && clipboard.mode == 'move') {
-            
 
+        if (clipboard && clipboard.mode && clipboard.mode == 'move') {
             let el;
             if ((el = $('a.group_move'))) {
                 el.classList.add('active');
@@ -88,8 +81,8 @@ class Clipboard {
             }
         }
     }
-    
-    initGroupPaste(){
+
+    initGroupPaste() {
         const a_group_paste = $('a.group_paste');
         if (a_group_paste) {
             a_group_paste.addEventListener('click', (ev) => {
@@ -110,29 +103,27 @@ class Clipboard {
                     })
                         .then((r) => r.json())
                         .then((js) => {
-                            if (js.code == '200') {
+                            if (js && js.code == '200') {
                                 localStorage.setItem('clipboard', JSON.stringify({}));
 
                                 location.href = location.href;
-                            } else {
-                                if (js.msg) {
-                                    // reset clipboard on error
-                                    localStorage.setItem('clipboard', JSON.stringify({}));
+                            } else if (js && js.msg) {
+                                // reset clipboard on error
+                                localStorage.setItem('clipboard', JSON.stringify({}));
 
-                                    let el;
-                                    if ((el = $('a.group_copy'))) {
-                                        el.classList.remove('active');
-                                    }
-                                    if ((el = $('a.group_move'))) {
-                                        el.classList.remove('active');
-                                    }
-
-                                    alert(js.msg);
+                                let el;
+                                if ((el = $('a.group_copy'))) {
+                                    el.classList.remove('active');
                                 }
+                                if ((el = $('a.group_move'))) {
+                                    el.classList.remove('active');
+                                }
+
+                                alert(js.msg);
                             }
                         })
                         .catch((err) => {
-                            console.error(err);
+                            console.error('/api/' + clipboard.mode + ' catch err=', err);
                         });
                 } else {
                     alert('Clipboard is empty');
@@ -140,8 +131,8 @@ class Clipboard {
             });
         }
     }
-    
-    initGroupCopy(){
+
+    initGroupCopy() {
         const a_group_copy = $('a.group_copy');
         if (a_group_copy) {
             a_group_copy.addEventListener('click', (ev) => {
@@ -171,8 +162,8 @@ class Clipboard {
             });
         }
     }
-    
-    initGroupMove(){
+
+    initGroupMove() {
         const a_group_move = $('a.group_move');
         if (a_group_move) {
             a_group_move.addEventListener('click', (ev) => {
@@ -202,29 +193,26 @@ class Clipboard {
             });
         }
     }
-    
-    
 }
 
 class API {
-    
-    constructor(){
-        this.initHeaderChk()
-        
-        this.initDelOneElement()
-        this.initDelGroup()
-        this.initZipGroup()
-        
-        this.initMakeNewFile()
-        this.initMakeNewFolder()
-        
-        this.initSearch()
-        this.initRename()
-        this.initEditors()
-        
-        this.initLegacyUploader()
+    constructor() {
+        this.initHeaderChk();
+
+        this.initDelOneElement();
+        this.initDelGroup();
+        this.initZipGroup();
+
+        this.initMakeNewFile();
+        this.initMakeNewFolder();
+
+        this.initSearch();
+        this.initRename();
+        this.initEditors();
+
+        this.initLegacyUploader();
     }
-    
+
     static async fetchWithTimeout(url, options, timeout) {
         // without timeout
         if (timeout == 0) {
@@ -237,27 +225,8 @@ class API {
             new Promise((_, reject) => setTimeout(() => reject(new Error('API fetchWithTimeout timeout ' + timeout)), timeout)),
         ]);
     }
-    
-    static async request(url, options){
-        
-        return fetch(url, options)
-            .then((r) => r.json())
-            .then((js) => {
-                
-                if (js && js.code == 200) {
-                    return js
-                } else if (js && js.msg) {
-                    
-                    throw new Error(js.code + ' ' + js.msg);
-                }
-            })
-            .catch((err) => {
-                console.error('API2.request catch err=', err);
-            });
-        
-    }
-    
-    initHeaderChk(){
+
+    initHeaderChk() {
         const chk_table_rows = $('input[type=checkbox].head-chk');
         if (chk_table_rows) {
             chk_table_rows.addEventListener('click', (ev) => {
@@ -273,58 +242,42 @@ class API {
             });
         }
     }
-    
-    initDelOneElement(){
+
+    initDelOneElement() {
         $$('a.del, button.del').forEach((aa) => {
             aa.addEventListener('click', (ev) => {
                 let el = ev.target;
                 if (el.tagName == 'I') {
                     el = el.parentNode;
                 }
-                //console.log('el=', el);
 
                 let name = el.dataset.name;
 
                 if (confirm('Delete "' + name + '"?')) {
                     let formData = new FormData();
                     formData.append('name', name);
-                    
-                    API.request('/api/delete', {
-                        method: 'POST',
-                        body: formData,
-                    })
-                        .then((js) => {
-                            //console.log('js=', js);
-                            if (js && js.code == '200') {
-                                location.href = location.href;
-                            }
-                        })
-                    
-                    /*
+
                     fetch('/api/delete', {
                         method: 'POST',
                         body: formData,
                     })
                         .then((r) => r.json())
                         .then((js) => {
-                            if (js.code == '200') {
+                            if (js && js.code == '200') {
                                 location.href = location.href;
-                            } else {
-                                if (js.msg) {
-                                    alert(js.msg);
-                                }
+                            } else if (js && js.msg) {
+                                alert(js.msg);
                             }
                         })
                         .catch((err) => {
-                            console.error(err);
+                            console.error('/api/delete/one catch err=', err);
                         });
-                    */
                 }
             });
         });
     }
-    
-    initDelGroup(){
+
+    initDelGroup() {
         const a_group_del = $('a.group_del');
         if (a_group_del) {
             a_group_del.addEventListener('click', (ev) => {
@@ -341,42 +294,28 @@ class API {
                     for (let a = 0; a < arr.length; a++) {
                         formData.append('name', arr[a]);
                     }
-                    
-                    API.request('/api/delete', {
-                        method: 'POST',
-                        body: formData,
-                    })
-                        .then((js) => {
-                            //console.log('js=', js);
-                            if (js && js.code == '200') {
-                                location.href = location.href;
-                            }
-                        });
-                    
-                    /*
+
                     fetch('/api/delete', {
                         method: 'POST',
                         body: formData,
                     })
                         .then((r) => r.json())
                         .then((js) => {
-                            if (js.code == '200') {
+                            if (js && js.code == '200') {
                                 location.href = location.href;
-                            } else {
-                                if (js.msg) {
-                                    alert(js.msg);
-                                }
+                            } else if (js && js.msg) {
+                                alert(js.msg);
                             }
                         })
                         .catch((err) => {
-                            console.error(err);
-                        });*/
+                            console.error('/api/delete catch err=', err);
+                        });
                 }
             });
         }
     }
-    
-    initZipGroup(){
+
+    initZipGroup() {
         const a_group_zip = $('a.group_zip');
         if (a_group_zip) {
             a_group_zip.addEventListener('click', (ev) => {
@@ -391,40 +330,27 @@ class API {
                 for (let a = 0; a < arr.length; a++) {
                     formData.append('name', arr[a]);
                 }
-                
-                API.request('/api/zip', {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then((js) => {
-                        if (js && js.code == '200') {
-                            location.href = '/__temp/' + js.href;
-                        }
-                    });
 
-                /*
                 fetch('/api/zip', {
                     method: 'POST',
                     body: formData,
                 })
                     .then((r) => r.json())
                     .then((js) => {
-                        if (js.code == '200') {
-                            location.href = '/__temp/' + js.href;
-                        } else {
-                            if (js.msg) {
-                                alert(js.msg);
-                            }
+                        if (js && js.code == '200') {
+                            location.href = '/__temp/' + js.file;
+                        } else if (js && js.msg) {
+                            alert(js.msg);
                         }
                     })
                     .catch((err) => {
-                        console.error(err);
-                    });*/
+                        console.error('/api/zip catch err=', err);
+                    });
             });
         }
     }
-    
-    initMakeNewFile(){
+
+    initMakeNewFile() {
         const make_new_file = async (ev) => {
             let val = $('input[type=text]', ev.target.parentNode).value;
 
@@ -435,14 +361,13 @@ class API {
 
             let formData = new FormData();
             formData.append('name', val);
-            
-            API.request('/api/file/touch_', {
+
+            fetch('/api/file/touch', {
                 method: 'POST',
                 body: formData,
             })
+                .then((r) => r.json())
                 .then((js) => {
-                    console.log('JJ js=', js)
-                    
                     if (js && js.code == '200') {
                         let openOnlineEditor = $('#openOnlineEditor');
                         if (openOnlineEditor && !openOnlineEditor.checked) {
@@ -477,13 +402,13 @@ class API {
 
                         location.href = location.href;
                         return;
+                    } else if (js && js.msg) {
+                        alert(js.msg);
                     }
                 })
                 .catch((err) => {
-                    console.error('catch TTTT=', err);
+                    console.error('/api/file/touch catch err=', err);
                 });
-            
-            
         };
 
         const mk_file_button = $('#make_file_button');
@@ -508,7 +433,7 @@ class API {
 
                 file_modal.addEventListener('shown.bs.modal', () => {
                     const inp = $('#make_file_input');
-                    DOM.focus(inp)
+                    DOM.focus(inp);
                 });
 
                 const mkfileModal = new bootstrap.Modal(file_modal, {});
@@ -516,8 +441,8 @@ class API {
             });
         });
     }
-    
-    initMakeNewFolder(){
+
+    initMakeNewFolder() {
         const make_new_folder = async (ev) => {
             let val = $('input[type=text]', ev.target.parentNode).value;
 
@@ -528,19 +453,7 @@ class API {
 
             let formData = new FormData();
             formData.append('name', val);
-            
-            API.request('/api/folder', {
-                method: 'POST',
-                body: formData,
-            })
-                .then((js) => {
-                    //console.log('js=', js);
-                    if (js && js.code == '200') {
-                        location.href = location.href;
-                    }
-                });
-            
-            /*
+
             fetch('/api/folder', {
                 method: 'POST',
                 body: formData,
@@ -549,15 +462,13 @@ class API {
                 .then((js) => {
                     if (js.code == '200') {
                         location.href = location.href;
-                    } else {
-                        if (js.msg) {
-                            alert(js.msg);
-                        }
+                    } else if (js && js.msg) {
+                        alert(js.msg);
                     }
                 })
                 .catch((err) => {
-                    console.error(err);
-                });*/
+                    console.error('/api/folder catch err=', err);
+                });
         };
 
         const mk_folder_button = $('#make_folder_button');
@@ -582,7 +493,7 @@ class API {
 
                 folder_modal.addEventListener('shown.bs.modal', () => {
                     const inp = $('#make_folder_input');
-                    DOM.focus(inp)
+                    DOM.focus(inp);
                 });
 
                 const mkfolderModal = new bootstrap.Modal(folder_modal, {});
@@ -590,9 +501,8 @@ class API {
             });
         });
     }
-    
-    initSearch(){
-        
+
+    initSearch() {
         let search_submit = function (ev) {
             let val = $('input[type=text]', ev.target.parentNode).value;
 
@@ -626,7 +536,7 @@ class API {
 
                 modal.addEventListener('shown.bs.modal', () => {
                     const inp = $('#search_input');
-                    DOM.focus(inp)
+                    DOM.focus(inp);
                 });
 
                 const srchModal = new bootstrap.Modal(modal, {});
@@ -634,9 +544,8 @@ class API {
             });
         });
     }
-    
-    initRename(){
-        
+
+    initRename() {
         $$('a.rename').forEach((aa) => {
             aa.addEventListener('click', (ev) => {
                 let el = ev.target;
@@ -653,7 +562,7 @@ class API {
 
                 mod.addEventListener('shown.bs.modal', () => {
                     const inp = $('#rename_input');
-                    DOM.focus(inp)
+                    DOM.focus(inp);
                 });
 
                 const renameModal = new bootstrap.Modal(mod, {});
@@ -673,19 +582,7 @@ class API {
             let formData = new FormData();
             formData.append('name', orig);
             formData.append('to', name);
-            
-            API.request('/api/rename', {
-                method: 'POST',
-                body: formData,
-            })
-                .then((js) => {
-                    //console.log('js=', js);
-                    if (js && js.code == '200') {
-                        location.href = location.href;
-                    }
-                });
-            
-            /*
+
             fetch('/api/rename', {
                 method: 'POST',
                 body: formData,
@@ -694,15 +591,13 @@ class API {
                 .then((js) => {
                     if (js.code == '200') {
                         location.href = location.href;
-                    } else {
-                        if (js.msg) {
-                            alert(js.msg);
-                        }
+                    } else if (js && js.msg) {
+                        alert(js.msg);
                     }
                 })
                 .catch((err) => {
-                    console.error(err);
-                });*/
+                    console.error('/api/rename catch err=', err);
+                });
         };
 
         const set_rename_button = $('#set_rename_button');
@@ -720,11 +615,9 @@ class API {
                 }
             });
         }
-        
     }
-    
-    initEditors(){
-        
+
+    initEditors() {
         $$('a.edit_code').forEach((aa) => {
             aa.addEventListener('click', (ev) => {
                 let el = ev.target;
@@ -772,19 +665,17 @@ class API {
                 location.href = '/__player' + location.pathname + '/' + el.dataset.name;
             });
         });
-        
     }
-    
-    initLegacyUploader(){
+
+    initLegacyUploader() {
         $$('#upload_file, #upload_file2').forEach((upl) => {
-            
             upl.addEventListener('change', this.evTargetFiles.bind(this));
         });
     }
-    
-    evTargetFiles(ev){
+
+    evTargetFiles(ev) {
         const files = ev.target.files;
-        
+
         if (files.length > config.files_count_max) {
             alert(`Count of files is more than ${config.files_count_max}.`);
             location.href = location.href;
@@ -805,7 +696,6 @@ class API {
             $('#progress').setAttribute('max', 100);
             $('#progress').setAttribute('value', 0);
             $('#progress').style.display = 'block';
-            
 
             let xhr = new XMLHttpRequest();
 
@@ -836,7 +726,6 @@ class API {
 
         submit();
     }
-    
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------
@@ -1368,14 +1257,7 @@ class PartUploadClient extends BaseClient {
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
-
-
 (() => {
-    
-    const clipboard = new Clipboard()
-    const api = new API()
-    
-    
-    
+    const clipboard = new Clipboard();
+    const api = new API();
 })();
-
