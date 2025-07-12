@@ -168,7 +168,7 @@ If you put inside folder `index.html`, it will be return as content
 
 ## Thumbnails support
 
-You need `convert` (ImageMagick package) for preview images `jpg, png, gif`
+For preview images `jpg, png, gif` you not need anything.
 
 For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, docx, xls, xlsx, odt, ods`
 
