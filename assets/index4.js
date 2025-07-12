@@ -82,6 +82,24 @@ class Clipboard {
         }
     }
 
+    static chk_fold_file_list() {
+        let checked_lst = [];
+
+        $$('input[type=checkbox][name=fold], input[type=checkbox][name=file]').forEach((aa) => {
+            if (aa.checked) {
+                checked_lst.push(aa.value);
+            }
+        });
+
+        return checked_lst;
+    }
+
+    static chk_off() {
+        $$('input[type=checkbox][name=fold], input[type=checkbox][name=file]').forEach((aa) => {
+            aa.checked = false;
+        });
+    }
+
     initGroupPaste() {
         const a_group_paste = $('a.group_paste');
         if (a_group_paste) {
@@ -141,7 +159,7 @@ class Clipboard {
                     targ = ev.target.parentNode;
                 }
 
-                let arr = chk_fold_file_list();
+                let arr = Clipboard.chk_fold_file_list();
 
                 if (arr.length == 0) {
                     alert('You need select something');
@@ -153,7 +171,7 @@ class Clipboard {
                 $('a.group_move').classList.remove('active');
                 targ.classList.add('active');
 
-                chk_off();
+                Clipboard.chk_off();
 
                 const chk_table_rows = $('input[type=checkbox].head-chk');
                 if (chk_table_rows) {
@@ -172,7 +190,7 @@ class Clipboard {
                     targ = ev.target.parentNode;
                 }
 
-                let arr = chk_fold_file_list();
+                let arr = Clipboard.chk_fold_file_list();
 
                 if (arr.length == 0) {
                     alert('You need select something');
@@ -184,7 +202,7 @@ class Clipboard {
                 $('a.group_copy').classList.remove('active');
                 targ.classList.add('active');
 
-                chk_off();
+                Clipboard.chk_off();
 
                 const chk_table_rows = $('input[type=checkbox].head-chk');
                 if (chk_table_rows) {
@@ -213,17 +231,16 @@ class API {
         this.initLegacyUploader();
     }
 
-    static async fetchWithTimeout(url, options, timeout) {
-        // without timeout
-        if (timeout == 0) {
-            return fetch(url, options);
-        }
+    static chk_fold_file_list() {
+        let checked_lst = [];
 
-        // with
-        return Promise.race([
-            fetch(url, options),
-            new Promise((_, reject) => setTimeout(() => reject(new Error('API fetchWithTimeout timeout ' + timeout)), timeout)),
-        ]);
+        $$('input[type=checkbox][name=fold], input[type=checkbox][name=file]').forEach((aa) => {
+            if (aa.checked) {
+                checked_lst.push(aa.value);
+            }
+        });
+
+        return checked_lst;
     }
 
     initHeaderChk() {
@@ -281,7 +298,7 @@ class API {
         const a_group_del = $('a.group_del');
         if (a_group_del) {
             a_group_del.addEventListener('click', (ev) => {
-                let arr = chk_fold_file_list();
+                let arr = API.chk_fold_file_list();
 
                 if (arr.length == 0) {
                     alert('You need select something');
@@ -319,7 +336,7 @@ class API {
         const a_group_zip = $('a.group_zip');
         if (a_group_zip) {
             a_group_zip.addEventListener('click', (ev) => {
-                let arr = chk_fold_file_list();
+                let arr = API.chk_fold_file_list();
 
                 if (arr.length == 0) {
                     alert('You need select something');
@@ -688,7 +705,7 @@ class API {
             if (file.size > config.fieldSize_max) {
                 alert('File "' + file.name + `" size is overload "${config.fieldSize_max_human}"`);
             } else {
-                formData.append('fileBlob', file);
+                formData.append('fileBlob', file, encodeURIComponent(file.name));
             }
         });
 
