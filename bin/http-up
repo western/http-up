@@ -15,7 +15,7 @@ import * as model from '../model/index.js';
 
 const argv = minimist(process.argv.slice(2), {
     string: ['port', 'user', 'password', 'log-download'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'share-only', 'tls', 'tls-debug', 'extend-mode', 'crypt', 'silence', 'usedb'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'share-only', 'tls', 'tls-debug', 'extend-mode', 'silence', 'usedb'],
     alias: { h: 'help' },
     default: { port: config.defaultPort },
     '--': true,

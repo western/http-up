@@ -239,26 +239,26 @@
 
                             {{#each rows}}
 
-                                {{#if IsDir}}
+                                {{#if isDirectory}}
 
                                     <tr>
-                                        <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="fold" value="{{Name}}"></th>
-                                        <td><i class="bi bi-folder"></i> <a class="nodecor" href="{{FullPath}}">{{Name}}</a></td>
+                                        <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="fold" value="{{fileNameExt}}"></th>
+                                        <td><i class="bi bi-folder"></i> <a class="nodecor" href="{{relativePath}}">{{fileNameExt}}</a></td>
 
                                         <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell"></td>
-                                        <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{ModTimeHuman}}</td>
+                                        <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{mTimeHuman}}</td>
                                         <td class="text-center">
-                                            <!--a class="del" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-x-lg"></i></a-->
+                                            <!--a class="del" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></a-->
 
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-secondary btn-sm del" data-name="{{Name}}"><i class="bi bi-x-lg"></i></button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm del" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></button>
                                                 <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
                                                     <span class="visually-hidden">Toggle Dropdown</span>
                                                 </button>
                                                 <ul class="dropdown-menu">
 
-                                                    <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
-                                                    <li><a class="dropdown-item player" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-music-note-beamed"></i> Open in Audio Player</a></li>
+                                                    <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
+                                                    <li><a class="dropdown-item player" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-music-note-beamed"></i> Open in Audio Player</a></li>
                                                     <!--li><a class="dropdown-item" href="#">Something else here</a></li>
                                                     <li><hr class="dropdown-divider"></li>
                                                     <li><a class="dropdown-item" href="#">Separated link</a></li-->
@@ -271,43 +271,43 @@
                                 {{else}}
 
                                     <tr>
-                                        <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="file" value="{{Name}}"></th>
+                                        <th scope="row" class="text-center"><input class="form-check-input" type="checkbox" name="file" value="{{fileNameExt}}"></th>
                                         <td>
-                                            <a class="nodecor" href="{{FullPath}}?{{Rnds}}">{{Name}}</a>
+                                            <a class="nodecor" href="{{relativePath}}?{{rnds}}">{{fileNameExt}}</a>
                                             
                                             
                                             <div class="text-body-secondary   d-block d-sm-block d-md-block    d-lg-none d-xl-none">
-                                                <small>{{ModTimeHuman}}</small>&nbsp;
-                                                <span class="badge text-bg-secondary">{{SizeHuman}}</span>
+                                                <small>{{mTimeHuman}}</small>&nbsp;
+                                                <span class="badge text-bg-secondary">{{sizeHuman}}</span>
                                             </div>
                                         </td>
 
-                                        <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{SizeHuman}}</td>
+                                        <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">{{sizeHuman}}</td>
                                         <td class="d-none d-sm-none d-md-none d-lg-table-cell d-xl-table-cell">
 
 
 
-                                            {{ModTimeHuman}}
+                                            {{mTimeHuman}}
                                         </td>
                                         <td class="text-center">
-                                            <!--a class="del" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-x-lg"></i></a-->
+                                            <!--a class="del" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></a-->
 
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline-secondary btn-sm del" data-name="{{Name}}"><i class="bi bi-x-lg"></i></button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm del" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></button>
                                                 <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
                                                     <span class="visually-hidden">Toggle Dropdown</span>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <!--li><a class="dropdown-item share" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-share-fill"></i> Share</a></li-->
-                                                    <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
-                                                    {{#if IsEditDoc }}
-                                                        <li><a class="dropdown-item edit_doc" href="javascript:void(0)" data-name="{{Name}}" data-full-path="{{FullPath}}" ><i class="bi bi-file-earmark-word"></i> Open as DOC</a></li>
+                                                    <!--li><a class="dropdown-item share" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-share-fill"></i> Share</a></li-->
+                                                    <li><a class="dropdown-item rename" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-cursor-text"></i> Rename</a></li>
+                                                    {{#if isEditDoc }}
+                                                        <li><a class="dropdown-item edit_doc" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-file-earmark-word"></i> Open as DOC</a></li>
                                                     {{/if}}
-                                                    {{#if IsEditCode }}
-                                                        <li><a class="dropdown-item edit_code" href="javascript:void(0)" data-name="{{Name}}" data-full-path="{{FullPath}}" ><i class="bi bi-pencil"></i> Open as CODE</a></li>
+                                                    {{#if isEditCode }}
+                                                        <li><a class="dropdown-item edit_code" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-pencil"></i> Open as CODE</a></li>
                                                     {{/if}}
-                                                    {{#if IsEditMd }}
-                                                        <li><a class="dropdown-item edit_md" href="javascript:void(0)" data-name="{{Name}}" data-full-path="{{FullPath}}" ><i class="bi bi-pencil"></i> Open as MARKDOWN</a></li>
+                                                    {{#if isEditMd }}
+                                                        <li><a class="dropdown-item edit_md" href="javascript:void(0)" data-name="{{fileNameExt}}" data-full-path="{{relativePath}}" ><i class="bi bi-pencil"></i> Open as MARKDOWN</a></li>
                                                     {{/if}}
                                                     
                                                     
@@ -442,15 +442,21 @@
 
 
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+                        
+                        {{#unless rows }}
+                            <div class="col">
+                                Empty folder
+                            </div>
+                        {{/unless}}
+                        
 
                         {{#each rows}}
 
-                            {{#if IsDir}}
+                            {{#if isDirectory}}
 
                                 <div class="col">
                                     <div class="card shadow-sm">
-                                        <a href="{{FullPath}}">
+                                        <a href="{{relativePath}}">
                                             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
                                                 <title></title>
                                                 <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Folder</text>
@@ -458,24 +464,24 @@
                                         </a>
                                         <div class="card-body">
                                             <p class="card-text text-truncate">
-                                                <b>{{Name}}</b><br>
-                                                <span class="fw-lighter">{{ModTimeHuman}}</span>
+                                                <b>{{fileNameExt}}</b><br>
+                                                <span class="fw-lighter">{{mTimeHuman}}</span>
                                             </p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
 
                                                     <div class="input-group-text">
-                                                        <input class="form-check-input mt-0" type="checkbox" name="fold" value="{{Name}}">
+                                                        <input class="form-check-input mt-0" type="checkbox" name="fold" value="{{fileNameExt}}">
                                                     </div>
 
 
-                                                    <!--a type="button" class="btn btn-sm btn-outline-secondary" href="{{FullPath}}">View</a-->
+                                                    <!--a type="button" class="btn btn-sm btn-outline-secondary" href="{{relativePath}}">View</a-->
                                                     <!--a type="button" class="btn btn-sm btn-outline-danger">Del</a-->
                                                 </div>
                                                 <small class="text-body-secondary">
                                                     <div class="btn-group">
 
-                                                        <a type="button" class="del btn btn-sm btn-outline-danger" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-x-lg"></i></a>
+                                                        <a type="button" class="del btn btn-sm btn-outline-danger" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></a>
 
 
 
@@ -491,17 +497,17 @@
 
                                 <div class="col">
                                     <div class="card shadow-sm">
-                                        <a href="{{FullPath}}?{{Rnds}}" _data-img-preview="{{FullPath}}?{{Rnds}}" >
+                                        <a href="{{relativePath}}?{{rnds}}" _data-img-preview="{{relativePath}}?{{rnds}}" >
 
 
-                                            {{#if IsPreviewImg}}
+                                            {{#if isPreviewImg}}
 
-                                                <div class="bd-placeholder-img card-img-top" width="100%" height="225" style="height:225px; background: no-repeat center/80% url('{{FullPathPreview}}?{{Rnds}}'); background-size: cover;  ">
+                                                <div class="bd-placeholder-img card-img-top" width="100%" height="225" style="height:225px; background: no-repeat center/80% url('{{relativePathPreview}}?{{rnds}}'); background-size: cover;  ">
                                                 </div>
 
-                                            {{else if IsPreviewDoc}}
+                                            {{else if isPreviewDoc}}
 
-                                                <div class="bd-placeholder-img card-img-top" width="100%" height="225" style="height:225px; background: no-repeat top url('{{FullPathPreview}}?{{Rnds}}'); background-size: cover;  ">
+                                                <div class="bd-placeholder-img card-img-top" width="100%" height="225" style="height:225px; background: no-repeat top url('{{relativePathPreview}}?{{rnds}}'); background-size: cover;  ">
                                                 </div>
 
                                             {{else}}
@@ -517,46 +523,46 @@
                                         </a>
                                         <div class="card-body">
                                             <p class="card-text text-truncate">
-                                                <b>{{Name}}</b><br>
-                                                <span class="fw-lighter">{{ModTimeHuman}}</span>
+                                                <b>{{fileNameExt}}</b><br>
+                                                <span class="fw-lighter">{{mTimeHuman}}</span>
                                             </p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
 
 
                                                     <div class="input-group-text">
-                                                        <input class="form-check-input mt-0" type="checkbox" name="file" value="{{Name}}">
+                                                        <input class="form-check-input mt-0" type="checkbox" name="file" value="{{fileNameExt}}">
                                                     </div>
 
 
 
 
-                                                    <!--a type="button" class="btn btn-sm btn-outline-secondary" href="{{FullPath}}">View</a-->
+                                                    <!--a type="button" class="btn btn-sm btn-outline-secondary" href="{{relativePath}}">View</a-->
                                                     <!--a type="button" class="btn btn-sm btn-outline-danger">Del</a-->
                                                 </div>
                                                 <small class="text-body-secondary">
                                                     <div class="btn-group">
 
-                                                        {{#if IsPreviewImg}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{Name}}">
+                                                        {{#if isPreviewImg}}
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{relativePathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
 
-                                                        {{#if IsPreviewDoc}}
-                                                            <a type="button" class="btn btn-sm btn-outline" href="{{FullPathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{Name}}">
+                                                        {{#if isPreviewDoc}}
+                                                            <a type="button" class="btn btn-sm btn-outline" href="{{relativePathPreview}}" data-fslightbox data-lightbox="image-1" data-title="{{fileNameExt}}">
                                                                 <i class="bi bi-zoom-in"></i>
                                                             </a>
                                                         {{/if}}
 
 
                                                         <div class="input-group-text font-reset">
-                                                            {{SizeHuman}}
+                                                            {{sizeHuman}}
                                                         </div>
 
 
 
-                                                        <a type="button" class="del btn btn-sm btn-outline-danger" href="javascript:void(0)" data-name="{{Name}}"><i class="bi bi-x-lg"></i></a>
+                                                        <a type="button" class="del btn btn-sm btn-outline-danger" href="javascript:void(0)" data-name="{{fileNameExt}}"><i class="bi bi-x-lg"></i></a>
 
                                                     </div>
                                                 </small>
@@ -597,24 +603,24 @@
                 
                 {{#each rows}}
 
-                    {{#if IsDir}}
+                    {{#if isDirectory}}
 
-                        <a href="{{FullPath}}" class="list-group-item list-group-item-action fold">
+                        <a href="{{relativePath}}" class="list-group-item list-group-item-action fold">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><i class="bi bi-folder"></i> {{Name}}</h5>
+                                <h5 class="mb-1"><i class="bi bi-folder"></i> {{fileNameExt}}</h5>
 
                             </div>
                         </a>
 
                     {{else}}
 
-                        <a href="{{FullPath}}" class="list-group-item list-group-item-action file">
+                        <a href="{{relativePath}}" class="list-group-item list-group-item-action file">
                             <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1"><i class="bi bi-file-earmark"></i> {{Name}}</h6>
-                                <small class="text-muted">{{SizeHuman}}</small>
+                                <h6 class="mb-1"><i class="bi bi-file-earmark"></i> {{fileNameExt}}</h6>
+                                <small class="text-muted">{{sizeHuman}}</small>
                             </div>
                             <!--p class="mb-1">Some placeholder content in a paragraph.</p-->
-                            <small class="text-muted">{{ModTimeHuman}}</small>
+                            <small class="text-muted">{{mTimeHuman}}</small>
                         </a>
 
                     {{/if}}
@@ -632,28 +638,7 @@
 
 
 
-    {{#if arg_crypt}}
-        <div class="row" style="padding:10px 0 50px 0;">
-
-            <div class="col">
-
-
-
-            </div>
-
-            <div class="col">
-
-
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Code to encrypt/decrypt" aria-label="Code to encrypt/decrypt" id="set_code_input">
-                    <button class="btn btn-outline-secondary" type="button" id="set_code_button">Set</button>
-                </div>
-
-
-            </div>
-
-        </div>
-    {{/if}}
+    
 
 
 

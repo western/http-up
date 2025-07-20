@@ -106,7 +106,7 @@ export const init_db = (argv) => {
             modified text not null default ''
         );
         
-        CREATE INDEX IF NOT EXISTS indx_file_full_path on file(full_path);
+        CREATE unique INDEX IF NOT EXISTS indx_file_full_path on file(full_path);
         
         CREATE INDEX IF NOT EXISTS indx_file_md5 on file(md5);
         
@@ -145,7 +145,7 @@ export const init_db = (argv) => {
         
         if( row && row.full_path && !fs.existsSync(row.full_path) ){
             
-            //console.log('file not found, remove: ', row.full_path);
+            //console.log('file not found, remove: ', row.full_path, row);
             
             db.run(
                 `delete from file where id=?`,
@@ -157,11 +157,7 @@ export const init_db = (argv) => {
                 },
             );
             
-            db.run(`
-                delete from share where md5 not in (select md5 from file)
-            `, () => {
-                
-            });
+            
     
         }
     });

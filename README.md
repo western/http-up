@@ -29,6 +29,10 @@ or
 npx http-up --port 3999 /path/to/fold
 ```
 
+```console
+npx http-up --help
+```
+
 ## If you switch --extend-mode
 
 ```console
@@ -95,7 +99,7 @@ it is disable "upload" and disable "make new folder" buttons
 
 You can online edit files `html, rtf, doc, docx, odt` as office files.
 
-Or `html, txt, js, css, md` formats as source code.
+Or `html, txt, js, css, md, sh, json` formats as source code.
 
 Or `md` as markdown.
 
@@ -117,7 +121,7 @@ If you set extension for file as `rtf, doc, docx, odt`, after create you can edi
 
 (For formats `rtf, doc, docx, odt` you need `libreoffice` package)
 
-If you set extension `html, txt, js, css, md`, you will edit it with code editor.
+If you set extension `html, txt, js, css, md, sh, json`, you will edit it with code editor.
 
 
 ## Automatic TLS keys generate
@@ -164,14 +168,12 @@ If you put inside folder `index.html`, it will be return as content
 
 ## Thumbnails support
 
-You need `convert` (ImageMagick package) for preview images `jpg, png, gif`
+For preview images `jpg, png, gif` you not need anything.
 
 For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, docx, xls, xlsx, odt, ods`
 
 ## Linux packages needs for full functional
 
-- `md5sum` (coreutils package) - make md5 sum of file
-- `convert` (ImageMagick package) - for make thumbnails
 - `libreoffice` - for doc thumbnails, for doc files online edit
 - `openssl` - encrypt file support, package for certs build
 - `zip` - cmd util for zip_and_download
@@ -197,6 +199,27 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
 - [ ] tabs
+
+### 3.1.0
+- [x] thumbnails: rewrite to async
+- [x] thumbnails: removed dependence ImageMagick and md5
+- [x] api/post_file: rewrite to async
+- [x] api/get_all: rewrite to async
+- [x] File implementation
+- [x] new index4.js
+- [x] codemirror bundle update cm6.bundle-20250710.min.js
+
+codemirror:
+- [x] disable autocomplete
+- [x] disable black theme
+- [x] add highlight JSON
+
+editors:
+- [x] open SH as CODE
+- [x] for new SH file - open CODE online editor
+- [x] for new JSON file - open CODE online editor
+- [x] for new MD file - open in MARKDOWN editor
+- [x] fix: ability to save EMPTY source code file
 
 ### 3.0.0
 - [x] fresh packages

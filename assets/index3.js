@@ -358,18 +358,24 @@ if (typeof window.$ != 'function') {
                     let ext = regx.slice(1)[0];
 
                     let is_edit_doc = ext.match(/^(rtf|doc|docx|odt)$/i);
-                    let is_edit_code = ext.match(/^(html|txt|js|css)$/i);
+                    let is_edit_code = ext.match(/^(html|txt|js|css|sh|json)$/i);
                     let is_edit_md = ext.match(/^(md)$/i);
 
                     if (is_edit_doc) {
                         location.href = '/__doc' + location.pathname + '/' + val;
+                        return;
                     }
                     if (is_edit_code) {
                         location.href = '/__code' + location.pathname + '/' + val;
+                        return;
                     }
                     if (is_edit_md) {
                         location.href = '/__md' + location.pathname + '/' + val;
+                        return;
                     }
+
+                    location.href = location.href;
+                    return;
                 } else {
                     if (js.msg) {
                         alert(js.msg);
@@ -650,14 +656,18 @@ if (typeof window.$ != 'function') {
 
     // --------------------------------------------------------------------------------------------------------------------------------------
 
+    /*
     $$('#upload_file, #upload_file2').forEach((upl) => {
         upl.addEventListener('change', (ev) => {
             ev_target_files(ev.target.files);
         });
     });
+    */
 
     // --------------------------------------------------------------------------------------------------------------------------------------
 })();
+
+// --------------------------------------------------------------------------------------------------------------------------------------
 
 const ev_target_files = async (files) => {
     if (files.length > config.files_count_max) {
@@ -667,21 +677,12 @@ const ev_target_files = async (files) => {
     }
 
     let formData = new FormData();
+
     Array.prototype.forEach.call(files, function (file) {
         if (file.size > config.fieldSize_max) {
             alert('File "' + file.name + `" size is overload "${config.fieldSize_max_human}"`);
         } else {
             formData.append('fileBlob', file);
-            formData.append(
-                'fileMeta',
-                JSON.stringify({
-                    lastModified: file.lastModified,
-                    lastModifiedDate: file.lastModifiedDate,
-                    name: file.name,
-                    size: file.size,
-                    type: file.type,
-                }),
-            );
         }
     });
 
@@ -719,3 +720,532 @@ const ev_target_files = async (files) => {
 
     submit();
 };
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+class BaseClient {
+    constructor(args = {}) {
+        this.prefixUrl = args.prefixUrl || '/api/file';
+
+        this.retryDelay = args.retryDelay || 1000;
+        this.maxRetries = args.maxRetries || 2;
+        this.requestTimeout = args.requestTimeout || 5000;
+        if (args.requestTimeout === 0) {
+            this.requestTimeout = 0;
+        }
+        this.sessions = new Map();
+
+        this.sizeSum = 0;
+        this.sizeProgress = 0;
+
+        this.onProgress = args.onProgress || (() => {});
+        this.onComplete = args.onComplete || (() => {});
+        this.onError = args.onError || (() => {});
+        this.onFailed = args.onFailed || (() => {});
+    }
+
+    async fetchWithTimeout(url, options, timeout) {
+        // without timeout
+        if (timeout == 0) {
+            return fetch(url, options);
+        }
+
+        // with
+        return Promise.race([
+            fetch(url, options),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('fetchWithTimeout timeout ' + timeout)), timeout)),
+        ]);
+    }
+
+    humanFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KiB', 'MiB', 'GiB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    waitTime(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    generateFileId(file) {
+        return `${file.name}--${file.size}--${file.lastModified}`;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {}
+
+    async uploadFile(file) {}
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // INPUT LISTENER
+
+    on(nme, cb) {
+        switch (nme.toLowerCase()) {
+            case 'progress':
+                this.onProgress = cb;
+                break;
+            case 'complete':
+                this.onComplete = cb;
+                break;
+            case 'error':
+                this.onError = cb;
+                break;
+            case 'failed':
+                this.onFailed = cb;
+                break;
+        }
+    }
+
+    async handleInputListener(ev) {
+        let files = ev.target.files;
+        let promises = [];
+
+        this.sizeSum = 0;
+        this.sizeProgress = 0;
+        this.onProgress('open');
+
+        for (let a = 0; a < files.length; a++) {
+            promises.push(this.prepareAndUploadFile(files[a]));
+        }
+
+        await Promise.all(promises);
+
+        this.onProgress('close');
+    }
+
+    setupEventListener(qu) {
+        const fileInputs = document.querySelectorAll(qu);
+        fileInputs.forEach((input) => {
+            input.addEventListener('change', this.handleInputListener.bind(this));
+        });
+    }
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+class SimpleUploadClient extends BaseClient {
+    constructor(args = {}) {
+        super(args);
+
+        this.prefixUrl = args.prefixUrl || '/api/file';
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {
+        const fileId = this.generateFileId(file);
+        const sessionInfo = {
+            fileId,
+            name: file.name,
+            size: file.size,
+            sizeHuman: this.humanFileSize(file.size),
+            errors: [],
+            isDelayed: false,
+            isFailed: false,
+            isDone: false,
+            startTime: Date.now(),
+            endTime: undefined,
+        };
+
+        this.sizeSum += file.size;
+
+        this.sessions.set(fileId, sessionInfo);
+
+        return this.uploadFile(file);
+    }
+
+    async uploadFile(file) {
+        const fileId = this.generateFileId(file);
+
+        let formData = new FormData();
+        formData.append('fileBlob', file);
+        formData.append('path', location.pathname);
+
+        for (let attempt = 0; attempt < this.maxRetries; attempt++) {
+            let sessionInfo = this.sessions.get(fileId);
+
+            if (sessionInfo.isDone) {
+                continue;
+            }
+
+            if (sessionInfo.isDelayed) {
+                await this.waitTime(this.retryDelay);
+            }
+
+            await this.fetchWithTimeout(
+                this.prefixUrl,
+                {
+                    method: 'POST',
+                    body: formData,
+                },
+                this.requestTimeout,
+            )
+                .then((r) => r.text())
+                .then((text) => {
+                    try {
+                        const js = JSON.parse(text);
+
+                        if (js && js.code == 200) {
+                            sessionInfo.isDone = true;
+                            sessionInfo.endTime = Date.now();
+
+                            this.sizeProgress += sessionInfo.size;
+                            this.onProgress('process_done', sessionInfo, this.sizeSum, this.sizeProgress);
+
+                            this.sessions.set(fileId, sessionInfo);
+                            this.onComplete(sessionInfo, js);
+                        } else if (js && js.msg) {
+                            throw new Error(js.code + ' ' + js.msg);
+                        }
+                    } catch (err) {
+                        //console.error('fetch TRY err=', err);
+                        this.onError(err);
+
+                        sessionInfo.isDelayed = true;
+                        sessionInfo.errors.push(err);
+                        this.sessions.set(fileId, sessionInfo);
+                    }
+                })
+                .catch((err) => {
+                    //console.error('fetch CATCH err=', err);
+                    this.onError(err);
+
+                    sessionInfo.isDelayed = true;
+                    sessionInfo.errors.push(err);
+                    this.sessions.set(fileId, sessionInfo);
+                });
+        }
+
+        let sessionInfo = this.sessions.get(fileId);
+        if (!sessionInfo.endTime) {
+            sessionInfo.endTime = Date.now();
+        }
+        if (!sessionInfo.isDone) {
+            sessionInfo.isFailed = true;
+        }
+        if (!sessionInfo.isDone) {
+            this.onFailed(sessionInfo);
+        }
+
+        this.sessions.set(fileId, sessionInfo);
+    }
+}
+
+(() => {
+    let uploadClient = new SimpleUploadClient({
+        prefixUrl: '/api/file',
+        retryDelay: 2000,
+        maxRetries: 2,
+        requestTimeout: 0, // disable timeout
+        onProgress: (mode, sessionInfo, sizeSum, sizeProgress) => {
+            //console.info('onProgress', mode);
+
+            if (mode == 'open') {
+                $('#progress').setAttribute('max', 100);
+                $('#progress').setAttribute('value', 0);
+                $('#progress').style.display = 'block';
+            }
+
+            if (mode == 'process_done') {
+                $('#progress').setAttribute('max', sizeSum);
+                $('#progress').setAttribute('value', sizeProgress);
+            }
+
+            if (mode == 'close') {
+                $('#progress').style.display = 'none';
+            }
+        },
+        onComplete: (sessionInfo, js) => {
+            console.info('onComplete', sessionInfo.name, js);
+
+            if (js && js.code == 200) {
+                //location.href = location.href;
+            }
+        },
+        onError: (err) => {
+            console.info('onError', err.name, err.message);
+        },
+        onFailed: (sessionInfo) => {
+            console.info('onFailed', sessionInfo);
+        },
+    });
+
+    //uploadClient.setupEventListener('#upload_file, #upload_file2');
+})();
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+class PartUploadClient extends BaseClient {
+    constructor(args = {}) {
+        super(args);
+
+        this.prefixUrl = args.prefixUrl || '/api/file/part';
+
+        this.chunkSize = args.chunkSize || 8 * 1024 * 1024;
+    }
+
+    getFileChunks(file) {
+        const fileId = this.generateFileId(file);
+        const chunks = [];
+        let start = 0;
+        let counter = 0;
+
+        while (start < file.size) {
+            const end = Math.min(start + this.chunkSize, file.size);
+            const data = file.slice(start, end);
+            chunks.push({
+                n: counter,
+                data,
+                fileId,
+                name: file.name,
+                size: data.size,
+                sizeHuman: this.humanFileSize(data.size),
+                errors: [],
+                isDelayed: false,
+                isFailed: false,
+                isDone: false,
+                startTime: undefined,
+                endTime: undefined,
+            });
+            start = end;
+            counter++;
+        }
+
+        return chunks;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    // ENGINE
+
+    async prepareAndUploadFile(file) {
+        const fileId = this.generateFileId(file);
+
+        const chunks = this.getFileChunks(file);
+
+        const sessionInfo = {
+            fileId,
+            name: file.name,
+            size: file.size,
+            size_human: this.humanFileSize(file.size),
+            chunks,
+            uploadedChunks: 0,
+            errors: [],
+            to_path: location.pathname,
+            startTime: Date.now(),
+            endTime: undefined,
+        };
+
+        this.sessions.set(fileId, sessionInfo);
+
+        this.sizeSum += file.size;
+
+        await this.uploadFile(fileId, sessionInfo);
+
+        console.log('prepareAndUploadFile end');
+    }
+
+    async uploadFile(fileId, sessionInfo) {
+        let promises = [];
+
+        for (let a = 0; a < sessionInfo.chunks.length; a++) {
+            let pr = this.uploadChunk(fileId, a);
+            promises.push(pr);
+        }
+
+        await Promise.all(promises);
+
+        return this.uploadFileDone(fileId);
+    }
+
+    async uploadChunk(fileId, chunk_index) {
+        let sessionInfo = this.sessions.get(fileId);
+        let chunkInfo = sessionInfo.chunks[chunk_index];
+
+        chunkInfo.startTime = Date.now();
+        sessionInfo.chunks[chunk_index] = chunkInfo;
+
+        let formData = new FormData();
+        formData.append('file_id', sessionInfo.fileId);
+        formData.append('chunk_index', chunk_index);
+        formData.append('data', chunkInfo.data);
+
+        for (let attempt = 0; attempt < this.maxRetries; attempt++) {
+            let chunkInfo = sessionInfo.chunks[chunk_index];
+
+            if (chunkInfo.isDone) {
+                continue;
+            }
+
+            if (chunkInfo.isDelayed) {
+                await this.waitTime(this.retryDelay);
+            }
+
+            await this.fetchWithTimeout(
+                this.prefixUrl,
+                {
+                    method: 'POST',
+                    body: formData,
+                },
+                this.requestTimeout,
+            )
+                .then((r) => r.text())
+                .then((text) => {
+                    try {
+                        const js = JSON.parse(text);
+
+                        if (js && js.code == 200) {
+                            chunkInfo.isDone = true;
+                            chunkInfo.endTime = Date.now();
+                            sessionInfo.chunks[chunk_index] = chunkInfo;
+
+                            this.sizeProgress += chunkInfo.size;
+                            this.onProgress('process_done', chunkInfo, this.sizeSum, this.sizeProgress);
+
+                            //this.onComplete(chunkInfo, js);
+                        } else if (js && js.msg) {
+                            throw new Error(js.code + ' ' + js.msg);
+                        }
+                    } catch (err) {
+                        //console.error('fetch TRY err=', err);
+                        this.onError(err);
+
+                        chunkInfo.isDelayed = true;
+                        chunkInfo.errors.push(err);
+                        sessionInfo.chunks[chunk_index] = chunkInfo;
+                    }
+                })
+                .catch((err) => {
+                    //console.error('fetch CATCH err=', err);
+                    this.onError(err);
+
+                    chunkInfo.isDelayed = true;
+                    chunkInfo.errors.push(err);
+                    sessionInfo.chunks[chunk_index] = chunkInfo;
+                });
+        }
+
+        chunkInfo = sessionInfo.chunks[chunk_index];
+        if (!chunkInfo.endTime) {
+            chunkInfo.endTime = Date.now();
+        }
+        if (!chunkInfo.isDone) {
+            chunkInfo.isFailed = true;
+        }
+        if (!chunkInfo.isDone) {
+            this.onFailed(sessionInfo, chunkInfo);
+        }
+
+        sessionInfo.chunks[chunk_index] = chunkInfo;
+    }
+
+    async uploadFileDone(fileId) {
+        let sessionInfo = this.sessions.get(fileId);
+
+        let formData = new FormData();
+        formData.append('file_id', fileId);
+        formData.append('name', sessionInfo.name);
+        formData.append('to_path', sessionInfo.to_path);
+        formData.append('chunk_cnt', sessionInfo.chunks.length);
+
+        return fetch(this.prefixUrl + '/done', {
+            method: 'POST',
+            body: formData,
+        })
+            .then((r) => r.text())
+            .then((text) => {
+                try {
+                    const js = JSON.parse(text);
+
+                    if (js && js.code == 200) {
+                        sessionInfo.isDone = true;
+                        sessionInfo.endTime = Date.now();
+
+                        //this.sizeProgress += sessionInfo.size;
+                        //this.onProgress('process_done', sessionInfo, this.sizeSum, this.sizeProgress);
+
+                        this.sessions.set(fileId, sessionInfo);
+                        this.onComplete(sessionInfo, js);
+                    } else if (js && js.msg) {
+                        throw new Error(js.code + ' ' + js.msg);
+                    }
+                } catch (err) {
+                    //console.error('fetch TRY err=', err);
+                    this.onError(err);
+
+                    //sessionInfo.isDelayed = true;
+                    sessionInfo.errors.push(err);
+                    this.sessions.set(fileId, sessionInfo);
+                } finally {
+                    let sessionInfo = this.sessions.get(fileId);
+                    if (!sessionInfo.endTime) {
+                        sessionInfo.endTime = Date.now();
+                    }
+                    if (!sessionInfo.isDone) {
+                        sessionInfo.isFailed = true;
+                    }
+                    if (!sessionInfo.isDone) {
+                        this.onFailed(sessionInfo);
+                    }
+
+                    this.sessions.set(fileId, sessionInfo);
+                }
+            })
+            .catch((err) => {
+                //console.error('fetch CATCH err=', err);
+                this.onError(err);
+
+                //sessionInfo.isDelayed = true;
+                sessionInfo.errors.push(err);
+                this.sessions.set(fileId, sessionInfo);
+            });
+    }
+}
+
+(() => {
+    let uploadClient = new PartUploadClient({
+        chunkSize: 25 * 1024 * 1024,
+        retryDelay: 2000,
+        maxRetries: 2,
+        requestTimeout: 0, // disable timeout
+        onProgress: (mode, chunkInfo, sizeSum, sizeValue) => {
+            //console.info('onProgress', mode);
+
+            if (mode == 'open') {
+                $('#progress').setAttribute('max', 100);
+                $('#progress').setAttribute('value', 'xxx');
+                $('#progress').style.display = 'block';
+            }
+
+            if (mode == 'process_done') {
+                $('#progress').setAttribute('max', sizeSum);
+                $('#progress').setAttribute('value', sizeValue);
+            }
+
+            if (mode == 'close') {
+                $('#progress').style.display = 'none';
+            }
+        },
+        onComplete: (sessionInfo, js) => {
+            console.info('onComplete', sessionInfo.name, js);
+
+            if (js && js.code == 200) {
+                //location.href = location.href;
+            }
+        },
+        onError: (err) => {
+            console.info('onError', err.name, err.message);
+        },
+        onFailed: (sessionInfo, chunkInfo) => {
+            console.info('onFailed', sessionInfo, chunkInfo);
+        },
+    });
+
+    uploadClient.setupEventListener('#upload_file, #upload_file2');
+})();
+
+// --------------------------------------------------------------------------------------------------------------------------------------
