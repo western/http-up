@@ -61,7 +61,7 @@
     "chalk": "^5.4.1",
     "compression": "^1.8.1",
     "express": "^5.1.0",
-    "express-handlebars": "^8.0.1",
+    "express-handlebars": "^8.0.3",
     "image-thumbnail": "^1.0.17",
     "md5-file": "^5.0.0",
     "mime": "^4.0.7",
