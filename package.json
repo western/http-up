@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node ./bin/http-up",
     "test": "jest --watchAll --runInBand",
-    "prettier": "npx prettier bin lib assets --check",
+    "prettier": "npx prettier bin lib assets __tests__ --check",
     "prettier:fix": "npm run prettier -- --write"
   },
   "directories": {
