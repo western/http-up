@@ -8,6 +8,8 @@
     "http-up": "./bin/http-up"
   },
   "scripts": {
+    "start": "node ./bin/http-up",
+    "test": "jest --watchAll --runInBand",
     "prettier": "npx prettier bin lib assets --check",
     "prettier:fix": "npm run prettier -- --write"
   },
@@ -63,6 +65,7 @@
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "image-thumbnail": "^1.0.17",
+    "jest": "^30.0.5",
     "md5-file": "^5.0.0",
     "mime": "^4.0.7",
     "minimist": "^1.2.8",
