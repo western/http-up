@@ -20,7 +20,7 @@ describe('should 200', () => {
             fs.rmdirSync('/tmp/foldername1');
         }
 
-        child = shell.exec('./bin/http-up  /tmp ', { async: true });
+        child = shell.exec('./bin/http-up /tmp', { async: true });
     });
 
     it('should 200', async () => {
@@ -59,10 +59,12 @@ describe('should 200', () => {
         console.log('json=', json);
         */
 
-        child.kill();
-
         //expect(response ? response.status : undefined).toBe(200);
     }, 3_000);
+
+    afterAll(() => {
+        child.kill();
+    });
 });
 
 describe('should 500', () => {
@@ -109,11 +111,12 @@ describe('should 500', () => {
         console.log('json=', json);
         */
 
-        child.kill();
         //expect(response ? response.status : undefined).toBe(500);
     }, 3_000);
 
     afterAll(() => {
+        child.kill();
+
         if (fs.existsSync('/tmp/foldername1')) {
             fs.rmdirSync('/tmp/foldername1');
         }

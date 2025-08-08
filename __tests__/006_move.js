@@ -26,8 +26,8 @@ describe('should 200', () => {
             }
         });
 
-        if (!fs.existsSync('/tmp/fold9')) {
-            fs.mkdirSync('/tmp/fold9');
+        if (!fs.existsSync('/tmp/fold6')) {
+            fs.mkdirSync('/tmp/fold6');
         }
 
         child = shell.exec('./bin/http-up --extend-mode /tmp ', { async: true });
@@ -44,7 +44,7 @@ describe('should 200', () => {
         const formData = new FormData();
         formData.append('name', 'file1.jpg');
         formData.append('from_path', '/');
-        formData.append('to_path', 'fold9');
+        formData.append('to_path', 'fold6');
 
         let response = await fetch(prefix + '/api/move', {
             method: 'POST',
@@ -68,8 +68,8 @@ describe('should 200', () => {
             fs.unlinkSync('/tmp/file1.jpg');
         }
 
-        if (fs.existsSync('/tmp/fold9')) {
-            fs.rmSync('/tmp/fold9', { recursive: true, force: true });
+        if (fs.existsSync('/tmp/fold6')) {
+            fs.rmSync('/tmp/fold6', { recursive: true, force: true });
         }
     });
 });

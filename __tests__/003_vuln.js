@@ -11,12 +11,13 @@ let prefix = 'http://127.0.0.1:4000';
 
 jest.useRealTimers();
 
-describe('should 200', () => {
+describe('should check several requests', () => {
     let child;
     beforeAll(async () => {
+        /*
         if (!fs.existsSync('/tmp/foldXX/foldername2')) {
             fs.mkdirSync('/tmp/foldXX/foldername2', { recursive: true });
-        }
+        }*/
 
         child = shell.exec('./bin/http-up /tmp', { async: true });
     });
@@ -26,7 +27,7 @@ describe('should 200', () => {
         //{ referer: '', url: '', method: '', expect_code: 900, param_name: '', param_value: '', },
     ];
 
-    it('should XXX', async () => {
+    it('should check several requests', async () => {
         await new Promise((r) => setTimeout(r, 1500));
 
         for (const endp of endpoints) {
@@ -60,8 +61,9 @@ describe('should 200', () => {
     afterAll(() => {
         child.kill();
 
+        /*
         if (fs.existsSync('/tmp/foldXX')) {
             fs.rmSync('/tmp/foldXX', { recursive: true, force: true });
-        }
+        }*/
     });
 });

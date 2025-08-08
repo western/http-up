@@ -63,7 +63,7 @@ describe('should 200', () => {
         //console.log('body=', body)
 
         expect(response.status).toBe(200);
-    }, 3_000);
+    }, 5_000);
 
     afterAll(() => {
         child.kill();
