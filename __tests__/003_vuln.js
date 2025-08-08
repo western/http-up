@@ -18,45 +18,43 @@ describe('should 200', () => {
             fs.mkdirSync('/tmp/foldXX/foldername2', { recursive: true });
         }
 
-        child = shell.exec('./bin/http-up /tmp ', { async: true });
+        child = shell.exec('./bin/http-up /tmp', { async: true });
     });
 
-    /*
-    let path_list = [
-        '/foldXX/../../',
-        '/foldXX',
-        '/foldXX//',
-        '/foldXX/./t',
+    const endpoints = [
+        { referer: prefix + '/', url: '/../etc/passwd', method: 'GET', expect_code: 404 },
+        //{ referer: '', url: '', method: '', expect_code: 900, param_name: '', param_value: '', },
     ];
-    */
 
-    it('should 200', async () => {
+    it('should XXX', async () => {
         await new Promise((r) => setTimeout(r, 1500));
 
-        let headers = new Headers();
+        for (const endp of endpoints) {
+            let options = {
+                method: endp.method,
+            };
 
-        headers.append('Origin', 'http://127.0.0.1:4000');
-        headers.append('Referer', 'http://127.0.0.1:4000/foldXX/../../');
-        //headers.append('Referer', 'http://127.0.0.1:4000/foldXX' );
-        //headers.append('Referer', 'http://127.0.0.1:4000/foldXX//' );
-        //headers.append('Referer', 'http://127.0.0.1:4000/foldXX/./t' );
+            let headers = new Headers();
+            headers.append('Referer', prefix + endp.referer);
+            options['headers'] = headers;
 
-        const formData = new FormData();
+            let formData = new FormData();
+            if (endp.param_name) {
+                formData.append(endp.param_name, endp.param_value);
 
-        formData.append('name', '/../../foldername2/./');
+                options['body'] = formData;
+            }
 
-        let response = await fetch(prefix + '/api/folder', {
-            method: 'POST',
-            body: formData,
-            headers: headers,
-        });
+            await fetch(prefix + endp.url, options)
+                .then((res1) => {
+                    console.log('res1=', res1);
 
-        let json = await response.json();
-        console.log('json=', json);
-
-        expect(response.status).toBe(200);
-        //expect(json.result).toBe('/foldXX/foldernameT');
-        expect(json.code).toBe(200);
+                    expect(res1.status).toBe(endp.expect_code);
+                })
+                .catch((err1) => {
+                    console.log('err1=', err1);
+                });
+        }
     }, 3_000);
 
     afterAll(() => {
