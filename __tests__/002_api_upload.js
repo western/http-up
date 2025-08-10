@@ -17,6 +17,8 @@ jest.useRealTimers();
 describe('should 200', () => {
     let child;
     beforeAll(async () => {
+        child = shell.exec('./bin/http-up /tmp ', { async: true });
+
         /*
         if (fs.existsSync('/tmp/file1.jpg')) {
             fs.rmSync('/tmp/file1.jpg', { recursive: false, force: true });
@@ -38,8 +40,6 @@ describe('should 200', () => {
                 console.log(clp, 'Copy err=', err);
             }
         });
-
-        child = shell.exec('./bin/http-up /tmp ', { async: true });
     });
 
     it('should 200', async () => {

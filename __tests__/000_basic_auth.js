@@ -41,6 +41,10 @@ describe('should auth success', () => {
 
         //await new Promise((r) => setTimeout(r, 2000));
     }, 3_000);
+
+    afterAll(() => {
+        child.kill();
+    });
 });
 
 describe('should auth fail', () => {
@@ -70,4 +74,8 @@ describe('should auth fail', () => {
 
         //await new Promise((r) => setTimeout(r, 2000));
     }, 3_000);
+
+    afterAll(() => {
+        child.kill();
+    });
 });
