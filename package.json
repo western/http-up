@@ -58,6 +58,7 @@
     "file-server",
     "file-share",
     "file-sharing",
+    "file-transfer",
     "download"
   ],
   "dependencies": {
