@@ -175,8 +175,8 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 ## Linux packages needs for full functional
 
 - `libreoffice` - for doc thumbnails, for doc files online edit
-- `openssl` - encrypt file support, package for certs build
-- `zip` - cmd util for zip_and_download
+- `openssl` - package for certs build
+
 
 
 ## Notes
@@ -199,6 +199,11 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
 - [ ] tabs
+
+### 3.2.0
+- [x] remove zip util dependency
+- [x] api/post_zip: add support with two mode - `zip util` and `internal zip create`
+- [x] fix for create small image thumbnail (config.thumb.IMG.min_size)
 
 ### 3.1.0
 - [x] thumbnails: rewrite to async
