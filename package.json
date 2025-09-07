@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./bin/http-up",
   "bin": {
-    "http-up": "./bin/http-up"
+    "http-up": "bin/http-up"
   },
   "scripts": {
     "start": "node ./bin/http-up",
