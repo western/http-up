@@ -142,6 +142,8 @@ npx http-up --tls .
 
 ## Export log data and how read it
 
+It is work if you use database.
+
 After export log data to file
 
 ```console
