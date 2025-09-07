@@ -172,8 +172,8 @@ For preview images `jpg, png, gif` you not need anything.
 
 For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, docx, xls, xlsx, odt, ods`
 
-## Linux packages needs for full functional
-
+## Dependencies
+Linux packages needs for full functional
 - `libreoffice` - for doc thumbnails, for doc files online edit
 - `openssl` - package for certs build
 
