@@ -202,7 +202,7 @@ Linux packages needs for full functional
 
 ### 3.2.0
 - [x] remove zip util dependency
-- [x] api/post_zip: add support with two mode - `zip util` and `internal zip create`
+- [x] api/post_zip: add support work with two modes - `zip util` and `internal zip create`
 - [x] fix for create small image thumbnail (config.thumb.IMG.min_size)
 
 ### 3.1.0
