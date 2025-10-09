@@ -26,6 +26,12 @@ npx http-up .
 or
 
 ```console
+npx http-up@3.2.1 /tmp
+```
+
+or
+
+```console
 npx http-up --port 3999 /path/to/fold
 ```
 
