@@ -207,6 +207,7 @@ Linux packages needs for full functional
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
 - [ ] tabs
+- [ ] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
 
 ### 3.2.0
 - [x] remove zip util dependency
