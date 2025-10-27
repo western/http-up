@@ -208,6 +208,7 @@ Linux packages needs for full functional
 - [ ] rich frontend (react, vue) ?
 - [ ] tabs
 - [ ] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
+- [ ] should return the file encryption option for 3.0?
 
 ### 3.2.0
 - [x] remove zip util dependency
