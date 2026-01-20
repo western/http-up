@@ -182,9 +182,9 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 ## Dependencies
 
-- `libreoffice` - for doc thumbnails, for doc files online edit
-- `openssl` - package for certs build
-- CDN `cdn.jsdelivr.net` - bootstrap and bootstrap icons
+- CDN `cdn.jsdelivr.net` - Bootstrap and Bootstrap icons
+- `libreoffice` (not mandatory if you not use) - for doc thumbnails, for doc files online edit
+- `openssl` (not mandatory if you not use) - package for certs build
 
 ## Notes
 
