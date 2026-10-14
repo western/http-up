@@ -177,13 +177,13 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 ### backlog
 - [ ] save whitespaces for filenames?
-~~- [ ] what is the lib can resize images enough fast~~
-~~- [ ] project needs middleware (or module arch) or not~~
+- [ ] ~~what is the lib can resize images enough fast~~
+- [ ] ~~project needs middleware (or module arch) or not~~
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
-~~- [ ] tabs~~
+- [ ] ~~tabs~~
 - [x] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
-~~- [ ] should return the file encryption option for 3.x?~~
+- [ ] ~~should return the file encryption option for 3.x?~~
 
 ### 3.3.0
 - [x] delete sqlite
