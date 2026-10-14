@@ -8,6 +8,9 @@ import * as util from '../lib/util.js';
 import * as model from '../model/index.js';
 
 
+
+
+
 const message_builder = ( res, req, code, tag, ...msg) => {
     
     let argv;
@@ -99,29 +102,11 @@ export const write = ( res, req, code, tag, ...msg ) => {
     // database ------------------------------------------------------------------------------------
     if( argv && argv['usedb'] ){
         
-        let db = model.connect();
         
-        
-        if( db ){
-            
-            msg = msg.map(function(m) {
-                return util.string_color_clear(m)
-            });
-            
-            db.run(
-                `insert into event_log (proc_id, dt, ip, login, code, tag, msg) values(?, ?, ?, ?, ?, ?, ?)`,
-                [ process.pid, formatted, client_ip, req_auth_user, code, tag, msg.join(' ') ],
-                (err) => {
-                    if(err){
-                        console.log('insert into event_log err=', err);
-                    }
-                },
-            );
-        }
     }
     
 
-    //return '['+ret.join('] [')+'] ';
+    
 };
 
 
@@ -136,40 +121,3 @@ export const print = ( res, req, code, tag, ...msg) => {
 };
 
 
-
-
-export const export_to = (filename) => {
-    
-    let db = model.connect();
-        
-    db.all(
-        `select * from event_log order by id`,
-        [ ],
-        (err, data) => {
-            
-            if(err){
-                console.log('export_to err=', err);
-                return;
-            }
-            
-            /*
-            data.forEach((el) => {
-                el.msg = el.msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
-                //console.log('el.msg=', el.msg);
-            });*/
-            
-            try {
-                fs.writeFileSync(filename, JSON.stringify(data));
-                
-            } catch (err) {
-                console.log(err);
-            }
-            
-            console.log('Table event_log was saved to '+filename);
-            process.exit();
-            return;
-        }
-    );
-        
-        
-};
