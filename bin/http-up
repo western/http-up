@@ -91,17 +91,17 @@ if (argv.h || argv.help) {
             `     --share-only              Set --upload-disable and --folder-make-disable`,
             ``,
             ``,
-            `     --extend-mode             Enable delete mechanics. Be very careful. It disabled by default.`,
-            ``,
+            `     --extend-mode             Enable advanced mechanics. Be very careful. It disabled by default.`,
+            //``,
             //`     --crypt                   Enable file encrypt support.`,
-            ``,
-            `     --log-export [str]        Export all data log to out json file`,
-            ``,
-            `                               ${chalk.yellow('--log-export file.json')}`,
+            //``,
+            //`     --log-export [str]        Export all data log to out json file`,
+            //``,
+            //`                               ${chalk.yellow('--log-export file.json')}`,
             ``,
             ``,
             `     --silence                 Disable all console messages`,
-            `     --usedb                   Database use`,
+            //`     --usedb                   Database use`,
             ``,
             ``,
             `examples:`,
@@ -119,14 +119,16 @@ if (argv.h || argv.help) {
 
 // -----------------------------------------------------------------------------------------------------------------------
 
+/*
 if (argv['log-export']) {
     console.log('');
     console.log('Save log to "' + chalk.yellow(argv['log-export']) + '" ');
 
     model.event_log.export_to(argv['log-export']);
 
-    //process.exit();
+    
 }
+*/
 
 // -----------------------------------------------------------------------------------------------------------------------
 
