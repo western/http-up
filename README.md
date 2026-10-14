@@ -26,7 +26,7 @@ npx http-up .
 or
 
 ```console
-npx http-up@3.2.7 /tmp
+npx http-up@3.3.0 /tmp
 ```
 
 or
@@ -146,30 +146,6 @@ npx http-up --tls .
   <img src="https://github.com/western/http-up/blob/dev/doc/firefox_self_signed_cert.png?raw=true" width="45%" >
 </p>
 
-## Export log data and how read it
-
-It is work if you use database.
-
-After export log data to file
-
-```console
-npx http-up --log-export file.json
-```
-
-You can ask `show all data for client "192.168.0.102" ` inside with `jq`:
-
-```console
-jq '.[] | select(.ip=="192.168.0.102")' file.json
-```
-
-Or `show all events, contain "spring" substring`:
-
-```console
-jq '.[] | select(.msg | contains("spring"))' file.json
-```
-
-Or you can work with SQL directly inside `.httpup/db` folder
-
 ## Magic file index.html inside any folder
 
 If you put inside folder `index.html`, it will be return as content
@@ -201,13 +177,20 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 ### backlog
 - [ ] save whitespaces for filenames?
-- [ ] what is the lib can resize images enough fast
-- [ ] project needs middleware (or module arch) or not
+~~- [ ] what is the lib can resize images enough fast~~
+~~- [ ] project needs middleware (or module arch) or not~~
 - [ ] TS ?
 - [ ] rich frontend (react, vue) ?
-- [ ] tabs
-- [ ] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
-- [ ] should return the file encryption option for 3.0?
+~~- [ ] tabs~~
+- [x] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
+~~- [ ] should return the file encryption option for 3.x?~~
+
+### 3.3.0
+- [x] delete sqlite
+- [x] replace "image-thumbnail" with "sharp"
+- [x] change archiver version (change to ZipArchive)
+- [x] search without database
+- [x] manifest of project: basic functions and easy support
 
 ### 3.2.0
 - [x] remove zip util dependency
