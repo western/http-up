@@ -3,17 +3,11 @@
 
 import fsSync from 'node:fs';
 import fs from 'node:fs/promises';
-//import fs from 'fs';
 import path from 'node:path';
-//import chalk from 'chalk';
 import * as dateTime from 'node-datetime';
-//import shell from 'shelljs';
-//import { exec } from 'child_process';
-//import mime from 'mime';
 
 
 
-//import config from '../lib/config.js';
 import * as util from '../lib/util.js';
 import * as model from '../model/index.js';
 
@@ -40,28 +34,6 @@ export const search_result = async (app, res, req, s)=> {
     
     
     
-    
-    
-    // -----------------------------------------------------------------------------------
-    
-    /*
-    if (!argv || !argv.usedb) {
-        
-        
-        model.event_log.write(res, null, 500, 'core', 'Internal Server: search not work without enabled db');
-        res.status(500).send(util.error_page_content('500', 'Internal Server'));
-        
-        return;
-    }
-    
-    let db = model.connect();
-    
-    if(!db ){
-        return;
-    }
-    */
-    
-    // -----------------------------------------------------------------------------------
     
     
     let result_arr = [];
@@ -171,66 +143,6 @@ export const search_result = async (app, res, req, s)=> {
     
     
     
-    
-    // -----------------------------------------------------------------------------------
-    
-    /*
-    db.all(
-        `
-            select *
-            
-            from file
-            
-            where
-                full_path like ? and
-                full_path like ?
-            
-            order by full_path
-        `,
-        [ argv.fold+'%', '%'+s+'%' ],
-        (err, data) => {
-            
-            if(err){
-                console.log(err);
-                return;
-            }
-            
-            
-            
-            
-            data.forEach((el) => {
-                
-                el.full_path = el.full_path.replace(argv.fold, '');
-                
-                
-                let arr = el.full_path.split('/');
-                arr.shift();
-                arr.pop();
-                
-                el.only_fold = '/'+arr.join('/');
-                
-                const s_regex = new RegExp( s, "i" );
-                
-                el.only_fold_html = el.only_fold;
-                el.only_fold_html = el.only_fold_html.replace(s_regex, '<span style="background-color:yellow;">'+s+'</span>');
-                
-                el.filename_html = el.filename;
-                el.filename_html = el.filename_html.replace(s_regex, '<span style="background-color:yellow;">'+s+'</span>');
-                
-                el.SizeHuman = util.humanFileSize(el.size);
-                
-            });
-                    
-            res.render('search', {
-                
-                
-                result_list: data,
-            });
-            
-            
-        }
-    );
-    */
     
     // -----------------------------------------------------------------------------------
     
