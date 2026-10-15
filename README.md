@@ -17,7 +17,7 @@ In extended mode you can doing more
   <img src="https://github.com/western/http-up/blob/dev/doc/screen_mobile4.png?raw=true" />
 </p>
 
-## Fast run without install
+## Fast start without install
 
 ```console
 npx http-up .
