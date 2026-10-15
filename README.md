@@ -26,7 +26,7 @@ npx http-up .
 or
 
 ```console
-npx http-up@3.3.0 /tmp
+npx http-up@3.3.1 /tmp
 ```
 
 or
