@@ -11,8 +11,8 @@ import * as event_log from '../model/event_log.js';
 export { event_log };
 
 
-import * as file from '../model/file.js';
-export { file };
+//import * as file from '../model/file.js';
+//export { file };
 
 
 import config from '../lib/config.js';
