@@ -146,6 +146,26 @@ npx http-up --tls .
   <img src="https://github.com/western/http-up/blob/dev/doc/firefox_self_signed_cert.png?raw=true" width="45%" >
 </p>
 
+## Json log data and how read it
+
+After export log data to file
+
+```console
+npx http-up --jsonto file.json
+```
+
+You can ask `show all data for client "192.168.0.231" ` inside with `jq`:
+
+```console
+jq '.[] | select(.IP=="192.168.0.231")' file.json
+```
+
+Or `show all events, contain "spring" substring`:
+
+```console
+jq '.[] | select(.Msg | contains("spring"))' file.json
+```
+
 ## Magic file index.html inside any folder
 
 If you put inside folder `index.html`, it will be return as content
