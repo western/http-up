@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import os from 'os';
-import fs from 'fs';
-import path from 'path';
+//import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
+import path from 'node:path';
+
 import chalk from 'chalk';
 import minimist from 'minimist';
 
 import * as core from '../lib/core.js';
 import config from '../lib/config.js';
 import * as util from '../lib/util.js';
-import * as model from '../model/index.js';
 
 // -----------------------------------------------------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ if (argv._[0] && argv._[0] == '.') {
     argv.fold = path.normalize(argv.fold);
 }
 
-if (!fs.existsSync(argv.fold) || !fs.lstatSync(argv.fold).isDirectory()) {
+if (!fsSync.existsSync(argv.fold) || !fsSync.lstatSync(argv.fold).isDirectory()) {
     console.log('');
     console.log('Folder "' + chalk.yellow(argv.fold) + '" is absent.');
     console.log(
@@ -121,17 +121,6 @@ if (argv.h || argv.help) {
 }
 
 // -----------------------------------------------------------------------------------------------------------------------
-
-/*
-if (argv['log-export']) {
-    console.log('');
-    console.log('Save log to "' + chalk.yellow(argv['log-export']) + '" ');
-
-    model.event_log.export_to(argv['log-export']);
-
-    
-}
-*/
 
 // -----------------------------------------------------------------------------------------------------------------------
 
