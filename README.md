@@ -26,7 +26,7 @@ npx http-up .
 or
 
 ```console
-npx http-up@3.3.3 /tmp
+npx http-up@3.4.0 /tmp
 ```
 
 or
@@ -204,6 +204,11 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 - [ ] ~~tabs~~
 - [x] think to remove sqlite from http-up (benefits: speed, problem with sqlite run platform)
 - [ ] ~~should return the file encryption option for 3.x?~~
+
+### 3.4.0
+- [x] new `--logto` and `--jsonto` args
+- [x] move URL security check to one place
+- [x] clear code
 
 ### 3.3.0
 - [x] delete sqlite
