@@ -192,6 +192,9 @@ For document preview you need `libreoffice` package. Formats `pdf, rtf, doc, doc
 
 - If you run application under some User, this user should be have privileges to write target folder
 
+## Future
+
+[it is here](FUTURE.md)
 
 ## History
 
