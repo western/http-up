@@ -6,6 +6,12 @@
 
 This is current version `assets/index4.js`
 
+But one day it will be switch to `PartUploadClient`, where
+
+- full file split to the chunks
+- these chunks upload with retry control
+- these chunks upload to the server simultaneously
+
 ### SimpleUploadClient
 
 ```javascript
