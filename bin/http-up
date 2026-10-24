@@ -15,7 +15,7 @@ import * as util from '../lib/util.js';
 
 const argv = minimist(process.argv.slice(2), {
     string: ['port', 'user', 'password', 'logto', 'jsonto'],
-    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'share-only', 'tls', 'tls-debug', 'extend-mode', 'silence'],
+    boolean: ['basic', 'upload-disable', 'folder-make-disable', 'share-only', 'tls', 'tls-debug', 'extend-mode', 'silence', 'csrf-disable'],
     default: { port: config.defaultPort },
     '--': true,
     stopEarly: false,
