@@ -62,19 +62,21 @@
     "download"
   ],
   "dependencies": {
+    "@dr.pogodin/csurf": "^1.18.2",
     "archiver": "^8.0.0",
     "basic-auth": "^3.0.0",
     "chalk": "^6.0.1",
     "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
     "express": "^5.3.0",
     "express-handlebars": "^9.0.2",
-    "sharp": "^0.35.5",
     "jest": "^30.5.2",
     "md5-file": "^5.0.0",
     "mime": "^4.1.1",
     "minimist": "^1.2.8",
     "multer": "^2.4.0",
     "node-datetime": "^2.1.2",
+    "sharp": "^0.35.5",
     "shelljs": "^0.10.0",
     "urlencode": "^2.0.0",
     "which": "^7.0.0"
