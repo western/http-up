@@ -12,55 +12,21 @@ But one day it will be switch to `PartUploadClient`, where
 - these chunks upload with retry control
 - these chunks upload to the server simultaneously
 
-### SimpleUploadClient
-
-```javascript
-
-(() => {
-    let uploadClient = new SimpleUploadClient({
-        prefixUrl: '/api/file',
-        retryDelay: 2000,
-        maxRetries: 2,
-        requestTimeout: 0, // disable timeout
-        onProgress: (mode, sessionInfo, sizeSum, sizeProgress) => {
-            //console.info('onProgress', mode);
-
-            if (mode == 'open') {
-                $('#progress').setAttribute('max', 100);
-                $('#progress').setAttribute('value', 0);
-                $('#progress').style.display = 'block';
-            }
-
-            if (mode == 'process_done') {
-                $('#progress').setAttribute('max', sizeSum);
-                $('#progress').setAttribute('value', sizeProgress);
-            }
-
-            if (mode == 'close') {
-                $('#progress').style.display = 'none';
-            }
-        },
-        onComplete: (sessionInfo, js) => {
-            console.info('onComplete', sessionInfo.name, js);
-
-            if (js && js.code == 200) {
-                //location.href = location.href;
-            }
-        },
-        onError: (err) => {
-            console.info('onError', err.name, err.message);
-        },
-        onFailed: (sessionInfo) => {
-            console.info('onFailed', sessionInfo);
-        },
-    });
-
-    //uploadClient.setupEventListener('#upload_file, #upload_file2');
-})();
-
-```
 
 ### PartUploadClient
+
+```mermaid
+flowchart TD
+    A[PartUploadClient] -->|form click| B[prepareAndUploadFile]
+    B --> C(split file to cnunks and async upload)
+    C --> D{uploadFile}
+    D -->|One| E[ ]
+    D -->|Two| F[ ]
+    D -->|Three| G[ ]
+    E --> J[ wait and uploadFileDone ]
+    F --> J
+    G --> J
+```
 
 ```javascript
 
@@ -107,3 +73,8 @@ But one day it will be switch to `PartUploadClient`, where
 })();
 
 ```
+
+
+
+
+
