@@ -18,7 +18,7 @@ But one day it will be switch to `PartUploadClient`, where
 ```mermaid
 flowchart TD
     A[PartUploadClient] -->|form click| B[prepareAndUploadFile]
-    B --> C(split file to cnunks and async upload)
+    B --> C(split file to chunks and async upload)
     C --> D{uploadFile}
     D -->|One| E[ ]
     D -->|Two| F[ ]
