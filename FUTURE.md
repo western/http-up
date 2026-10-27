@@ -4,7 +4,7 @@
 
 ### LegacyUploader
 
-This is current version `assets/index4.js`
+This is current version `assets/index6.js`
 
 But one day it will be switch to `PartUploadClient`, where
 
