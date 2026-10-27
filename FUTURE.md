@@ -18,11 +18,10 @@ But one day it will be switch to `PartUploadClient`, where
 ```mermaid
 flowchart TD
     A[PartUploadClient] -->|form click| B[prepareAndUploadFile]
-    B --> C(split file to chunks and async upload)
-    C --> D{uploadFile}
-    D -->|One| E[ ]
-    D -->|Two| F[ ]
-    D -->|Three| G[ ]
+    B -->|split file to chunks and async upload| C[uploadFile one]
+    C -->|One chunk| E[ ]
+    C -->|Two chunk| F[ ]
+    C -->|Three chunk| G[ ]
     E --> J[ wait and uploadFileDone ]
     F --> J
     G --> J
